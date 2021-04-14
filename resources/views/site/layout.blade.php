@@ -80,21 +80,27 @@
                 <div class="footer-block footer-social">
                     <div class="title title-h4"> Мы в соцсетях</div>
                     <div class="social">
-                        <a href="javascript:void(0)" target="_blank">
-                            <svg class="icon icon-vk ">
-                                <use xlink:href="/build/images/sprite-inline.svg#vk"></use>
-                            </svg>
-                        </a>
-                        <a href="javascript:void(0)" target="_blank">
-                            <svg class="icon icon-facebook ">
-                                <use xlink:href="/build/images/sprite-inline.svg#facebook"></use>
-                            </svg>
-                        </a>
-                        <a href="javascript:void(0)" target="_blank">
-                            <svg class="icon icon-google ">
-                                <use xlink:href="/build/images/sprite-inline.svg#google"></use>
-                            </svg>
-                        </a>
+                        @if(config('settings.social_vk'))
+                            <a href="{{ config('settings.social_vk') }}" target="_blank">
+                                <svg class="icon icon-vk ">
+                                    <use xlink:href="/build/images/sprite-inline.svg#vk"></use>
+                                </svg>
+                            </a>
+                        @endif
+                        @if(config('settings.social_fb'))
+                            <a href="{{ config('settings.social_fb') }}" target="_blank">
+                                <svg class="icon icon-facebook ">
+                                    <use xlink:href="/build/images/sprite-inline.svg#facebook"></use>
+                                </svg>
+                            </a>
+                        @endif
+                        @if(config('settings.social_google'))
+                            <a href="{{ config('settings.social_google') }}" target="_blank">
+                                <svg class="icon icon-google ">
+                                    <use xlink:href="/build/images/sprite-inline.svg#google"></use>
+                                </svg>
+                            </a>
+                        @endif
                     </div>
                 </div>
                 <div class="footer-block footer-subscribe">
