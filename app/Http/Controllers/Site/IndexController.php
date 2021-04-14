@@ -8,11 +8,16 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\MainSlides;
+use Illuminate\Support\Facades\Cache;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        return view('site.index');
+        $slides = Cache::remember(MainSlides::CACHE_KEY, \Config::get('cache.ttl'), function () {
+            return MainSlides::where('active', 1)->orderBy('lft')->get();
+        });
+        return view('site.index', compact('slides'));
     }
 }

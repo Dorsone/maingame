@@ -2,70 +2,35 @@
 @section('content')
     <section class="home-main">
         <div class="home-main__slider">
-            <div class="swiper-container home-main__main">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="home-main__main__img">
-                            <img src="/build/images/home1.jpg" alt=""/>
-                        </div>
-                        <div class="title title-h1"> Заголовок баннера</div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="home-main__main__img">
-                            <img src="/build//images/home2.jpg" alt=""/>
-                        </div>
-                        <div class="title title-h1"> В ожидании финала зимней лиги DPC 2021</div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="home-main__main__img">
-                            <img src="/build/images/home1.jpg" alt=""/>
-                        </div>
-                        <div class="title title-h1"> Заголовок баннера</div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="home-main__main__img">
-                            <img src="/build/images/home2.jpg" alt=""/>
-                        </div>
-                        <div class="title title-h1"> В ожидании финала зимней лиги DPC 2021</div>
+            @if($slides->isNotEmpty())
+                <div class="swiper-container home-main__main">
+                    <div class="swiper-wrapper">
+                        @foreach($slides as $slide)
+                            <div class="swiper-slide">
+                                <div class="home-main__main__img">
+                                    <img src="{{ asset($slide->image) }}" alt=""/>
+                                </div>
+                                <div class="title title-h1"> {{ $slide->title }}</div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
-            <div class="swiper-container home-main__small">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="home-main__small__img img-sm"><img src="/build/images/home1.jpg" alt=""/>
-                        </div>
-                        <svg class="circle-svg" width="72" height="72" viewBox="0 0 67 67" preserveAspectRatio="xMidYMin meet">
-                            <circle class="path" cx="33" cy="33" r="31" stroke="#3BE6EF" stroke-width="5px" stroke-dasharray="195 195" stroke-linecap="round"></circle>
-                        </svg>
-                        <div class="title title-h4"> Заголовок баннера</div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="home-main__small__img img-sm"><img src="/build/images/home2.jpg" alt=""/>
-                        </div>
-                        <svg class="circle-svg" width="72" height="72" viewBox="0 0 67 67" preserveAspectRatio="xMidYMin meet">
-                            <circle class="path" cx="33" cy="33" r="31" stroke="#3BE6EF" stroke-width="5px" stroke-dasharray="195 195" stroke-linecap="round"></circle>
-                        </svg>
-                        <div class="title title-h4"> В ожидании финала зимней лиги DPC 2021</div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="home-main__small__img img-sm"><img src="/build/images/home1.jpg" alt=""/>
-                        </div>
-                        <svg class="circle-svg" width="72" height="72" viewBox="0 0 67 67" preserveAspectRatio="xMidYMin meet">
-                            <circle class="path" cx="33" cy="33" r="31" stroke="#3BE6EF" stroke-width="5px" stroke-dasharray="195 195" stroke-linecap="round"></circle>
-                        </svg>
-                        <div class="title title-h4"> Заголовок баннера</div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="home-main__small__img img-sm"><img src="/build/images/home2.jpg" alt=""/>
-                        </div>
-                        <svg class="circle-svg" width="72" height="72" viewBox="0 0 67 67" preserveAspectRatio="xMidYMin meet">
-                            <circle class="path" cx="33" cy="33" r="31" stroke="#3BE6EF" stroke-width="5px" stroke-dasharray="195 195" stroke-linecap="round"></circle>
-                        </svg>
-                        <div class="title title-h4"> В ожидании финала зимней лиги DPC 2021</div>
+                <div class="swiper-container home-main__small">
+                    <div class="swiper-wrapper">
+                        @foreach($slides as $slide)
+                            <div class="swiper-slide">
+                                <div class="home-main__small__img img-sm">
+                                    <img src="{{ asset($slide->image) }}" alt=""/>
+                                </div>
+                                <svg class="circle-svg" width="72" height="72" viewBox="0 0 67 67" preserveAspectRatio="xMidYMin meet">
+                                    <circle class="path" cx="33" cy="33" r="31" stroke="#3BE6EF" stroke-width="5px" stroke-dasharray="195 195" stroke-linecap="round"></circle>
+                                </svg>
+                                <div class="title title-h4"> {{ $slide->title }}</div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
         <div class="home-main__form">
             <div class="title title-h1"> Подпишись на обновления</div>
@@ -80,6 +45,7 @@
             </form>
         </div>
     </section>
+
     <section class="section">
         <div class="container">
             <div class="title-line">
