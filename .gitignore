@@ -15,3 +15,4 @@ _ide_helper*
 .phpstorm*
 config/debugbar.php
 public/build
+public/uploads
