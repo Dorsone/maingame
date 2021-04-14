@@ -8,6 +8,9 @@
     <a class="nav-link nav-dropdown-toggle" href="#">Контент</a>
     <ul class="nav-dropdown-items">
         <li class='nav-item'>
+            <a class='nav-link' href='{{ backpack_url('menu') }}'> Меню</a>
+        </li>
+        <li class='nav-item'>
             <a class='nav-link' href='{{ backpack_url('mainslides') }}'> Cлайдер</a>
         </li>
         <li class="nav-item">
@@ -15,5 +18,3 @@
         </li>
     </ul>
 </li>
-
-

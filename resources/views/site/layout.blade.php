@@ -26,14 +26,11 @@
                 <span>Независимое медиа <br>для игроманов</span>
             </a>
             <nav class="header-nav">
-                <a href="javascript:void(0)">
-                    <p>Медиа</p><span>Новости из мира игровой индустрии</span></a>
-                <a href="javascript:void(0)">
-                    <p>Онлайн академия</p><span>Обучение киберспорту и всякое</span>
-                </a>
-                <a href="javascript:void(0)">
-                    <p>Турнирная платформа</p><span>Чемпионы киберспорта</span>
-                </a>
+                @foreach($menuItems as $item)
+                    <a href="{{ asset($item['link']) }}">
+                        <p>{{ $item['title'] }}</p><span>{{ $item['description'] }}</span>
+                    </a>
+                @endforeach
             </nav>
             <div class="header-search header-icon">
                 <svg class="icon icon-search ">
@@ -76,9 +73,9 @@
                 </a>
                 <div class="footer-block footer-menu">
                     <div class="title title-h4"> Меню</div>
-                    <a href="javascript:void(0)">Медиа</a>
-                    <a href="javascript:void(0)">Онлайн академия</a>
-                    <a href="javascript:void(0)">Турнирная платформа</a>
+                    @foreach($menuItems as $item)
+                        <a href="{{ asset($item['link']) }}">{{ $item['title'] }}</a>
+                    @endforeach
                 </div>
                 <div class="footer-block footer-social">
                     <div class="title title-h4"> Мы в соцсетях</div>

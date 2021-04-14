@@ -15,7 +15,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $slides = Cache::remember(MainSlides::CACHE_KEY, \Config::get('cache.ttl'), function () {
+        $slides = Cache::remember(MainSlides::CACHE_KEY, config('cache.ttl'), function () {
             return MainSlides::where('active', 1)->orderBy('lft')->get();
         });
         return view('site.index', compact('slides'));
