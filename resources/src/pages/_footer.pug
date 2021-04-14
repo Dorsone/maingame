@@ -1,0 +1,35 @@
+footer.footer
+    .footer-top
+        .container
+            .footer-top-wrap
+                a(href='index.html').footer-logo
+                    +img('logo.svg')
+                    span Независимое медиа для игроманов
+                .footer-block.footer-menu
+                    +title('h4', 'div', 'Меню')
+                    a(href=empty_url) Медиа
+                    a(href=empty_url) Онлайн академия
+                    a(href=empty_url) Турнирная платформа
+                .footer-block.footer-social
+                    +title('h4', 'div', 'Мы в соцсетях')
+                    .social
+                        a(href=empty_url target="_blank")
+                            +icon('vk')
+                        a(href=empty_url target="_blank")
+                            +icon('facebook')
+                        a(href=empty_url target="_blank")
+                            +icon('google')
+                .footer-block.footer-subscribe
+                    +title('h4', 'div', 'Подписка')
+                    form(action='').form.form-line
+                        input(type='email' placeholder='Почта')
+                        button
+                            +icon('send')
+                    .footer-subscribe-done
+                        +icon('check')
+                        span.sentence Благодарим за подписку
+
+
+    .footer-bottom
+        .container
+            p Название сайта 2021

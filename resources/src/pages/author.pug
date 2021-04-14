@@ -1,0 +1,85 @@
+include ./_mixins
+include ./_data
+
+-
+    var bread = [
+        {
+            name:"Главная",
+            href:"index.html"
+        },
+        {
+            name:"Медиа",
+            href: empty_url
+        },
+        {
+            name:"Медиа",
+            href: empty_url
+        }
+    ]
+
+<!DOCTYPE html>
+html(lang="ru")
+    head
+        +metahead
+        title Author
+        include ./_styles
+    body
+        include _header
+
+        main
+            +breadcrumbs(bread)
+            section.section
+                .container.container__sm
+                    .author-content
+                        .author-info
+                            .author-info__block.text
+                                +title('h3', 'h3', 'Об авторе')
+                                p Мы ее ждали, и Hoodwink (Прохвостка) пришла! Этот милый ловкач попортит настроение большому количеству любителей погулять по лесам — как и у Treant Protector, некоторые ее способности завязаны на наличии деревьев поблизости. Ее AoE-корни могут серьезно напрячь оппонента, а ультимейт способен нанести большое количество урона издалека. Это новый партизан, который очень пригодится в качестве роумера.
+                            .author-info__block
+                                +title('h3', 'h3', 'Интересы')
+                                - for (var i = 0; i < 3; i ++)
+                                    .interest Dota
+                                    .interest GTA V
+                                    .interest Marvel
+
+
+                        .author-avatar
+                            .img-sm
+                                +img('avatar.jpg')
+                            h1.author-avatar__name Jason Momoah
+                            .author-avatar__time на сайте 1 год 2 мес
+
+            section.section
+                .container.container__sm
+                    .title-line
+                        +title('h2', 'h2', 'Статьи автора<span class="count">14</span> ')
+
+                    .col-two
+                        - for (var i = 0; i < 4; i ++)
+                            a(href=empty_url).item-block.col
+                                .item-block__save
+                                    +icon('save')
+                                .item-block__pic
+                                    +img('item-home.jpg')
+                                    .item-block__marks
+                                        .mark.mark__orange Dota
+                                        .mark.mark__velvet Видеоконтент
+                                .item-block__desc
+                                    .item-block__info
+                                        span
+                                            +icon('eye')
+                                            | 1,247
+                                        span
+                                            +icon('comment')
+                                            | 15
+                                    .item-block__title В ожидании финала зимней лиги DPC 2021
+                                    .item-block__text До конца зимней лиги DPC 2021 в пяти регионах осталось всего лишь три дня, а из 18 участников Singapore Major мы знаем ...
+                                    .item-block__date 12.02.21
+                                    .item-block__time читать 15 мин
+                    +link-more('Показь еще')
+
+
+
+
+        include _footer
+        include ./_scripts

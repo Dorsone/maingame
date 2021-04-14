@@ -1,0 +1,23 @@
+@import "reset";
+@import "fonts";
+@import "variables";
+@import "sprite";
+// components
+@import "components.scss";
+@import "header.scss";
+@import "footer.scss";
+//@import "popup.scss";
+
+
+// pages
+@import "index.scss";
+@import "category.scss";
+@import "news.scss";
+@import "author.scss";
+@import "not-found.scss";
+
+
+
+
+
+

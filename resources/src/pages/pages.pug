@@ -1,0 +1,71 @@
+include ./_mixins
+include ./_data
+
+-
+    var pages = [
+        {
+            name:"Home",
+            href:"index.html",
+            status: true
+        },
+        {
+            name:"Catalog A",
+            href:"catalog.html",
+            status: true
+        },
+        {
+            name:"Catalog B",
+            href:"catalog2.html",
+            status: true
+        },
+        {
+            name:"Author",
+            href:"author.html",
+            status: true
+        },
+        {
+            name:"Article",
+            href:"article.html",
+            status: true
+        },
+        {
+            name:"404",
+            href:"404.html",
+            status: true
+        }
+    ]
+
+<!DOCTYPE html>
+html(lang="ru")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        +metahead
+        title PAGES
+        include ./_styles    
+    body
+        include _header
+        main.pages-page
+            section
+                .container
+                    h3 hot keys to go to this page
+                    p for Windows <code>Ctrl+Enter</code>
+                    p for Mac <code>Shift+Enter</code>
+                    h1 Pages:
+                    ol
+                        each item in pages
+                            if item.status == true
+                                -var cl = "done"
+                            else
+                                -var cl = "undone"
+                            li
+                                a(href=item.href class=cl)
+                                    span #{item.name}
+                                    +icon('page-adapt')
+
+
+        include _footer
+        include ./_scripts 
+        script(src="./js/main.js")
+          

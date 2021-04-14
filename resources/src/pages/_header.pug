@@ -1,0 +1,28 @@
+header.header
+    .container
+        .header-content
+            a(href='index.html').header-logo
+                +img('logo.svg')
+                span Независимое медиа <br>для игроманов
+            nav.header-nav
+                a(href=empty_url)
+                    p Медиа
+                    span Новости из мира игровой индустрии
+                a(href=empty_url)
+                    p Онлайн академия
+                    span Обучение киберспорту и всякое
+                a(href=empty_url)
+                    p Турнирная платформа
+                    span Чемпионы киберспорта
+            .header-search.header-icon
+                +icon('search')
+            .header-enter.header-icon
+                +icon('enter')
+            .search
+                form(action='/').form
+                    input(type='text' placeholder='Поиск по сайту')
+                    button
+                        +icon('search')
+                .search-close
+                    +icon('close')
+

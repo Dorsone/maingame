@@ -1,0 +1,195 @@
+
+// ===================icons=====================
+// ===================fonts=====================
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+$ff:        'Montserrat', sans-serif;
+// ===================media=====================
+$lg: 1440;
+$md: 1250;
+$sm: 760;
+
+
+// ===================colors=====================
+$black:         #2F1239;
+$black-light:   #433049;
+$grey-dark:     #927E99;
+$grey:          #D7D4D8;
+$white:         #fff;
+$white-light:   #F5ECF9;
+$velvet:        #8302BF;
+$velvet-light:  #B215FC;
+$blue:          #01D6E3;
+$blue-light:    #11E8F5;
+
+$gradient:      radial-gradient(83.85% 78.68% at 23.45% 17.83%, #640087 11.27%, #8C31D3 50.61%, #3CE6EF 100%);
+// ===================sizes=====================
+$anim:          .3s ease;
+
+// ==================mixin======================
+@function width($col, $margin:0px) {
+    @return calc((100% / #{$col}) - #{$margin});
+}
+// how use
+// @include fluid-type($min_width, $max_width, 12px, 16px);
+// /how use
+
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+}
+  
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+    $u1: unit($min-vw);
+    $u2: unit($max-vw);
+    $u3: unit($min-font-size);
+    $u4: unit($max-font-size);
+
+    @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+            & {
+            font-size: $min-font-size;
+            @media screen and (min-width: $min-vw) {
+                font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+            }
+            @media screen and (min-width: $max-vw) {
+                font-size: $max-font-size;
+            }
+        }
+    }
+}
+
+@mixin center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin text-limit($row) {
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $row;
+}    
+
+@mixin triangle($color){
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: $color transparent transparent transparent;
+}
+
+@mixin fixInputIOS{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+@mixin w($size, $sizeMin:0){
+    @if ($sizeMin == 0){
+        @media (max-width: $size - 0.02 +"px") { @content; }
+    } @else {
+        @media (min-width: $sizeMin + "px") and (max-width: $size - 0.02 +"px"){ @content; }
+    }
+}
+
+@mixin h($size){
+    @media (max-height: $size +"px") { @content; }
+}
+
+@mixin offHoverOnDevices {
+    @media screen and (min-width: 1250px) {  @content;  }
+}
+
+@mixin tableColWidth($sizes...){
+    @for $i from 0 to length($sizes) {
+        &:nth-child(#{$i + 1}) {
+            width: #{nth($sizes, $i + 1)}
+        }
+    }
+}
+
+@mixin minw($size) {
+    @media (min-width: $size + "px") { @content; }
+}
+
+@mixin img-full($fit: contain) {
+    @include center;
+    overflow: hidden;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: $fit;
+        flex-shrink: 0;
+    }
+}
+
+@mixin img{
+    @include center;
+    img{
+        flex-shrink: 0;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+@mixin txt($font: 16px){
+    @include fluid-type(768px, 1280px, $font - 2px, $font);
+    line-height: 1.5;
+    @include w($md){
+        line-height: 1.14;
+    }
+}
+
+// ===================headers=====================
+
+@mixin h1{
+    @include fluid-type(768px, 1280px, 28px, 36px);
+    line-height: 1.11;
+    font-weight: 700;
+    @include w($md){
+        line-height: 1.14;
+    }
+}
+
+@mixin h2{
+    @include fluid-type(768px, 1280px, 24px, 28px);
+    line-height: 1.14;
+    font-weight: 700;
+    @include w($md){
+        line-height: 1.33;
+    }
+}
+
+@mixin h3{
+    @include fluid-type(768px, 1280px, 20px, 24px);
+    line-height: 1.33;
+    font-weight: 700;
+    @include w($md){
+        line-height: 1.2;
+    }
+}
+
+@mixin h4{
+    @include fluid-type(768px, 1280px, 16px, 18px);
+    line-height: 1.33;
+    font-weight: 700;
+    @include w($md){
+        line-height: 1.25;
+    }
+}
+
+//Key-frames==========================================================================================================>
+@keyframes shrink-bounce{
+    0%{
+        transform: scale(1);
+    }
+    33%{
+        transform: scale(.85);
+    }
+    100%{
+        transform: scale(1);
+    }
+}

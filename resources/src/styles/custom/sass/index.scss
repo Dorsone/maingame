@@ -1,0 +1,192 @@
+@import "variables";
+
+.home{
+  &-main{
+    margin-bottom: 32px;
+    width: 100%;
+    display: flex;
+    height: 54.4em;
+    &__slider{
+      width: calc(100% - 43.5em);
+      position: relative;
+    }
+    &__main{
+      .swiper-slide{
+        position: relative;
+      }
+      &__img{
+        width: 100%;
+        height: 100%;
+        @include img-full(cover);
+        position: relative;
+        &::before{
+          content: '';
+          position: absolute;
+          background: linear-gradient(180deg, rgba(47, 18, 57, 0) 0%, rgba(32, 12, 39, 0.3) 61.58%, rgba(21, 8, 26, 0.8) 100%);
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .title{
+        position: absolute;
+        width: 100%;
+        padding: 0 40px;
+        left: 0;
+        bottom: 146px;
+        color: $white;
+      }
+    }
+    &__small{
+      position: absolute;
+      bottom: 3em;
+      left: 0;
+      @include minw($md){
+        height: 77px;
+      }
+      .swiper-slide{
+        justify-content: flex-start;
+        padding: 0 40px;
+        @include minw($md){
+          height: 77px;
+        }
+        &-active {
+          .path{
+            animation: circle forwards 3.1s linear;
+          }
+        }
+      }
+      &__img{
+        width: 64px;
+        height: 64px;
+      }
+      .title{
+        color: $white;
+        padding-left: 16px;
+        max-width: 382px;
+      }
+      @keyframes circle {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      .circle-svg{
+        width: 72px;
+        height: 72px;
+        transform: rotate(-90deg);
+        position: absolute;
+        left: 37px;
+        top: 2px;
+        //@include w(1600){
+        //  top: 0;
+        //}
+      }
+      .path {
+        fill: none;
+        stroke: #3BE6EF;
+        stroke-dashoffset: 195;
+      }
+    }
+    &__form{
+      width: 43.5em;
+      background: $gradient;
+      color: $white;
+      padding: 0 40px 0 32px;
+      @include center;
+      flex-direction: column;
+      .title{
+        padding: 32px 0;
+      }
+      .form{
+        margin-top: 32px;
+        input{
+          color: $white;
+          &::placeholder{
+            color: #A6C2EF;
+          }
+        }
+      }
+    }
+    @include w($md){
+      height: 41.667vw;
+      &__slider{
+        width: calc(100% - 34.245vw);
+      }
+      &__main{
+        .title{
+          padding: 0 32px;
+          max-width: 290px;
+        }
+      }
+      &__small{
+        bottom: 16px;
+        height: 50px;
+        .swiper-slide{
+          padding: 0 32px;
+        }
+        &__img{
+          width: 48px;
+          height: 48px;
+        }
+        .title{
+          padding-left: 10px;
+          max-width: 230px;
+        }
+        .circle-svg{
+          width: 50px;
+          height: 50px;
+          left: 31px;
+          top: 0;
+        }
+      }
+      &__form{
+        width: 34.245vw;
+        padding: 0 32px 0 20px;
+        .title{
+          padding: 8px 0;
+          @include h3;
+        }
+        .form{
+          margin-top: 24px;
+        }
+      }
+    }
+    @include w($sm){
+      height: auto;
+      flex-direction: column;
+      &__slider{
+        width: 100%;
+        height: 100vw;
+      }
+      &__main{
+        .title{
+          padding: 0 16px;
+          max-width: 100%;
+        }
+      }
+      &__small{
+        .swiper-slide{
+          padding: 0 16px;
+        }
+        .title{
+          max-width: none;
+          width: calc(100% - 50px - 10px);
+        }
+        .circle-svg{
+          left: 15px;
+        }
+      }
+      &__form{
+        width: 100%;
+        padding: 16px;
+        .title{
+          padding: 0 0 8px;
+        }
+        .form{
+          margin-top: 16px;
+        }
+      }
+    }
+  }
+}

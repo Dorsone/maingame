@@ -1,0 +1,32 @@
+@import "variables";
+
+.not-found{
+  &__title{
+    color: rgba($grey-dark, .2);
+    @include fluid-type(768px, 1280px, 64px, 72px);
+    line-height: 1.12;
+    padding: 24vh 0 16px;
+    font-weight: 700;
+    @include w($md){
+      padding: 72px 0 24px;
+    }
+    @include w($sm){
+      padding: 64px 0 24px;
+    }
+  }
+  .form{
+    border-color: $grey-dark;
+    margin-top: 24px;
+    button{
+      color: $velvet;
+      @include offHoverOnDevices{
+        &:hover{
+          color: $velvet-light;
+        }
+      }
+    }
+    @include w($md){
+      margin-top: 16px;
+    }
+  }
+}

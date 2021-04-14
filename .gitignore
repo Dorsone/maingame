@@ -14,3 +14,4 @@ yarn-error.log
 _ide_helper*
 .phpstorm*
 config/debugbar.php
+public/build

@@ -1,0 +1,168 @@
+include ./_mixins
+include ./_data
+
+-
+    var bread = [
+        {
+            name:"Главная",
+            href:"index.html"
+        },
+        {
+            name:"Catalog А",
+            href:"catalog.html"
+        }
+    ]
+
+<!DOCTYPE html>
+html(lang="ru")
+    head
+        +metahead
+        title Catalog A
+        include ./_styles
+    body
+        include _header
+
+        main
+            +breadcrumbs(bread)
+
+            +banner('banner1.jpg', 'Стань студентом самой нескучной академии')
+
+            section.section
+                .container
+                    .title-line.title-line__center
+                        .img-sm
+                            +img('categ1.jpg')
+                        +title('h2', 'div', 'CS:go')
+                        +link-arrow('Больше в категории')
+                    .col-three.col-three__wrap
+                        - for (var i = 0; i < 3; i ++)
+                            a(href=empty_url).item-block.col
+                                .item-block__save
+                                    +icon('save')
+                                .item-block__pic
+                                    +img('item-home.jpg')
+                                    .item-block__marks
+                                        .mark.mark__orange Dota
+                                        .mark.mark__velvet Видеоконтент
+                                .item-block__desc
+                                    .item-block__info
+                                        span
+                                            +icon('eye')
+                                            | 1,247
+                                        span
+                                            +icon('comment')
+                                            | 15
+                                    .item-block__title В ожидании финала зимней лиги DPC 2021
+                                    .item-block__text До конца зимней лиги DPC 2021 в пяти регионах осталось всего лишь три дня, а из 18 участников Singapore Major мы знаем ...
+                                    .item-block__date 12.02.21
+                                    .item-block__time читать 15 мин
+
+
+
+
+            section.section
+                .container
+                    .title-line.title-line__center
+                        .img-sm
+                            +img('categ2.jpg')
+                        +title('h2', 'div', 'Dota')
+                        +link-arrow('Больше в категории')
+                    .col-three.col-three__wrap
+                        - for (var i = 0; i < 3; i ++)
+                            a(href=empty_url).item-block.col
+                                .item-block__save
+                                    +icon('save')
+                                .item-block__pic
+                                    +img('item-home.jpg')
+                                    .item-block__marks
+                                        .mark.mark__blue Cs:go
+                                        .mark.mark__green Соревнования
+                                .item-block__desc
+                                    .item-block__info
+                                        span
+                                            +icon('eye')
+                                            | 1,247
+                                        span
+                                            +icon('comment')
+                                            | 15
+                                    .item-block__title В ожидании финала зимней лиги DPC 2021
+                                    .item-block__text До конца зимней лиги DPC 2021 в пяти регионах осталось всего лишь три дня, а из 18 участников Singapore Major мы знаем ...
+                                    .item-block__date 12.02.21
+                                    .item-block__time читать 15 мин
+            section.section
+                .container
+                    .title-line.title-line__center
+                        .img-sm
+                            +img('categ3.jpg')
+                        +title('h2', 'div', 'Видеоконтент')
+                        +link-arrow('Больше в категории')
+                    .col-three.col-three__wrap
+                        - for (var i = 0; i < 3; i ++)
+                            a(href=empty_url).item-block.col
+                                .item-block__save
+                                    +icon('save')
+                                .item-block__pic
+                                    +img('item-home.jpg')
+                                    .item-block__marks
+                                        .mark.mark__red Категория
+                                        .mark.mark__green Соревнования
+                                .item-block__desc
+                                    .item-block__info
+                                        span
+                                            +icon('eye')
+                                            | 1,247
+                                        span
+                                            +icon('comment')
+                                            | 15
+                                    .item-block__title В ожидании финала зимней лиги DPC 2021
+                                    .item-block__text До конца зимней лиги DPC 2021 в пяти регионах осталось всего лишь три дня, а из 18 участников Singapore Major мы знаем ...
+                                    .item-block__date 12.02.21
+                                    .item-block__time читать 15 мин
+
+            section.section
+                .container
+                    .title-line.title-line__center
+                        .img-sm
+                            +img('categ4.jpg')
+                        +title('h2', 'div', 'Соревнования')
+                        +link-arrow('Больше в категории')
+                    .col-three.col-three__wrap
+                        - for (var i = 0; i < 3; i ++)
+                            a(href=empty_url).item-block.col
+                                .item-block__save
+                                    +icon('save')
+                                .item-block__pic
+                                    +img('item-home.jpg')
+                                    .item-block__marks
+                                        .mark.mark__red Категория
+                                        .mark.mark__green Соревнования
+                                .item-block__desc
+                                    .item-block__info
+                                        span
+                                            +icon('eye')
+                                            | 1,247
+                                        span
+                                            +icon('comment')
+                                            | 15
+                                    .item-block__title В ожидании финала зимней лиги DPC 2021
+                                    .item-block__text До конца зимней лиги DPC 2021 в пяти регионах осталось всего лишь три дня, а из 18 участников Singapore Major мы знаем ...
+                                    .item-block__date 12.02.21
+                                    .item-block__time читать 15 мин
+
+
+
+
+
+
+
+
+
+            section.section
+                .container
+                    .container__md
+                        .text
+                            h2 CЕО текст располагается здесь
+                            p Мы ее ждали, и Hoodwink (Прохвостка) пришла! Этот милый ловкач попортит настроение большому количеству любителей погулять по лесам — как и у Treant Protector, некоторые ее способности завязаны на наличии деревьев поблизости. Ее AoE-корни могут серьезно напрячь оппонента, а ультимейт способен нанести большое количество урона издалека. Это новый партизан, который очень пригодится в качестве роумера.
+
+        include _footer
+        include ./_scripts

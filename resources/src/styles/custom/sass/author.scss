@@ -1,0 +1,90 @@
+@import "variables";
+
+.author{
+  &-content{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    @include w($sm){
+      flex-wrap: wrap-reverse;
+    }
+  }
+  &-avatar{
+    width: 15.2em;
+    .img-sm{
+      width: 15.2em;
+      height: 15.2em;
+      margin: 0 auto;
+      @include w($md){
+        width: 112px;
+        height: 112px;
+      }
+    }
+    &__name{
+      @include fluid-type(768px, 1280px, 20px, 24px);
+      line-height: 1.18;
+      font-weight: 700;
+      color: #6E4C7A;
+      padding: 16px 0 8px;
+      text-align: center;
+      @include w($md){
+        padding: 8px 0;
+      }
+    }
+    &__time{
+      text-align: center;
+      font-size: 12px;
+      line-height: 16px;
+      color: $grey-dark;
+    }
+    @include w($md){
+      width: 180px;
+    }
+    @include w($sm){
+      width: 100%;
+      margin: 16px 0 32px;
+    }
+  }
+  &-info{
+    width: calc(100% - 15.2em - 6.2em);
+    &__block{
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+      .title{
+        margin-bottom: 24px;
+        width: 100%;
+      }
+    }
+    @include w($md){
+      width: calc(100% - 180px - 40px);
+      &__block{
+        margin-bottom: 24px;
+        .title{
+          margin-bottom: 16px;
+        }
+      }
+    }
+    @include w($sm){
+      width: 100%;
+      &__block{
+        margin-bottom: 32px;
+      }
+    }
+  }
+}
+
+.interest{
+  @include txt;
+  line-height: 16px;
+  color: #6E4C7A;
+  margin: 0 8px 8px 0;
+  padding: 8px 16px;
+  border-radius: 16px;
+  background: rgba($blue, .1);
+}

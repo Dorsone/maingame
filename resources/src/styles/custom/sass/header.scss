@@ -1,0 +1,208 @@
+@import "variables";
+
+.header{
+  background: $black;
+  padding: 9px 0;
+  @include w($md){
+    padding: 8px 0;
+  }
+  @include w($sm){
+    padding: 4px 0;
+  }
+  &-content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    @include w($md){
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+  &-logo{
+    margin-right: auto;
+    @include center;
+    position: relative;
+    z-index: 2;
+    span{
+      color: $white;
+      font-size: 10px;
+      line-height: 12px;
+      padding-left: 16px;
+    }
+    @include w($md){
+      margin-right: 16px;
+      img{
+        height: 40px;
+      }
+      span{
+        font-size: 8px;
+        padding-left: 8px;
+        line-height: 1;
+      }
+    }
+    @include w($sm){
+      margin-right: auto;
+      img{
+        height: 32px;
+      }
+    }
+  }
+  &-nav{
+    padding: 16px 0;
+    display: flex;
+    p{
+      transition: $anim;
+      font-weight: 700;
+      color: $blue;
+      @include fluid-type(1280px, 1440px, 16px, 20px);
+      line-height: 1.25;
+    }
+    span{
+      transition: $anim;
+      color: $white;
+      @include fluid-type(1280px, 1440px, 10px, 12px);
+      line-height: 1.6;
+    }
+    a{
+      display: flex;
+      flex-direction: column;
+      margin-left: 4.8em;
+      @include offHoverOnDevices{
+        &:hover{
+          p,span{
+            color: $blue-light;
+          }
+        }
+      }
+    }
+    @include w($md){
+      padding: 0;
+      margin: 0 auto;
+      p{
+        @include fluid-type(320px, 500px, 10px, 14px);
+      }
+      a{
+        margin: 0 8px;
+      }
+      span{
+        display: none;
+      }
+    }
+    @include w($sm){
+      order: 1;
+      width: 100%;
+      padding: 8px 0;
+      justify-content: space-between;
+      a{
+        margin: 0;
+      }
+    }
+  }
+  &-icon{
+    color: $blue;
+    transition: $anim;
+    margin-left: 4.8em;
+    margin-top: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    @include offHoverOnDevices{
+      &:hover{
+        color: $blue-light;
+      }
+    }
+    @include w($md){
+      margin-left: 16px;
+      margin-top: 0;
+      align-items: center;
+    }
+  }
+  &-search{}
+  &-enter{}
+}
+
+.search{
+  display: none;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0;
+  background: $black;
+  height: 100%;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: flex-end;
+  width: calc(100% - 250px);
+  &-close{
+    margin-left: 4em;
+    margin-top: 18px;
+    color: $grey-dark;
+    transition: $anim;
+    @include offHoverOnDevices{
+      cursor: pointer;
+      &:hover{
+        color: $blue;
+      }
+    }
+  }
+  .form{
+    width: 100%;
+    max-width: 82em;
+    border-bottom: 1px solid $grey-dark;
+    padding: 0 10px;
+    input{
+      color: $white;
+      padding: 18px 0 10px;
+      @include txt;
+      &::placeholder {
+        color: $grey-dark;
+      }
+    }
+    button{
+      @include center;
+      color: $blue;
+      transition: $anim;
+      cursor: pointer;
+      padding: 12px 0 9px;
+      @include offHoverOnDevices{
+        &:hover{
+          color: $blue-light;
+        }
+      }
+    }
+  }
+  @include w($md){
+    width: calc(100% - 190px);
+    align-items: center;
+    &-close{
+      margin-left: 16px;
+      margin-top: 0;
+    }
+    .form{
+      width: 100%;
+      padding: 0;
+      input{
+        padding: 10px 0 ;
+      }
+      button{
+        padding: 9px 0;
+      }
+    }
+  }
+  @include w($sm){
+    z-index: 3;
+    width: 100%;
+    height: 32px;
+    .form{
+      border-bottom: 0;
+      input{
+        padding: 5px 0;
+      }
+      button{
+        padding: 2px 0;
+      }
+    }
+  }
+}

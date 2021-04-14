@@ -1,18 +1,51 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
-    },
+    "name": "game-zone",
+    "version": "",
     "devDependencies": {
-        "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "@babel/core": "^7.6.0",
+        "@babel/preset-env": "^7.6.0",
+        "browser-sync": "^2.26.14",
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^7.0.0",
+        "gulp-babel": "^8.0.0",
+        "gulp-clean-css": "^4.2.0",
+        "gulp-sass": "^4.0.2",
+        "gulp-svg-sprite": "^1.5.0",
+        "gulp-uglify": "^3.0.2",
+        "node-sass": "^4.14.1",
+        "require-dir": "^1.2.0"
+    },
+    "browserslist": [
+        "last 2 version",
+        "> 1%",
+        "maintained node versions",
+        "not dead"
+    ],
+    "dependencies": {
+        "del": "^5.1.0",
+        "gulp-cheerio": "^1.0.0",
+        "gulp-pug": "^4.0.1",
+        "gulp-replace": "^1.0.0",
+        "gulp-sourcemaps": "^2.6.5",
+        "gulp-svgmin": "^2.2.0"
+    },
+    "config": {
+        "src": {
+            "sass": "resources/src/styles/custom/sass",
+            "styles": "resources/src/styles/vendor",
+            "jsVendor": "resources/src/js/vendor",
+            "jsCustom": "resources/src/js/custom",
+            "pages": "resources/src/pages",
+            "sprite": "resources/src/images/sprite",
+            "images": "resources/src/images/static",
+            "fonts": "resources/src/fonts"
+        },
+        "build": {
+            "css": "public/build/css",
+            "pages": "public/build",
+            "images": "public/build/images",
+            "js": "public/build/js",
+            "fonts": "public/build/fonts"
+        }
     }
 }

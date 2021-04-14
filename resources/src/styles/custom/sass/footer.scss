@@ -1,0 +1,177 @@
+@import "variables";
+
+.footer{
+  &-top{
+    background: #1F0328;
+    padding: 32px 0;
+    @include w($md){
+      padding: 24px 0;
+    }
+    @include w($sm){
+      padding: 24px 0 32px;
+    }
+    &-wrap{
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      @include w($sm){
+        flex-wrap: wrap;
+      }
+    }
+  }
+  &-bottom{
+    background: $black;
+    padding: 16px 0;
+    color: $white-light;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  &-logo{
+    @include img;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-right: 4.8em;
+    img{
+      height: 63px;
+    }
+    span{
+      color: $white;
+      font-size: 10px;
+      line-height: 12px;
+      padding-top: 16px;
+      width: 185px;
+    }
+    @include w($md){
+      margin-right: 10px;
+      img{
+        height: 53px;
+      }
+      span{
+        width: 110px;
+      }
+    }
+    @include w($sm){
+      display: none;
+    }
+  }
+  &-block{
+    display: flex;
+    flex-direction: column;
+    margin-left: 4.8em;
+    .title{
+      color: #6E4C7A;
+      padding-bottom: 16px;
+    }
+    @include w($md){
+      margin-left: 0;
+      .title{
+        padding-bottom: 12px;
+      }
+    }
+    @include w($sm){
+      width: 100%;
+      align-items: center;
+    }
+  }
+  &-menu{
+    flex-direction: column;
+    align-items: flex-start;
+    a{
+      color: $grey-dark;
+      @include txt;
+      margin-bottom: 12px;
+      white-space: nowrap;
+      @include offHoverOnDevices{
+        &:hover{
+          color: $white-light;
+        }
+      }
+    }
+    @include w($sm){
+      align-items: center;
+    }
+  }
+  &-social{
+    a{
+      color: $grey-dark;
+      @include center;
+      margin-right: 16px;
+      flex-shrink: 0;
+      @include offHoverOnDevices{
+        &:hover{
+          color: $blue;
+        }
+      }
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+    .social{
+      display: flex;
+      align-items: center;
+
+    }
+    @include w($md){
+      .icon-vk,
+      .icon-facebook,
+      .icon-google{
+        font-size: 32px;
+      }
+    }
+    @include w($sm){
+      .title{
+        display: none;
+      }
+      .social{
+        margin-top: 20px;
+      }
+    }
+  }
+  &-subscribe{
+    margin-left: auto;
+    width: 31.2em;
+    &-done{
+      display: none;
+      width: 100%;
+      //display: flex;
+      align-items: center;
+      padding: 14px 8px;
+      svg{
+        color: $blue;
+        margin-right: 8px;
+      }
+      .sentence{
+        color: $grey-dark;
+      }
+    }
+    .form{
+      border-bottom-color: #fff;
+      input{
+        color: $white-light;
+        &::placeholder{
+          color: #6E4C7A;
+        }
+      }
+      button{
+        color: $blue;
+        @include offHoverOnDevices{
+          &:hover{
+            color: $blue-light;
+          }
+        }
+      }
+    }
+    @include w($md){
+      margin-left: 0;
+      width: 220px;
+      flex-shrink: 0;
+      &-done{
+        padding: 12px 8px;
+      }
+    }
+    @include w($sm){
+      display: none;
+    }
+  }
+}

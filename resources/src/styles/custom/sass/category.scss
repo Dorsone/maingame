@@ -1,0 +1,40 @@
+@import "variables";
+
+.category{
+  &-slider{
+    width: 100%;
+    .swiper-container{
+      padding: 0 40px;
+      @include w($md){
+        padding: 0 32px;
+      }
+      @include w($sm){
+        padding: 0 16px;
+      }
+    }
+    &__item{
+      width: 11.2em;
+      flex-wrap: wrap;
+      .sentence{
+        width: 100%;
+        text-align: center;
+        padding-top: 8px;
+        color: #6E4C7A;
+      }
+      .img-sm{
+        width: 7.2em;
+        height: 7.2em;
+      }
+      @include offHoverOnDevices{
+        &:hover{
+          .sentence{
+            color: $velvet;
+          }
+        }
+      }
+      @include w($md){
+        width: 100px;
+      }
+    }
+  }
+}
