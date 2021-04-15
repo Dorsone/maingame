@@ -12,6 +12,7 @@ use App\Models\Articles;
 use App\Models\ArticlesCategories;
 use App\Models\ArticlesTags;
 use App\Models\MainSlides;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class IndexController extends Controller
@@ -62,8 +63,11 @@ class IndexController extends Controller
         return view('site.categories', compact('categories', 'breadcrumbs'));
     }
 
-    public function category($categorySlug)
+    public function category($categorySlug, Request $request)
     {
+        $filterTags = $request->input('tags');
+        $sort = $request->input('sort');
+
         $category = ArticlesCategories::where('slug', $categorySlug)
             ->whereHas('articles', function ($q) {
                 $q->where('active', 1);
@@ -71,11 +75,31 @@ class IndexController extends Controller
             ->where('active', 1)
             ->firstOrFail();
 
-        $articles = Articles::where('category_id', $category->id)
-            ->where('active', 1)
-            ->orderByDesc('date')
-            ->with(['tags'])
-            ->paginate(config('settings.paginate_per_page') ?? 9);
+        $articlesQuery = Articles::where('category_id', $category->id)
+            ->where('active', 1);
+
+        if ($filterTags && is_array($filterTags)) {
+            $articlesQuery->whereHas('tags', function ($q) use ($filterTags) {
+                $q->whereIn('slug', $filterTags);
+            });
+        }
+
+        if ($sort && !empty($sort['col']) && !empty($sort['order'])) {
+
+            if ($sort['order'] == 'asc') {
+                $articlesQuery->orderBy($sort['col']);
+            } else {
+                $articlesQuery->orderByDesc($sort['col']);
+            }
+        } else {
+            $articlesQuery->orderByDesc('date');
+        }
+
+
+        $articlesQuery->with(['tags']);
+
+        $articles = $articlesQuery->paginate(config('settings.paginate_per_page') ?? 9);
+
 
         $tags = ArticlesTags::whereHas('articles', function ($q) use ($category) {
             $q->where('active', 1);

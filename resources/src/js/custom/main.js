@@ -1,17 +1,23 @@
 $(document).ready(function () {
     svg4everybody();
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     // === header search ===
-    $('.header-search').on('click', function (){
-        $('.search').fadeIn('fast').css('display','flex');
+    $('.header-search').on('click', function () {
+        $('.search').fadeIn('fast').css('display', 'flex');
     })
-    $('.search-close').on('click', function (){
+    $('.search-close').on('click', function () {
         $('.search').fadeOut('fast');
     })
 
 
     // === home main slider
-    if($('.home-main__slider').length){
+    if ($('.home-main__slider').length) {
         let el = $('.home-main__small .swiper-slide:first-child');
         $('.home-main__small .swiper-wrapper').append(el);
 
@@ -43,7 +49,7 @@ $(document).ready(function () {
     }
 
     // === category slider
-    if($('.category-slider').length){
+    if ($('.category-slider').length) {
         let categorySlider = new Swiper('.category-slider .swiper-container', {
             speed: 500,
             slidesPerView: 'auto',
@@ -59,29 +65,31 @@ $(document).ready(function () {
     }
 
     // === save news ===
-    $('.item-block__save').on('click', function (){
+    $('.item-block__save').on('click', function () {
         $(this).parents('.item-block').toggleClass('saved');
     })
-    $('.news-article__actions .save').on('click', function (){
+    $('.news-article__actions .save').on('click', function () {
         $(this).parents('.news-article').toggleClass('saved');
     })
 
     // === current tag ===
-    $('.tag').on('click', function (){
+    $('.tag').on('click', function () {
         $(this).toggleClass('current');
+        getArticles()
     });
-    $('.tag-remove').on('click', function (){
+    $('.tag-remove').on('click', function () {
         $('.tag').removeClass('current')
+        getArticles()
     })
 
     // === show tags ===
-    $(function (){
+    $(function () {
         let tag = $('.tag');
-        $('.tag-more').on('click', function (){
+        $('.tag-more').on('click', function () {
             tag.show();
             $(this).hide();
         });
-        if(tag.length < 14){
+        if (tag.length < 14) {
             $('.tag-more').hide();
         } else {
             let tag_hide = tag.length - 13;
@@ -91,17 +99,78 @@ $(document).ready(function () {
     })
 
     // === show sort ===
-    $('.sort-selected, .sort-arrow').on('click', function (e){
-        $("html").one("click", function() {
+    $('.sort-selected, .sort-arrow').on('click', function (e) {
+        $("html").one("click", function () {
             $(".sort").removeClass("show")
         });
-       $(this).parents('.sort').toggleClass('show');
+        $(this).parents('.sort').toggleClass('show');
         e.stopPropagation()
     });
-    $('.sort-list span').on('click', function (){
-        $('.sort-selected').text($(this).text())
+    $('.sort-list span').on('click', function () {
+        let _this = $(this);
+        let sortSelected = $('.sort-selected');
+
+        sortSelected.text(_this.text());
+        sortSelected.attr('data-col', _this.attr('data-col'));
+        sortSelected.attr('data-sort', _this.attr('data-sort'));
         $('.sort').removeClass('show')
+        getArticles()
     })
 
+    $('.js-link-more').on('click', function () {
+        let _this = $(this);
+        let url = _this.attr('data-url');
+        getArticles(url, false)
+    });
+
 });
+
+function getArticles(url = null, replace = true) {
+
+    let content = $('section .container')
+    let tagsList = $('.js-tag-item.current');
+    let tags = [];
+    let sort = {};
+
+    if (url === null) {
+        url = document.location.href;
+    }
+
+    if (tagsList.length > 0) {
+        tagsList.each(function (key, item) {
+            tags.push($(item).attr('data-tag'));
+        })
+    }
+
+    let sortSelected = $('.sort-selected');
+    sort.col = sortSelected.attr('data-col');
+    sort.order = sortSelected.attr('data-sort');
+
+    $.ajax({
+        url: url,
+        data: {
+            tags: tags,
+            sort: sort,
+        },
+        dataType: "html",
+        beforeSend: function () {
+
+        },
+        complete: function () {
+
+        },
+        success: function (response) {
+            let html = $(response);
+            let list = html.find('a.item-block');
+            let paginate = html.find('.js-link-more').attr('data-url')
+
+            content.find('.js-link-more').attr('data-url', paginate);
+            if (replace) {
+                content.find('.js-articles-wrap').html(list);
+            } else {
+                content.find('.js-articles-wrap').append(list);
+            }
+        }
+    });
+}
 

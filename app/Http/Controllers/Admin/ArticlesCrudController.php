@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\ArticlesRequest;
+use App\Models\ArticlesCategories;
 use App\Models\ArticlesTags;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -35,6 +36,17 @@ class ArticlesCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->crud->addFilter([
+            'name' => 'category_id',
+            'type' => 'select2',
+            'label' => 'Категория'
+        ],
+            ArticlesCategories::orderBy('title')->get()->pluck('title', 'id')->toArray(),
+            function ($value) {
+                $this->crud->addClause('where', 'category_id', $value);
+            }
+        );
+
         $this->crud->addColumns([
             [
                 'name' => 'active',
