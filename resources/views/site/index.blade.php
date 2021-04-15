@@ -11,12 +11,12 @@
                 <div class="swiper-container home-main__main">
                     <div class="swiper-wrapper">
                         @foreach($slides as $slide)
-                            <div class="swiper-slide">
+                            <a class="swiper-slide" href="{{ $slide->link }}">
                                 <div class="home-main__main__img">
                                     <img src="{{ asset($slide->image) }}" alt=""/>
                                 </div>
                                 <div class="title title-h1"> {{ $slide->title }}</div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>
