@@ -16,11 +16,11 @@ html(lang="ru")
                     .swiper-container.home-main__main
                         .swiper-wrapper
                             - for (var x = 0; x < 2; x++)
-                                .swiper-slide
+                                a(href=empty_url).swiper-slide
                                     .home-main__main__img
                                         +img('home1.jpg')
                                     +title('h1', 'div','Заголовок баннера')
-                                .swiper-slide
+                                a(href=empty_url).swiper-slide
                                     .home-main__main__img
                                         +img('home2.jpg')
                                     +title('h1', 'div','В ожидании финала зимней лиги DPC 2021')

@@ -36,7 +36,7 @@ class ArticlesTags extends Model
     */
     public function articles()
     {
-        return $this->belongsToMany(Articles::class, 'pivot_events_tags', 'tag_id', 'article_id');
+        return $this->belongsToMany(Articles::class, 'articles_tags_pivot', 'tag_id', 'article_id');
     }
 
     /*
@@ -50,6 +50,13 @@ class ArticlesTags extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
+
+    public function getColorClassAttribute()
+    {
+        $colors = ['mark__orange', 'mark__velvet'];
+
+        return $colors[array_rand($colors)];
+    }
 
     /*
     |--------------------------------------------------------------------------

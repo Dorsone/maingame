@@ -13,6 +13,9 @@
     <meta name="msapplication-TileColor" content="#2b5797"/>
     <meta name="theme-color" content="#ffffff"/>
     <title>@yield('title', config('app.name'))</title>
+    <meta name="description" content="@yield('description')">
+    <meta name="keywords" content="@yield('keywords')">
+
     <link rel="stylesheet" href="{{ asset('build/css/jquery.fancybox.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('build/css/swiper.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('build/css/style.css') }}"/>
