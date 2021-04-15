@@ -70,7 +70,7 @@ return [
         'create' => [
             // Define the size/looks of the content div for all CRUDs
             // To override per view use $this->crud->setCreateContentClass('class-string')
-            'contentClass' => 'col-md-8 bold-labels',
+            'contentClass' => 'col-md-10 bold-labels',
 
             // When using tabbed forms (create & update), what kind of tabs would you like?
             'tabsType' => 'horizontal', //options: horizontal, vertical
@@ -106,7 +106,7 @@ return [
         'update' => [
             // Define the size/looks of the content div for all CRUDs
             // To override per view use $this->crud->setEditContentClass('class-string')
-            'contentClass'   => 'col-md-8 bold-labels',
+            'contentClass'   => 'col-md-10 bold-labels',
 
             // When using tabbed forms (create & update), what kind of tabs would you like?
             'tabsType' => 'horizontal', //options: horizontal, vertical
