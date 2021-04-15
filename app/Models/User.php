@@ -75,7 +75,7 @@ class User extends Authenticatable
 
     public function setImageAttribute($value)
     {
-        $this->setImage("image", "public/users/", $value);
+        $this->setImage("image", "public/uploads/users/", $value);
     }
 
     private function getNumEnding($iNumber, $aEnding)

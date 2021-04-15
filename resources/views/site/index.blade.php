@@ -82,7 +82,7 @@
             </div>
             <div class="news-all">
                 @foreach($news as $n)
-                    <a class="item-block" href="javascript:void(0)">
+                    <a class="item-block" href="{{ route('site.article', ['categorySlug' => $n->category->slug, 'articleSlug' => $n->slug]) }}">
                         <div class="item-block__save">
                             <svg class="icon icon-save ">
                                 <use xlink:href="/build/images/sprite-inline.svg#save"></use>
