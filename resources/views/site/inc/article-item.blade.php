@@ -1,3 +1,4 @@
+@php /** @var $art \App\Models\Articles */ @endphp
 <a class="item-block col"
    href="{{ route('site.article', ['categorySlug' => $cat->slug, 'articleSlug' => $art->slug]) }}">
     <div class="item-block__save">

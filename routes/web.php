@@ -18,3 +18,4 @@ Route::get('/', [Site\IndexController::class, 'index'])->name('site.index');
 Route::get('categories', [Site\IndexController::class, 'categories'])->name('site.categories');
 Route::get('category/{categorySlug}', [Site\IndexController::class, 'category'])->name('site.category');
 Route::get('category/{categorySlug}/{articleSlug}', [Site\IndexController::class, 'article'])->name('site.article');
+Route::get('author/{id}', [Site\IndexController::class, 'author'])->name('site.author');

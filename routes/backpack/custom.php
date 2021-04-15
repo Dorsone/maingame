@@ -25,4 +25,5 @@ Route::group([
         Route::post('delete', ['as' => 'summernote.image.delete', 'uses' => 'SummernoteImageController@delete']);
     });
 
+    Route::crud('user', 'UserCrudController');
 }); // this should be the absolute last line of this file

@@ -12,6 +12,8 @@ use App\Models\Articles;
 use App\Models\ArticlesCategories;
 use App\Models\ArticlesTags;
 use App\Models\MainSlides;
+use App\Models\User;
+use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -58,7 +60,7 @@ class IndexController extends Controller
             ->orderBy('lft')
             ->get();
 
-        $breadcrumbs = $this->getCategoryBreadcrumbs();
+        $breadcrumbs = $this->getBreadcrumbs();
 
         return view('site.categories', compact('categories', 'breadcrumbs'));
     }
@@ -106,38 +108,95 @@ class IndexController extends Controller
             $q->where('category_id', $category->id);
         })->get();
 
-        $breadcrumbs = $this->getCategoryBreadcrumbs($category);
+        $breadcrumbs = $this->getBreadcrumbs($category);
 
         return view('site.category', compact('category', 'articles', 'tags', 'breadcrumbs'));
     }
 
     public function article($categorySlug, $articleSlug)
     {
+
+        $category = ArticlesCategories::where('slug', $categorySlug)
+            ->where('active', 1)
+            ->firstOrFail();
+
+        $article = Articles::where('active', 1)
+            ->where('category_id', $category->id)
+            ->where('slug', $articleSlug)
+            ->with(['tags', 'user'])
+            ->firstOrFail();
+
+        $article->views = ($article->views) ? $article->views + 1 : 1;
+        $article->save();
+
+        $recommendation = Articles::where('active', 1)
+            ->where('id', '<>', $article->id)
+            ->with(['tags', 'category'])
+            ->orderByDesc('views')
+            ->limit(4)
+            ->get();
+
+        $breadcrumbs = $this->getBreadcrumbs($category, $article);
+
+        return view('site.article', compact('article', 'category', 'breadcrumbs', 'recommendation'));
     }
 
+    public function author($id)
+    {
+        $user = User::findOrFail($id);
+
+        $articles = Articles::where('active', 1)
+            ->where('user_id', $user->id)
+            ->with(['tags', 'user', 'category'])
+            ->paginate(4);
+
+        $breadcrumbs = $this->getBreadcrumbs();
+        $breadcrumbs[] = [
+            'title' => $user->name,
+            'url' => route('site.author', ['id' => $user->id]),
+            'current' => true
+        ];
+
+        return view('site.author', compact('user', 'articles', 'breadcrumbs'));
+    }
 
     /**
      *
      * @param  null|ArticlesCategories  $category
+     * @param  null|Articles  $article
      * @return array
      */
-    private function getCategoryBreadcrumbs($category = null): array
+    private function getBreadcrumbs($category = null, $article = null): array
     {
-        $breadcrumbs[0] = [
-            'title' => 'Категории',
-            'url' => route('site.categories'),
-            'current' => true
-        ];
+        $breadcrumbs = [];
+
+        if ($category or $article) {
+            $breadcrumbs[0] = [
+                'title' => 'Категории',
+                'url' => route('site.categories'),
+                'current' => true
+            ];
+        }
 
         if ($category) {
             $breadcrumbs[1] = [
                 'title' => empty($category->breadcrumbs_title) ? $category->title : $category->breadcrumbs_title,
-                'current' => true
+                'current' => true,
+                'url' => route('site.category', ['categorySlug' => $category->slug])
             ];
 
             $breadcrumbs[0]['current'] = false;
         }
 
+        if ($article) {
+            $breadcrumbs[2] = [
+                'title' => empty($article->breadcrumbs_title) ? $article->title : $article->breadcrumbs_title,
+                'current' => true
+            ];
+
+            $breadcrumbs[0]['current'] = false;
+            $breadcrumbs[1]['current'] = false;
+        }
         return $breadcrumbs;
     }
 }
