@@ -18,7 +18,7 @@
 
     <link rel="stylesheet" href="{{ asset('build/css/jquery.fancybox.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('build/css/swiper.min.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('build/css/style.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('build/css/style.css') }}?v={{ hash_file('md5', public_path('build/css/style.css')) }}"/>
 </head>
 <body>
 <header class="header">
@@ -141,9 +141,11 @@
 <script src="{{ asset('build/js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('build/js/jquery.ui.touch-punch.min.js') }}"></script>
 <script src="{{ asset('build/js/jquery.maskedinput.min.js') }}"></script>
-<!-- REMOVE THIS SCRIPT \/ ON REAL SITE-->
-<script src="{{ asset('build/js/dev-js.js') }}"></script>
-<!-- REMOVE THIS SCRIPT /\ ON REAL SITE-->
-<script src="{{ asset('build/js/main.js') }}"></script>
+
+@if(config('app.env') == 'local')
+    <script src="{{ asset('build/js/dev-js.js') }}"></script>
+@endif
+
+<script src="{{ asset('build/js/main.js') }}?v={{ hash_file('md5', public_path('build/js/main.js')) }}"></script>
 </body>
 </html>
