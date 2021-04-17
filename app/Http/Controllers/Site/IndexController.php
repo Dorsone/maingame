@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Models\Articles;
 use App\Models\ArticlesCategories;
+use App\Models\ArticlesComments;
 use App\Models\ArticlesTags;
 use App\Models\MainSlides;
 use App\Models\User;
@@ -30,7 +31,8 @@ class IndexController extends Controller
                 $q->where('active', 1);
                 $q->orderByDesc('date');
                 $q->with(['tags']);
-            }
+                $q->withCount(['comments']);
+            },
         ])
             ->whereHas('articles', function ($q) {
                 $q->where('active', 1);
@@ -39,7 +41,10 @@ class IndexController extends Controller
             ->orderBy('lft')
             ->get();
 
-        $news = Articles::where('active', 1)->with(['category'])->orderByDesc('date')->limit(4)->get();
+        $news = Articles::where('active', 1)
+            ->with(['category'])
+            ->withCount(['comments'])
+            ->orderByDesc('date')->limit(4)->get();
 
         return view('site.index', compact('slides', 'categories', 'news'));
     }
@@ -51,6 +56,7 @@ class IndexController extends Controller
                 $q->where('active', 1);
                 $q->orderByDesc('date');
                 $q->with(['tags']);
+                $q->withCount(['comments']);
             }
         ])
             ->whereHas('articles', function ($q) {
@@ -78,6 +84,7 @@ class IndexController extends Controller
             ->firstOrFail();
 
         $articlesQuery = Articles::where('category_id', $category->id)
+            ->withCount(['comments'])
             ->where('active', 1);
 
         if ($filterTags && is_array($filterTags)) {
@@ -123,7 +130,7 @@ class IndexController extends Controller
         $article = Articles::where('active', 1)
             ->where('category_id', $category->id)
             ->where('slug', $articleSlug)
-            ->with(['tags', 'user'])
+            ->with(['tags', 'user', 'comments'])
             ->firstOrFail();
 
         $article->views = ($article->views) ? $article->views + 1 : 1;
@@ -158,6 +165,25 @@ class IndexController extends Controller
         ];
 
         return view('site.author', compact('user', 'articles', 'breadcrumbs'));
+    }
+
+    public function addComment(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'comment' => 'required|string',
+            'article_id' => 'required|exists:articles,id'
+        ]);
+
+        $comment = new ArticlesComments();
+        $comment->fill($request->except('_token'));
+        $comment->save();
+
+        return response()->json([
+            'status' => 'success',
+        ]);
+
     }
 
     /**

@@ -302,7 +302,29 @@
         }
       }
     }
+
+      .comment-input {
+          border-bottom: $grey-dark;
+          margin-bottom: 16px;
+      }
   }
+
+  .comment-add-done {
+        display: none;
+        width: 100%;
+        align-items: center;
+        padding: 14px 8px;
+
+        svg {
+            color: $black-light;
+            margin-right: 8px;
+        }
+
+        .sentence {
+            color: $black-light;
+        }
+    }
+
   &-item{
     margin-top: 32px;
     &__first{

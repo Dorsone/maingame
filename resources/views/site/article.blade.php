@@ -91,90 +91,68 @@
     <section class="section">
         <div class="container container__xs">
             <div class="title-line">
-                <h2 class="title title-h2"> Комментарии<span class="count">0</span></h2>
+                <h2 class="title title-h2"> Комментарии<span class="count">{{ $article->comments->count() }}</span></h2>
             </div>
             <div class="comment">
-                <form class="form form-line" action="/">
-                    <input type="text" placeholder="Ваш комментарий"/>
+                <form method="post"
+                      data-success-block="comment-add-done"
+                      class="js-send-form form form-line"
+                      action="{{ route('site.add-comment') }}">
+                    @csrf
+                    <input type="hidden" name="article_id" value="{{ $article->id }}">
+                    <input class="comment-input" name="name" required type="text" placeholder="Ваше имя"/>
+                    <input class="comment-input" name="email" required type="email" placeholder="Ваш email"/>
+                    <input class="comment-input" name="comment" required type="text" placeholder="Ваш комментарий"/>
                     <button>
                         <svg class="icon icon-send ">
                             <use xlink:href="/build/images/sprite-inline.svg#send"></use>
                         </svg>
                     </button>
                 </form>
+                <div class="comment-add-done">
+                    <svg class="icon icon-check ">
+                        <use xlink:href="/build/images/sprite-inline.svg#check"></use>
+                    </svg>
+                    <span class="sentence">Ваш комментарий получен и будет показан после модерации</span>
+                </div>
 
-                {{--
-                <div class="comment-item">
-                    <div class="comment-item__first">
-                        <div class="img-sm"><img src="./images/avatar.jpg" alt=""/>
-                        </div>
-                        <div class="comment-item__desc">
-                            <div class="comment-item__name">Evan J.</div>
-                            <div class="comment-item__text text">
-                                <p>Главным же победителем является Dark Seer: его Normal Punch — это отсылка к JoJo's Bizarre Adventure!</p>
+                @foreach($article->comments as $comment)
+                    <div class="comment-item">
+                        <div class="comment-item__first">
+                            <div class="img-sm">
+                                <img src="https://www.gravatar.com/avatar/{{ md5($comment->email) }}" alt=""/>
+                            </div>
+                            <div class="comment-item__desc">
+                                <div class="comment-item__name">{{ $comment->name }}</div>
+                                <div class="comment-item__text text">
+                                    <p>{{ $comment->comment }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="comment-item__answer">
-                        <svg class="icon icon-arrow-reply ">
-                            <use xlink:href="./images/sprite-inline.svg#arrow-reply"></use>
-                        </svg>
-                        <span>Ответить</span>
-                    </div>
-                </div>
-                <div class="comment-item">
-                    <div class="comment-item__first">
-                        <div class="img-sm"><img src="./images/avatar.jpg" alt=""/>
+                        <div class="comment-item__answer">
+                            <span>&nbsp;</span>
                         </div>
-                        <div class="comment-item__desc">
-                            <div class="comment-item__name">Evan J.</div>
-                            <div class="comment-item__text text">
-                                <p>Ястребом вновь можно управлять, выполняя более качественную разведку. Более того, он еще и стал камикадзе, наносящим урон по оппоненту и станящим
-                                    его. Главным же победителем является Dark Seer: его Normal Punch — это отсылка к JoJo's Bizarre Adventure!</p>
+                        @if($comment->answer)
+                            <div class="comment-item__second">
+                                @if($article->user->image)
+                                    <div class="img-sm">
+                                        <img src="{{ asset($article->user->image) }}" alt=""/>
+                                    </div>
+                                @endif
+                                <div class="comment-item__desc">
+                                    <div class="comment-item__name">{{ $article->user->name }}</div>
+                                    <div class="comment-item__text text">
+                                        <p>{{ $comment->answer }}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
-                    <div class="comment-item__answer">
-                        <svg class="icon icon-arrow-reply ">
-                            <use xlink:href="./images/sprite-inline.svg#arrow-reply"></use>
-                        </svg>
-                        <span>Ответить</span>
-                    </div>
-                    <div class="comment-item__second">
-                        <div class="img-sm"><img src="./images/avatar.jpg" alt=""/>
-                        </div>
-                        <div class="comment-item__desc">
-                            <div class="comment-item__name">Evan J.</div>
-                            <div class="comment-item__text text">
-                                <p>Ястребом вновь можно управлять, выполняя более качественную разведку. Более того, он еще и стал камикадзе, наносящим урон по оппоненту и станящим
-                                    его. Главным же победителем является Dark Seer: его Normal Punch — это отсылка к JoJo's Bizarre Adventure!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment-item">
-                    <div class="comment-item__first">
-                        <div class="img-sm"><img src="./images/avatar.jpg" alt=""/>
-                        </div>
-                        <div class="comment-item__desc">
-                            <div class="comment-item__name">Evan J.</div>
-                            <div class="comment-item__text text">
-                                <p>Главным же победителем является Dark Seer: его Normal Punch — это отсылка к JoJo's Bizarre Adventure!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment-item__answer">
-                        <svg class="icon icon-arrow-reply ">
-                            <use xlink:href="./images/sprite-inline.svg#arrow-reply"></use>
-                        </svg>
-                        <span>Ответить</span>
-                    </div>
-                </div>
-                --}}
+                @endforeach
             </div>
             <div class="link-more" data-url="">
                 <svg class="icon icon-arrow-circle ">
-                    <use xlink:href="./images/sprite-inline.svg#arrow-circle"></use>
+                    <use xlink:href="/build/images/sprite-inline.svg#arrow-circle"></use>
                 </svg>
                 <span>Еще 11 комментариев </span>
             </div>

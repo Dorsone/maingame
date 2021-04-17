@@ -17,6 +17,9 @@
             <a class='nav-link' href='{{ backpack_url('articles') }}'> Статьи</a>
         </li>
         <li class='nav-item'>
+            <a class='nav-link' href='{{ backpack_url('articlescomments') }}'> Комментарии</a>
+        </li>
+        <li class='nav-item'>
             <a class='nav-link' href='{{ backpack_url('articlescategories') }}'> Категории статей </a>
         </li>
         <li class='nav-item'>

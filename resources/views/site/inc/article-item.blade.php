@@ -24,7 +24,7 @@
             </span>
             <span>
                 <svg class="icon icon-comment "><use xlink:href="/build/images/sprite-inline.svg#comment"></use></svg>
-                0
+                {{ $art->comments_count }}
             </span>
         </div>
         <div class="item-block__title">{{ $art->title }}</div>

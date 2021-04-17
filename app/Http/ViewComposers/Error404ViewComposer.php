@@ -16,6 +16,7 @@ class Error404ViewComposer
     {
         $articles = Articles::where('active', 1)
             ->with(['tags', 'category'])
+            ->withCount(['comments'])
             ->orderByDesc('views')
             ->limit(6)
             ->get();

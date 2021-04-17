@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Articles extends Model
+class ArticlesComments extends Model
 {
-    use CrudTrait, HasFactory;
+    use CrudTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -16,13 +15,13 @@ class Articles extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'articles';
+    protected $table = 'articles_comment';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
-    protected $dates = ['date'];
+    // protected $dates = [];
 
     /*
     |--------------------------------------------------------------------------
@@ -35,31 +34,9 @@ class Articles extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function category()
+    public function article()
     {
-        return $this->belongsTo(ArticlesCategories::class, 'category_id', 'id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(ArticlesTags::class, 'articles_tags_pivot', 'article_id', 'tag_id');
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(ArticlesComments::class, 'article_id', 'id')
-            ->where('active', 1)
-            ->orderByDesc('created_at');
-    }
-
-    public function commentsAll()
-    {
-        return $this->hasMany(ArticlesComments::class, 'article_id', 'id');
+        return $this->belongsTo(Articles::class, 'article_id', 'id');
     }
 
     /*
