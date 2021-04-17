@@ -109,8 +109,12 @@
                 </div>
                 <div class="footer-block footer-subscribe">
                     <div class="title title-h4"> Подписка</div>
-                    <form class="form form-line" action="">
-                        <input type="email" placeholder="Почта"/>
+                    <form method="post"
+                          data-success-block="footer-subscribe-done"
+                          class="js-send-form form form-line"
+                          action="{{ route('site.subscribe') }}">
+                        @csrf
+                        <input name="mail" type="email" placeholder="Почта"/>
                         <button>
                             <svg class="icon icon-send ">
                                 <use xlink:href="/build/images/sprite-inline.svg#send"></use>

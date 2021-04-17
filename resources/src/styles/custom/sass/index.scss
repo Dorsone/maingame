@@ -108,6 +108,22 @@
         }
       }
     }
+    &-subscribe-done {
+
+        display: none;
+        width: 100%;
+        align-items: center;
+        padding: 14px 8px;
+
+        svg {
+            color: $white;
+            margin-right: 8px;
+        }
+
+        .sentence {
+            color: $white;
+        }
+    }
     @include w($md){
       height: 41.667vw;
       &__slider{

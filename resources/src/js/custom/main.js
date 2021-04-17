@@ -117,12 +117,46 @@ $(document).ready(function () {
         getArticles()
     })
 
+    // === link more ===
     $('.js-link-more').on('click', function () {
         let _this = $(this);
         let url = _this.attr('data-url');
         getArticles(url, false)
     });
 
+    // === send form ===
+    $('.js-send-form').on('submit', function (e) {
+        e.preventDefault();
+
+        let form = $(this)
+        let url = form.attr('action')
+        let successMessageBlock = form.attr('data-success-block')
+
+        $.ajax({
+            url: url,
+            data: form.serialize(),
+            type: form.attr('method'),
+            dataType: "json",
+            beforeSend: function () {
+                if (typeof successMessageBlock !== 'undefined') {
+                    $('.' + successMessageBlock).hide();
+                }
+            },
+            complete: function () {
+
+            },
+            error: function (jqXHR, exception) {
+                console.log(jqXHR, exception)
+            },
+            success: function (response) {
+                if (typeof successMessageBlock !== 'undefined') {
+                    $('.' + successMessageBlock).show();
+                }
+
+                form.trigger("reset");
+            }
+        });
+    });
 });
 
 function getArticles(url = null, replace = true) {

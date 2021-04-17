@@ -40,14 +40,24 @@
         <div class="home-main__form">
             <div class="title title-h1"> Подпишись на обновления</div>
             <div class="sentence">Никакого спама! Только интересные новости по твоим предпочтениям</div>
-            <form class="form form-line" action="">
-                <input type="email" placeholder="Почта"/>
+            <form method="post"
+                  data-success-block="home-main-subscribe-done"
+                  class="js-send-form form form-line"
+                  action="{{ route('site.subscribe') }}">
+                @csrf
+                <input name="mail" type="email" placeholder="Почта"/>
                 <button>
                     <svg class="icon icon-send ">
                         <use xlink:href="/build/images/sprite-inline.svg#send"></use>
                     </svg>
                 </button>
             </form>
+            <div class="home-main-subscribe-done">
+                <svg class="icon icon-check ">
+                    <use xlink:href="/build/images/sprite-inline.svg#check"></use>
+                </svg>
+                <span class="sentence">Благодарим за подписку</span>
+            </div>
         </div>
     </section>
 
