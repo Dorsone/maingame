@@ -9,8 +9,8 @@
                     <h1 class="title title-h1"> Что-то пошло не так</h1>
                 </div>
                 <div class="sentence">Этой страницы более не существует. Но это не Game Over, вы можете найти что-то интересное.</div>
-                <form class="form form-line" action="/">
-                    <input type="text" placeholder="Поиск по сайту"/>
+                <form method="get" class="form form-line" action="{{ route('site.search') }}">
+                    <input name="q" type="text" placeholder="Поиск по сайту"/>
                     <button>
                         <svg class="icon icon-search ">
                             <use xlink:href="{{ asset('build/images/sprite-inline.svg#search') }}"></use>
