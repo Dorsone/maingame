@@ -47,8 +47,8 @@
                 </svg>
             </div>
             <div class="search">
-                <form class="form" action="/">
-                    <input type="text" placeholder="Поиск по сайту"/>
+                <form method="get" class="form" action="{{ route('site.search') }}">
+                    <input name="q" type="text" placeholder="Поиск по сайту"/>
                     <button>
                         <svg class="icon icon-search ">
                             <use xlink:href="{{ asset('build/images/sprite-inline.svg#search') }}"></use>

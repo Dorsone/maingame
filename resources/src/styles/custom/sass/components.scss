@@ -662,7 +662,7 @@ b{
     width: 100%;
     @include h4;
     color: $black;
-
+    transition: $anim;
   }
   &__text{
     width: 100%;

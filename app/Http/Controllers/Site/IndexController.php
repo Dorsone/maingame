@@ -13,8 +13,10 @@ use App\Models\ArticlesCategories;
 use App\Models\ArticlesComments;
 use App\Models\ArticlesTags;
 use App\Models\MainSlides;
+use App\Models\Search;
+use App\Models\SearchItems;
 use App\Models\User;
-use Facade\FlareClient\View;
+use App\Services\IndexingText;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -66,7 +68,7 @@ class IndexController extends Controller
             ->orderBy('lft')
             ->get();
 
-        $breadcrumbs = $this->getBreadcrumbs();
+        $breadcrumbs = $this->getBreadcrumbs(true);
 
         return view('site.categories', compact('categories', 'breadcrumbs'));
     }
@@ -134,7 +136,7 @@ class IndexController extends Controller
             ->firstOrFail();
 
         $article->views = ($article->views) ? $article->views + 1 : 1;
-        $article->save();
+        $article->saveQuietly();
 
         $recommendation = Articles::where('active', 1)
             ->where('id', '<>', $article->id)
@@ -186,6 +188,55 @@ class IndexController extends Controller
 
     }
 
+    public function search(IndexingText $indexingText, Request $request)
+    {
+        $breadcrumbs[0] = [
+            'title' => 'Поиск',
+            'url' => route('site.search'),
+            'current' => true
+        ];;
+
+        $text = $request->get('q');
+
+        if (!empty($text)):
+            $prepareWords = $indexingText->getIndex($text);
+
+            $resultId = [];
+
+            $query = Search::select(['items_id', 'weight', 'text']);
+            foreach ($prepareWords as $index => $word) {
+                $query->orWhereRaw("MATCH(text) AGAINST(? IN BOOLEAN MODE)", [$word]);
+            }
+
+            $preResult = $query->orderBy('weight')->get();
+
+            foreach ($preResult as $item) {
+                if (isset($resultId[$item->items_id])) {
+                    $resultId[$item->items_id] += (int)$item->weight;
+                } else {
+                    $resultId[$item->items_id] = (int)$item->weight;
+                }
+            }
+            arsort($resultId);
+
+            $resultTmp = Articles::whereIn('id', array_keys($resultId))
+                ->with(['category'])
+                ->withCount(['comments'])
+                ->get();
+
+            foreach ($resultTmp as $item) {
+                if (isset($resultId[$item->id])) {
+                    $resultId[$item->id] = $item;
+                }
+            }
+
+        else:
+            $resultId = [];
+        endif;
+
+        return view('site.search', ['breadcrumbs' => $breadcrumbs, 'articles' => $resultId]);
+    }
+
     /**
      *
      * @param  null|ArticlesCategories  $category
@@ -204,7 +255,7 @@ class IndexController extends Controller
             ];
         }
 
-        if ($category) {
+        if ($category && is_object($category)) {
             $breadcrumbs[1] = [
                 'title' => empty($category->breadcrumbs_title) ? $category->title : $category->breadcrumbs_title,
                 'current' => true,
@@ -223,6 +274,8 @@ class IndexController extends Controller
             $breadcrumbs[0]['current'] = false;
             $breadcrumbs[1]['current'] = false;
         }
+
+
         return $breadcrumbs;
     }
 }

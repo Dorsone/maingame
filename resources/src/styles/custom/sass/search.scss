@@ -1,0 +1,66 @@
+@import "variables";
+
+.search{
+  &-block{
+    .form{
+      border-color: $grey-dark;
+      margin-top: 24px;
+      button{
+        color: $velvet;
+        @include offHoverOnDevices{
+          &:hover{
+            color: $velvet-light;
+          }
+        }
+      }
+      @include w($md){
+        margin-top: 16px;
+      }
+    }
+  }
+  &-result{
+    padding-top: 48px;
+    &-empty{
+      padding-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      .sentence{
+        width: 100%;
+        padding-bottom: 12px;
+      }
+      a{
+        @include txt;
+        line-height: 1;
+        color: $blue;
+        border-bottom: 1px solid ;
+        margin-top: 12px;
+        margin-right: 24px;
+        @include offHoverOnDevices{
+          &:hover{
+            color: $blue-light;
+            border-bottom-color: transparent;
+          }
+        }
+      }
+    }
+    .item-block{
+      width: 100%;
+      margin-top: 16px;
+      @include minw($sm){
+        &__pic{
+          width: calc(50% - 12px);
+        }
+        &__desc{
+          width: calc(50% + 12px);
+          padding-left: 24px;
+          padding-top: 0;
+        }
+        &__save{
+          right: calc(50% + 24px + 4px);
+        }
+      }
+
+    }
+  }
+}

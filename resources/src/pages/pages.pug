@@ -32,6 +32,16 @@ include ./_data
             name:"404",
             href:"404.html",
             status: true
+        },
+        {
+            name:"Search",
+            href:"search.html",
+            status: true
+        },
+        {
+            name:"Search empty",
+            href:"search-empty.html",
+            status: true
         }
     ]
 
@@ -43,7 +53,7 @@ html(lang="ru")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         +metahead
         title PAGES
-        include ./_styles    
+        include ./_styles
     body
         include _header
         main.pages-page
@@ -66,6 +76,5 @@ html(lang="ru")
 
 
         include _footer
-        include ./_scripts 
+        include ./_scripts
         script(src="./js/main.js")
-          

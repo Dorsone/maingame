@@ -19,5 +19,7 @@ Route::get('categories', [Site\IndexController::class, 'categories'])->name('sit
 Route::get('category/{categorySlug}', [Site\IndexController::class, 'category'])->name('site.category');
 Route::get('category/{categorySlug}/{articleSlug}', [Site\IndexController::class, 'article'])->name('site.article');
 Route::get('author/{id}', [Site\IndexController::class, 'author'])->name('site.author');
+Route::get('search', [Site\IndexController::class, 'search'])->name('site.search');
+
 Route::post('add-comment', [Site\IndexController::class, 'addComment'])->name('site.add-comment');
 Route::post('subscribe', [Site\MailchimpController::class, 'subscribe'])->name('site.subscribe');

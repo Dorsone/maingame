@@ -1,0 +1,69 @@
+include ./_mixins
+include ./_data
+
+
+-
+    var bread = [
+        {
+            name:"Главная",
+            href:"index.html"
+        },
+        {
+            name:"Search",
+            href:"search.html"
+        }
+    ]
+
+<!DOCTYPE html>
+html(lang="ru")
+    head
+        +metahead
+        title Search
+        include ./_styles
+    body
+        include _header
+
+        main
+            +breadcrumbs(bread)
+            section.section
+                .container.container__sm
+                    .search-block
+                        .title-line
+                            +title('h1', 'h1', 'Поиск')
+                        form(action='/').form.form-line
+                            input(type='text' placeholder='Поиск по сайту')
+                            button
+                                +icon('search')
+                    .search-result
+                        +title('h3', 'h3', '2 Результата по запросу “Контра” ')
+                        .tag-block
+                            .tag.current все
+                            .tag только в названии
+                            .tag в хештегах
+                            .tag автор
+                            //- .tag-more + Еще <span></span>
+                        - for (var i = 0; i < 2; i ++)
+                            a(href=empty_url).item-block
+                                .item-block__save
+                                    +icon('save')
+                                .item-block__pic
+                                    +img('item-home.jpg')
+                                    .item-block__marks
+                                        .mark.mark__orange Dota
+                                        .mark.mark__velvet Видеоконтент
+                                .item-block__desc
+                                    .item-block__info
+                                        span
+                                            +icon('eye')
+                                            | 1,247
+                                        span
+                                            +icon('comment')
+                                            | 15
+                                    .item-block__title В ожидании финала зимней лиги DPC 2021
+                                    .item-block__text До конца зимней лиги DPC 2021 в пяти регионах осталось всего лишь три дня, а из 18 участников Singapore Major мы знаем ...
+                                    .item-block__date 12.02.21
+                                    .item-block__time читать 15 мин
+
+
+        include _footer
+        include ./_scripts
