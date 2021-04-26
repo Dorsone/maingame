@@ -21,7 +21,6 @@ class IndexingText
 
         $url = $this->getUrl($article);
 
-        echo $article->id;
         $item = SearchItems::updateOrCreate(['url' => $url], [
             'article_id' => $article->id,
             'title' => $article->title,

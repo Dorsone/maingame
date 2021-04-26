@@ -59,7 +59,7 @@
 
     }
     @include w($md){
-      max-height: 395px;
+      //max-height: 395px;
       .item-block{
         &__pic{
           width: 12.63vw;
@@ -88,6 +88,12 @@
         }
 
       }
+    }
+    @include w(1020){
+      max-height: 500px;
+    }
+    @include w(800){
+      max-height: 395px;
     }
     @include w($sm){
       max-height: none;
