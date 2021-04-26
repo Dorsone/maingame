@@ -13,5 +13,10 @@ class SearchItems extends Model
 {
     protected $table = 'search_items';
 
-    protected $fillable = ['title', 'url', 'description', 'breadcrumbs'];
+    protected $fillable = ['article_id', 'title', 'url', 'description', 'breadcrumbs'];
+
+    public function searchIndex()
+    {
+        return $this->hasMany(Search::class, 'items_id', 'id');
+    }
 }

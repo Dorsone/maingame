@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\searchIndexCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
+        searchIndexCommand::class,
     ];
 
     /**
@@ -24,7 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('re-index')->dailyAt('5:00');
     }
 
     /**

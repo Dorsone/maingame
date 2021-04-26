@@ -69,11 +69,6 @@
                             <use xlink:href="/build/images/sprite-inline.svg#facebook"></use>
                         </svg>
                     </a>
-                    <a class="share" href="https://plus.google.com/share?url={{url()->current()}}">
-                        <svg class="icon icon-google ">
-                            <use xlink:href="/build/images/sprite-inline.svg#google"></use>
-                        </svg>
-                    </a>
                 </div>
                 <div class="text">
                     {!! $article->content !!}

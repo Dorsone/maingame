@@ -219,14 +219,24 @@ class IndexController extends Controller
             }
             arsort($resultId);
 
-            $resultTmp = Articles::whereIn('id', array_keys($resultId))
+            $articlesIds = SearchItems::whereIn('id', array_keys($resultId))->get(['id', 'article_id']);
+
+            $resultTmp = Articles::whereIn('id', $articlesIds->pluck('article_id'))
                 ->with(['category'])
                 ->withCount(['comments'])
                 ->get();
 
+
             foreach ($resultTmp as $item) {
-                if (isset($resultId[$item->id])) {
+                $idItem = $articlesIds->where('article_id', $item->id)->first();
+                if($idItem && isset($resultId[$idItem->id])){
                     $resultId[$item->id] = $item;
+                }
+            }
+
+            foreach ($resultId as $key => $value) {
+                if (is_numeric($value)) {
+                    unset($resultId[$key]);
                 }
             }
 

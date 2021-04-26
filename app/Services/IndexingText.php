@@ -21,7 +21,9 @@ class IndexingText
 
         $url = $this->getUrl($article);
 
+        echo $article->id;
         $item = SearchItems::updateOrCreate(['url' => $url], [
+            'article_id' => $article->id,
             'title' => $article->title,
             'url' => $url,
             'description' => Str::limit($article->content_preview),
@@ -68,7 +70,12 @@ class IndexingText
 
     public function deleteArticleIndex(Articles $article)
     {
-        SearchItems::where(['url' => $this->getUrl($article)])->delete();
+        $item = SearchItems::where(['url' => $this->getUrl($article)])->first();
+
+        if ($item) {
+            Search::where('items_id', $item->id)->delete();
+            $item->delete();
+        }
     }
 
     public function start()
@@ -83,6 +90,7 @@ class IndexingText
 
         Search::where('need_delete', 1)->delete();
 
+        SearchItems::whereDoesntHave('searchIndex')->delete();
     }
 
     public function getIndex($text)
@@ -94,7 +102,7 @@ class IndexingText
             $words[$j] = trim($word);
         }
 
-        $morph = new \cijic\phpMorphy\Morphy('ua');
+        $morph = new \cijic\phpMorphy\Morphy('ru');
 
         $root = [];
 
