@@ -44,12 +44,12 @@
                 <svg class="icon icon-sort ">
                     <use xlink:href="/build/images/sprite-inline.svg#sort"></use>
                 </svg>
-                <div class="sort-selected" data-col="date" data-sort="asc">Сначала новые</div>
+                <div class="sort-selected" data-col="date" data-sort="desc">Сначала новые</div>
                 <div class="sort-arrow"></div>
                 <div class="sort-list">
                     <span data-col="time_read" data-sort="asc">Сначала короткие</span>
                     <span data-col="time_read" data-sort="desc">Сначала длинные</span>
-                    <span data-col="date" data-sort="asc">Сначала новые</span>
+                    <span data-col="date" data-sort="desc">Сначала новые</span>
                     <span data-col="views" data-sort="desc">Сначала популярные</span>
                 </div>
             </div>
