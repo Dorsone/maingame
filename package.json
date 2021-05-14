@@ -47,5 +47,8 @@
             "js": "public/build/js",
             "fonts": "public/build/fonts"
         }
+    },
+    "scripts": {
+        "gulp": "gulp"
     }
 }
