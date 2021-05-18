@@ -24,21 +24,10 @@
     @include center;
     position: relative;
     z-index: 2;
-    span{
-      color: $white;
-      font-size: 10px;
-      line-height: 12px;
-      padding-left: 16px;
-    }
     @include w($md){
       margin-right: 16px;
       img{
-        height: 40px;
-      }
-      span{
-        font-size: 8px;
-        padding-left: 8px;
-        line-height: 1;
+        height: 32px;
       }
     }
     @include w($sm){
@@ -51,6 +40,10 @@
   &-nav{
     padding: 16px 0;
     display: flex;
+    &--icon{
+      @include img;
+      margin-right: 10px;
+    }
     p{
       transition: $anim;
       font-weight: 700;
@@ -65,8 +58,7 @@
       line-height: 1.6;
     }
     a{
-      display: flex;
-      flex-direction: column;
+      @include center;
       margin-left: 4.8em;
       @include offHoverOnDevices{
         &:hover{
@@ -79,6 +71,9 @@
     @include w($md){
       padding: 0;
       margin: 0 auto;
+      &--icon{
+        display: none;
+      }
       p{
         @include fluid-type(320px, 500px, 10px, 14px);
       }

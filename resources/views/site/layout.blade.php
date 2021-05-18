@@ -27,12 +27,16 @@
         <div class="header-content">
             <a class="header-logo" href="{{ route('site.index') }}">
                 <img src="{{ asset('build/images/logo.svg') }}" alt=""/>
-                <span>Независимое медиа <br>для игроманов</span>
             </a>
             <nav class="header-nav">
                 @foreach($menuItems as $item)
                     <a href="{{ asset($item['link']) }}">
-                        <p>{{ $item['title'] }}</p><span>{{ $item['description'] }}</span>
+                        <div class="header-nav--icon">
+                            <img src="{{ asset('build/images/head'.$loop->iteration.'.svg') }}" alt=""/>
+                        </div>
+                        <div class="header-nav--title">
+                            <p>{{ $item['title'] }}</p><span>{{ $item['description'] }}</span>
+                        </div>
                     </a>
                 @endforeach
             </nav>
@@ -73,7 +77,6 @@
             <div class="footer-top-wrap">
                 <a class="footer-logo" href="index.html">
                     <img src="{{ asset('build/images/logo.svg') }}" alt=""/>
-                    <span>Независимое медиа для игроманов</span>
                 </a>
                 <div class="footer-block footer-menu">
                     <div class="title title-h4"> Меню</div>

@@ -3,17 +3,25 @@ header.header
         .header-content
             a(href='index.html').header-logo
                 +img('logo.svg')
-                span Независимое медиа <br>для игроманов
             nav.header-nav
                 a(href=empty_url)
-                    p Медиа
-                    span Новости из мира игровой индустрии
+                    .header-nav--icon
+                        +img('head1.svg')
+                    .header-nav--title
+                        p Медиа
+                        span Новости из мира игровой индустрии
                 a(href=empty_url)
-                    p Онлайн академия
-                    span Обучение киберспорту и всякое
+                    .header-nav--icon
+                        +img('head2.svg')
+                    .header-nav--title
+                        p Онлайн академия
+                        span Обучение киберспорту и всякое
                 a(href=empty_url)
-                    p Турнирная платформа
-                    span Чемпионы киберспорта
+                    .header-nav--icon
+                        +img('head3.svg')
+                    .header-nav--title
+                        p Турнирная платформа
+                        span Чемпионы киберспорта
             .header-search.header-icon
                 +icon('search')
             .header-enter.header-icon
