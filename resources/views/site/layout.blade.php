@@ -20,6 +20,19 @@
     <link rel="stylesheet" href="{{ asset('build/css/jquery.fancybox.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('build/css/swiper.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('build/css/style.css') }}?v={{ hash_file('md5', public_path('build/css/style.css')) }}"/>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8YXNV0T2RL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'G-8YXNV0T2RL');
+    </script>
 </head>
 <body>
 <header class="header">
