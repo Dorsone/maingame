@@ -29,7 +29,6 @@ class ArticlesRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'slug' => [
-                'required',
                 Rule::unique('articles')->ignore($this->id),
             ],
             'category_id' => 'required',

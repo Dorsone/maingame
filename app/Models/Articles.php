@@ -5,10 +5,11 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Articles extends Model
 {
-    use CrudTrait, HasFactory;
+    use CrudTrait, HasFactory, Sluggable;
 
     /*
     |--------------------------------------------------------------------------
@@ -29,6 +30,14 @@ class Articles extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     /*
     |--------------------------------------------------------------------------

@@ -150,6 +150,7 @@ class ArticlesCrudController extends CrudController
                 'name' => 'slug',
                 'label' => 'Url',
                 'type' => 'text',
+                'hint' => 'Будет автоматически сгенерирован из вашего заголовка, если оставить его пустым.',
             ],
             [
                 'name' => 'content_preview',
