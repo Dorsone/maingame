@@ -46,7 +46,7 @@ class IndexController extends Controller
         $news = Articles::where('active', 1)
             ->with(['category'])
             ->withCount(['comments'])
-            ->orderByDesc('date')->limit(4)->get();
+            ->orderByDesc('date')->orderByDesc('id')->limit(4)->get();
 
         return view('site.index', compact('slides', 'categories', 'news'));
     }
