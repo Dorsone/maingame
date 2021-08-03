@@ -150,6 +150,33 @@ class IndexController extends Controller
         return view('site.article', compact('article', 'category', 'breadcrumbs', 'recommendation'));
     }
 
+    public function articlesByTag($tagSlug, Request $request)
+    {
+        $tag = ArticlesTags::where('slug', $tagSlug)->firstOrFail();
+
+        $breadcrumbs = $this->getBreadcrumbs(null, null, $tag);
+
+
+        $articlesQuery = Articles::with(['category', 'tags'])->where('active', 1)->whereHas('tags', function ($q) use ($tag) {
+            $q->where('tag_id', $tag->id);
+        });
+
+        $sort = $request->input('sort');
+
+        if ($sort && !empty($sort['col']) && !empty($sort['order'])) {
+
+            if ($sort['order'] == 'asc') {
+                $articlesQuery->orderBy($sort['col']);
+            } else {
+                $articlesQuery->orderByDesc($sort['col']);
+            }
+        } else {
+            $articlesQuery->orderByDesc('date');
+        }
+        $articles = $articlesQuery->paginate(config('settings.paginate_per_page') ?? 9);
+        return view('site.articles-by-tag', compact('tag', 'articles', 'breadcrumbs'));
+    }
+
     public function author($id)
     {
         $user = User::findOrFail($id);
@@ -229,7 +256,7 @@ class IndexController extends Controller
 
             foreach ($resultTmp as $item) {
                 $idItem = $articlesIds->where('article_id', $item->id)->first();
-                if($idItem && isset($resultId[$idItem->id])){
+                if ($idItem && isset($resultId[$idItem->id])) {
                     $resultId[$item->id] = $item;
                 }
             }
@@ -253,7 +280,7 @@ class IndexController extends Controller
      * @param  null|Articles  $article
      * @return array
      */
-    private function getBreadcrumbs($category = null, $article = null): array
+    private function getBreadcrumbs($category = null, $article = null, $tag = null): array
     {
         $breadcrumbs = [];
 
@@ -285,6 +312,12 @@ class IndexController extends Controller
             $breadcrumbs[1]['current'] = false;
         }
 
+        if ($tag) {
+            $breadcrumbs[1] = [
+                'title' => 'Статьи по тегу #'.$tag->name,
+                'current' => true
+            ];
+        }
 
         return $breadcrumbs;
     }

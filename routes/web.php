@@ -20,6 +20,7 @@ Route::get('category/{categorySlug}', [Site\IndexController::class, 'category'])
 Route::get('category/{categorySlug}/{articleSlug}', [Site\IndexController::class, 'article'])->name('site.article');
 Route::get('author/{id}', [Site\IndexController::class, 'author'])->name('site.author');
 Route::get('search', [Site\IndexController::class, 'search'])->name('site.search');
+Route::get('tag/{tagSlug}', [Site\IndexController::class, 'articlesByTag'])->name('site.articles-by-tag');
 
 Route::post('add-comment', [Site\IndexController::class, 'addComment'])->name('site.add-comment');
 Route::post('subscribe', [Site\MailchimpController::class, 'subscribe'])->name('site.subscribe');

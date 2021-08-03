@@ -75,7 +75,11 @@
 
                     <div class="news-tags">
                         @foreach($article->tags as $tag)
-                            <span>#{{ $tag->name }}</span>
+                            <span>
+                                <a href="{{ route('site.articles-by-tag', ['tagSlug' => $tag->slug ]) }}">
+                                    #{{ $tag->name }}
+                                </a>
+                            </span>
                         @endforeach
                     </div>
                 </div>
