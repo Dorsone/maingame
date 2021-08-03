@@ -477,6 +477,12 @@ a{
   h4{
     margin-bottom: 8px;
   }
+  a {
+      text-decoration: underline;
+      &:hover{
+          text-decoration: none;
+      }
+  }
   p{
     @include txt;
     line-height: 2;
@@ -493,9 +499,11 @@ a{
     flex-wrap: wrap;
     margin: 24px 0;
     li{
+      @include txt;
+      line-height: 2;
+      margin-bottom: 16px;
       position: relative;
       width: 100%;
-      margin-bottom: 16px;
       padding-left: 24px;
     }
   }
