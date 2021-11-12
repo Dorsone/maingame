@@ -315,75 +315,40 @@
                         </div>
                         <aside class="section-aside">
                             <div class="section-aside__items">
-                                <div class="section-aside__item">
-                                    <div class="news-info">
-                                        <div class="news-info__bg-img"><img src="./images/news-banner-1.jpg" alt=""/>
-                                        </div>
-                                        <a href="javascript:void(0)"> </a>
-                                        <div class="news-info__main">
-                                            <div class="news-info__top">
-                                                <div class="hashtags"><a href="javascript:void(0)">#WEPLAY! VIDEO</a><a
-                                                        href="javascript:void(0)">#DOTA 2</a></div>
-                                                <div class="news-info__action bookmark">
-                                                    <svg class="icon icon-mark ">
-                                                        <use xlink:href="./images/sprite-inline.svg#mark"></use>
-                                                    </svg>
+                                @foreach($news as $article)
+                                    <div class="section-aside__item">
+                                        <div class="news-info">
+                                            <div class="news-info__bg-img"><img src="{{ asset($article->image) }}" alt=""/>
+                                            </div>
+                                            <a href="javascript:void(0)"> </a>
+                                            <div class="news-info__main">
+                                                <div class="news-info__top">
+                                                    @if($article->tags->isNotEmpty())
+                                                        <div class="hashtags">
+                                                            @foreach($article->tags as $tag)
+                                                                <a href="javascript:void(0)" class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
+                                                    <div class="news-info__action bookmark">
+                                                        <svg class="icon icon-mark ">
+                                                            <use xlink:href="{{ asset('/images/sprite-inline.svg#mark') }}"></use>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <p class="news-info__caption">{{ $article->title }}</p>
+                                                <div class="news-info__bottom">
+                                                    <span
+                                                        class="news-info__date">{{ $article->created_at->format('d M. Y') }}</span>
+                                                    @if($article->time_read)
+                                                        <span
+                                                            class="news-info__reading">Читать {{ $article->time_read }} мин</span>
+                                                    @endif
                                                 </div>
                                             </div>
-                                            <p class="news-info__caption">ODPixel - Techies (feat. BSJ) (Official
-                                                Video)</p>
-                                            <div class="news-info__bottom"><span
-                                                    class="news-info__date">30 апр. 2021</span><span
-                                                    class="news-info__reading">Читать 1 мин</span></div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="section-aside__item">
-                                    <div class="news-info">
-                                        <div class="news-info__bg-img"><img src="./images/news-banner-2.jpg" alt=""/>
-                                        </div>
-                                        <a href="javascript:void(0)"> </a>
-                                        <div class="news-info__main">
-                                            <div class="news-info__top">
-                                                <div class="hashtags"><a href="javascript:void(0)">#WEPLAY! VIDEO</a><a
-                                                        href="javascript:void(0)">#DOTA 2</a></div>
-                                                <div class="news-info__action bookmark">
-                                                    <svg class="icon icon-mark ">
-                                                        <use xlink:href="./images/sprite-inline.svg#mark"></use>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <p class="news-info__caption">ODPixel - Techies (feat. BSJ) (Official
-                                                Video)</p>
-                                            <div class="news-info__bottom"><span
-                                                    class="news-info__date">30 апр. 2021</span><span
-                                                    class="news-info__reading">Читать 1 мин</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="section-aside__item">
-                                    <div class="news-info">
-                                        <div class="news-info__bg-img"><img src="./images/news-banner-2.jpg" alt=""/>
-                                        </div>
-                                        <a href="javascript:void(0)"> </a>
-                                        <div class="news-info__main">
-                                            <div class="news-info__top">
-                                                <div class="hashtags"><a href="javascript:void(0)">#WEPLAY! VIDEO</a><a
-                                                        href="javascript:void(0)">#DOTA 2</a></div>
-                                                <div class="news-info__action bookmark">
-                                                    <svg class="icon icon-mark ">
-                                                        <use xlink:href="./images/sprite-inline.svg#mark"></use>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <p class="news-info__caption">ODPixel - Techies (feat. BSJ) (Official
-                                                Video)</p>
-                                            <div class="news-info__bottom"><span
-                                                    class="news-info__date">30 апр. 2021</span><span
-                                                    class="news-info__reading">Читать 1 мин</span></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                                 <div class="section-aside__item section-aside__item_show-md">
                                     <div class="news-info news-info_coming">
                                         <div class="hashtags"><a href="javascript:void(0)">#Next video</a></div>
