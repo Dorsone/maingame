@@ -30,7 +30,7 @@
                                 <div class="article-preview__author-img">
                                     <img src="{{ asset($art->user->image) }}" alt=""/>
                                 </div>
-                                <a class="article-preview__author-name" href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $art->slug]) }}"{{ $art->user->name }}</a>
+                                <a class="article-preview__author-name" href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $art->slug]) }}">{{ $art->user->name }}</a>
                             </div>
                             @if($art->time_read)
                                 <span class="article-preview__reading">Читать {{ $art->time_read }} мин</span>
