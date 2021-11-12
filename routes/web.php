@@ -27,3 +27,4 @@ Route::post('add-comment', [Site\IndexController::class, 'addComment'])->name('s
 Route::post('subscribe', [Site\MailchimpController::class, 'subscribe'])->name('site.subscribe');
 
 Route::get('login', [Site\LoginController::class, 'login'])->name('site.login');
+Route::get('policy', [Site\IndexController::class, 'policy'])->name('site.policy');

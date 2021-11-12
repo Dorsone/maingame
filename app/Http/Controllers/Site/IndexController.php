@@ -282,8 +282,8 @@ class IndexController extends Controller
 
     /**
      *
-     * @param  null|ArticlesCategories  $category
-     * @param  null|Articles  $article
+     * @param null|ArticlesCategories $category
+     * @param null|Articles $article
      * @return array
      */
     private function getBreadcrumbs($category = null, $article = null, $tag = null): array
@@ -320,11 +320,19 @@ class IndexController extends Controller
 
         if ($tag) {
             $breadcrumbs[1] = [
-                'title' => 'Статьи по тегу #'.$tag->name,
+                'title' => 'Статьи по тегу #' . $tag->name,
                 'current' => true
             ];
         }
 
         return $breadcrumbs;
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function policy()
+    {
+        return view('gzone.pages.policy');
     }
 }
