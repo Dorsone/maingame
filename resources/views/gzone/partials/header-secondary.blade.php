@@ -41,7 +41,7 @@
                 </svg>
             </button>
         </div>
-        <a class="header__enter" href="javascript:void(0)"><span>Войти</span>
+        <a class="header__enter" href="{{ route('site.login') }}"><span>Войти</span>
             <div class="header__enter-icon"><img src="{{ asset('images/enter-icon-mob.svg') }}" alt=""/>
             </div></a>
     </div>
