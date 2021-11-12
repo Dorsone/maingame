@@ -11,8 +11,8 @@
             <nav class="header__nav">
                 <ul>
                     <li><a href="{{ route('site.categories') }}">Meдиа</a></li>
-                    <li><a href="{{ url('learning') }}">Академия</a></li>
-                    <li><a href="{{ url('tournament') }}">Арена</a></li>
+                    <li><a href="{{ url('site.learning') }}">Академия</a></li>
+                    <li><a href="{{ route('site.tournament') }}">Арена</a></li>
                 </ul>
             </nav>
             <ul class="tournaments-submenu">

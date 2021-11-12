@@ -51,6 +51,12 @@ class IndexController extends Controller
         return view('gzone.home', compact('slides', 'categories', 'news'));
     }
 
+    public function tournament()
+    {
+        return view('gzone.pages.tournament');
+    }
+
+
     public function categories()
     {
         $categories = ArticlesCategories::with([
