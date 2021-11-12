@@ -277,7 +277,7 @@ class IndexController extends Controller
             $resultId = [];
         endif;
 
-        return view('site.search', ['breadcrumbs' => $breadcrumbs, 'articles' => $resultId]);
+        return view('gzone.pages.search', ['breadcrumbs' => $breadcrumbs, 'articles' => $resultId]);
     }
 
     /**

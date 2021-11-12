@@ -29,7 +29,6 @@
                 @foreach($articles as $article)
                     @include('site.inc.article-item', ['art' => $article, 'cat' => $article->category])
                 @endforeach
-
             </div>
         </div>
     </section>
