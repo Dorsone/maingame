@@ -19,6 +19,7 @@ use App\Models\User;
 use App\Services\IndexingText;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Response;
 
 class IndexController extends Controller
 {
@@ -122,6 +123,14 @@ class IndexController extends Controller
             $q->where('active', 1);
             $q->where('category_id', $category->id);
         })->get();
+
+        if(request()->isMethod('post')){
+
+            return response([
+                'nextUrl' => $articles->nextPageUrl(),
+                'html'    => view('gzone.partials.ajax.feeds', ['articles' => $articles, 'category' => $category])->render()
+            ]);
+        }
 
         $breadcrumbs = $this->getBreadcrumbs($category);
 

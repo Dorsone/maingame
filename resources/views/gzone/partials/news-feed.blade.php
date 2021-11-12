@@ -2,8 +2,9 @@
     <div class="container">
         <div class="container-md2">
             <h2 class="title-h2">Лента</h2>
-            <div class="news-feed__wrapper">
-                @foreach($category->articles->take(6) as $key => $art)
+            <div class="news-feed__wrapper" id="articlesWrap">
+                @php $articles = $category->articles()->paginate(6) @endphp
+                @foreach($articles as $key => $art)
                     <div class="article-preview">
                         <div class="article-preview__img">
                             <a href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $art->slug]) }}">
@@ -69,8 +70,8 @@
                     @endif
                 @endforeach
             </div>
-            <div class="load-more">
-                <button class="button button_transp-hover">Показать еще</button>
+            <div class="load-more" id="show-more-link-articles">
+                <button class="button button_transp-hover" data-link="{{ route('site.category', ['categorySlug' => $category->slug]) }}?page=2">Показать еще</button>
             </div>
         </div>
     </div>

@@ -42,3 +42,34 @@
     </main>
     @include('gzone.partials.footer')
 @endsection
+
+@section('js')
+    <script>
+        $(function () {
+            var showMoreLink = $('#show-more-link-articles');
+            var itemsWrap = $('#articlesWrap');
+
+            if (showMoreLink.length && itemsWrap.length) {
+                showMoreLink.find('.button').click(function ($event) {
+                    $event.preventDefault();
+                    var url = $(this).data('link');
+                    if (url) {
+                        $.post(url)
+                            .done(function(response) {
+                                itemsWrap.append(response.html);
+                                if (response.nextUrl) {
+                                    showMoreLink.find('.button').data('link', response.nextUrl)
+                                } else {
+                                    showMoreLink.hide();
+                                }
+                            })
+                            .fail(function() {
+                                console.log('Error : ', response);
+                            });
+                    }
+                })
+
+            }
+        });
+    </script>
+@endsection
