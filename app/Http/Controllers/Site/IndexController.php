@@ -48,7 +48,7 @@ class IndexController extends Controller
             ->withCount(['comments'])
             ->orderByDesc('date')->orderByDesc('id')->limit(4)->get();
 
-        return view('site.index', compact('slides', 'categories', 'news'));
+        return view('gzone.home', compact('slides', 'categories', 'news'));
     }
 
     public function categories()
@@ -70,7 +70,7 @@ class IndexController extends Controller
 
         $breadcrumbs = $this->getBreadcrumbs(true);
 
-        return view('site.categories', compact('categories', 'breadcrumbs'));
+        return view('gzone.pages.categories', compact('categories', 'breadcrumbs'));
     }
 
     public function category($categorySlug, Request $request)
@@ -147,7 +147,7 @@ class IndexController extends Controller
 
         $breadcrumbs = $this->getBreadcrumbs($category, $article);
 
-        return view('site.article', compact('article', 'category', 'breadcrumbs', 'recommendation'));
+        return view('gzone.pages.article', compact('article', 'category', 'breadcrumbs', 'recommendation'));
     }
 
     public function articlesByTag($tagSlug, Request $request)

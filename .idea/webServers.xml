@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f4cdd712-3363-4e18-8c7c-dd60fc290713" name="GAME">
+        <fileTransfer accessType="SFTP" host="188.34.203.228" port="5253" sshConfigId="8908abe5-306f-4347-a864-259ee9585c14" sshConfig="woweb@188.34.203.228:5253 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="8b13c89e-ccd5-4a53-99f4-acb00d8e775b" name="HEMIS">
+        <fileTransfer accessType="SFTP" host="195.158.22.187" port="22" sshConfigId="872ed3d4-e021-4fd1-9d84-db4755cbc4e3" sshConfig="root@195.158.22.187:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="14ad4d09-8cce-4bcd-886c-b719c0f98072" name="NSPI">
+        <fileTransfer accessType="SFTP" host="195.158.22.187" port="5364" sshConfigId="4cd910ba-77a2-4056-ab64-78d9338f592c" sshConfig="root@195.158.22.187:5364 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

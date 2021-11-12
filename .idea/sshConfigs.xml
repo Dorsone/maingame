@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="188.34.203.228" id="8908abe5-306f-4347-a864-259ee9585c14" port="5253" nameFormat="DESCRIPTIVE" username="woweb" />
+      <sshConfig authType="PASSWORD" host="195.158.22.187" id="872ed3d4-e021-4fd1-9d84-db4755cbc4e3" port="22" nameFormat="DESCRIPTIVE" username="root" />
+      <sshConfig authType="PASSWORD" host="195.158.22.187" id="4cd910ba-77a2-4056-ab64-78d9338f592c" port="5364" nameFormat="DESCRIPTIVE" username="root" />
+    </configs>
+  </component>
+</project>
