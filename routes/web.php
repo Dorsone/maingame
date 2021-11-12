@@ -25,3 +25,5 @@ Route::get('tag/{tagSlug}', [Site\IndexController::class, 'articlesByTag'])->nam
 
 Route::post('add-comment', [Site\IndexController::class, 'addComment'])->name('site.add-comment');
 Route::post('subscribe', [Site\MailchimpController::class, 'subscribe'])->name('site.subscribe');
+
+Route::get('login', [Site\LoginController::class, 'login'])->name('site.login');
