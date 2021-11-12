@@ -1,35 +1,44 @@
-@extends('site.layout')
-
+@extends('gzone.layouts.main')
+@section('header')
+    @include('gzone.partials.header-secondary')
+@endsection
 @section('content')
-    <section class="section">
-        <div class="container container__sm">
-            <div class="not-found">
-                <div class="not-found__title">404</div>
-                <div class="title-line">
-                    <h1 class="title title-h1"> Что-то пошло не так</h1>
+    <main class="page-404">
+        <div class="page-404__body">
+            <div class="background-img"><img src="{{ asset('images/image-36.jpg') }}" alt=""/>
+            </div>
+            <div class="fog-img"><img src="{{ asset('images/fog.png') }}" alt=""/>
+            </div>
+            <div class="tournaments-submenu-block">
+                <div class="sticky-block">
+                    <div class="caption"><a href="javascript:void(0)">EASPORT NEWS</a></div>
+                    <!-- add class "current" to "a" tag to make active element-->
+                    <ul class="games-list">
+                        <li><a href="javascript:void(0)">
+                                <svg class="icon icon-counter-strike ">
+                                    <use xlink:href="./images/sprite-inline.svg#counter-strike"></use>
+                                </svg></a></li>
+                        <li><a href="javascript:void(0)">
+                                <svg class="icon icon-dota-2 ">
+                                    <use xlink:href="./images/sprite-inline.svg#dota-2"></use>
+                                </svg></a></li>
+                        <li><a href="javascript:void(0)">
+                                <svg class="icon icon-mortal-kombat ">
+                                    <use xlink:href="./images/sprite-inline.svg#mortal-kombat"></use>
+                                </svg></a></li>
+                    </ul>
                 </div>
-                <div class="sentence">Этой страницы более не существует. Но это не Game Over, вы можете найти что-то интересное.</div>
-                <form method="get" class="form form-line" action="{{ route('site.search') }}">
-                    <input name="q" type="text" placeholder="Поиск по сайту"/>
-                    <button>
-                        <svg class="icon icon-search ">
-                            <use xlink:href="{{ asset('build/images/sprite-inline.svg#search') }}"></use>
-                        </svg>
-                    </button>
-                </form>
+            </div>
+            <div class="page-404__inner">
+                <div class="page-404__main">
+                    <div class="page-404__desc">
+                        <p class="title-h3">Страница не найдена</p><a class="button" href="{{ route('site.index') }}">На главную</a>
+                    </div>
+                    <div class="page-404__img-404"><img src="{{ asset('images/image-37.png') }}" alt=""/>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
-    <section class="section">
-        <div class="container container__sm">
-            <div class="title-line">
-                <div class="title title-h2"> Похожие статьи</div>
-            </div>
-            <div class="col-two">
-                @foreach($articles as $recomm)
-                    @include('site.inc.article-item', ['art' => $recomm, 'cat' => $recomm->category])
-                @endforeach
-            </div>
-        </div>
-    </section>
+    </main>
+    @include('gzone.partials.footer')
 @endsection
