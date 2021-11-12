@@ -21,6 +21,7 @@
 <body class="full-height">
 @yield('header')
 @yield('content')
+@include('gzone.partials.popups')
 <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('js/svg4everybody.min.js') }}"></script>
 <script src="{{ asset('js/swiper.min.js') }}"></script>

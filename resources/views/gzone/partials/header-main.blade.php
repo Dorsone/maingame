@@ -34,10 +34,14 @@
                   </svg></span><span class="tournaments-submenu__text">Помощь</span></a></li>
             </ul>
         </div>
-        <div class="header__search"><a href="javascript:void(0)">
+        <div class="header__search">
+            <button class="header__search-btn">
                 <svg class="icon icon-search ">
-                    <use xlink:href="{{ asset('images/sprite-inline.svg#search') }}"></use>
-                </svg></a></div><a class="header__enter" href="javascript:void(0)"><span>Войти</span>
+                    <use xlink:href="{{ asset('/images/sprite-inline.svg#search') }}"></use>
+                </svg>
+            </button>
+        </div>
+        <a class="header__enter" href="javascript:void(0)"><span>Войти</span>
             <div class="header__enter-icon"><img src="{{ asset('images/enter-icon-mob.svg') }}" alt=""/>
             </div></a>
     </div>
