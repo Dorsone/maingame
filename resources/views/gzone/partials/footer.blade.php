@@ -12,10 +12,14 @@
                     <p>Получай +100 к знаниям, поддержке и победам.</p>
                     <div class="footer__subscribe subscribe">
                         <p>Подписывайся</p>
-                        <form class="subscribe-form">
+                        <form  method="post"
+                               data-success-block="footer-subscribe-done"
+                               class="subscribe-form"
+                               action="{{ route('site.subscribe') }}">
+                            @csrf
                             <div class="subscribe-form__email">
                                 <label for="subscribe-email">Email</label>
-                                <input type="email" id="subscribe-email" placeholder="Hideo_Kojima@mail.com"/>
+                                <input name="mail" type="email" id="subscribe-email" placeholder="Hideo_Kojima@mail.com"/>
                             </div>
                             <div class="subscribe-form__agree">
                                 <input type="checkbox" id="subscribe-checkbox"/>
