@@ -46,12 +46,13 @@
                             <div class="subscribe-banner__desc">
                                 <div class="subscribe-banner__caption">
                                     <svg class="icon icon-maingame ">
-                                        <use xlink:href="./images/sprite-inline.svg#maingame"></use>
+                                        <use xlink:href="{{asset('images/sprite-inline.svg#maingame')}}"></use>
                                     </svg>
                                     <span class="title-h3">Дайджест Maingame!</span>
                                 </div>
-                                <p class="subscribe-banner__text">Новости, лонгриды, мемасики – лучшее из мира
-                                    киберспорта прямо у тебя в почте!</p>
+                                <p class="subscribe-banner__text">
+                                    Новости, лонгриды, мемасики – лучшее из мира киберспорта прямо у тебя в почте!
+                                </p>
                             </div>
                             <div class="subscribe-banner__form">
                                 <form class="subscribe-form">
@@ -64,8 +65,9 @@
                                     </div>
                                     <div class="subscribe-form__agree">
                                         <input type="checkbox" id="subscribe-checkbox-banner"/>
-                                        <label for="subscribe-checkbox-banner">Разрешаю обработку моих личных
-                                            данных</label>
+                                        <label for="subscribe-checkbox-banner">
+                                            Разрешаю обработку моих личных данных
+                                        </label>
                                     </div>
                                 </form>
                             </div>
