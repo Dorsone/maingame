@@ -19,6 +19,7 @@ use App\Models\User;
 use App\Services\IndexingText;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Response;
 
 class IndexController extends Controller
 {
@@ -48,8 +49,14 @@ class IndexController extends Controller
             ->withCount(['comments'])
             ->orderByDesc('date')->orderByDesc('id')->limit(4)->get();
 
-        return view('site.index', compact('slides', 'categories', 'news'));
+        return view('gzone.home', compact('slides', 'categories', 'news'));
     }
+
+    public function tournament()
+    {
+        return view('gzone.pages.tournament');
+    }
+
 
     public function categories()
     {
@@ -70,7 +77,7 @@ class IndexController extends Controller
 
         $breadcrumbs = $this->getBreadcrumbs(true);
 
-        return view('site.categories', compact('categories', 'breadcrumbs'));
+        return view('gzone.pages.categories', compact('categories', 'breadcrumbs'));
     }
 
     public function category($categorySlug, Request $request)
@@ -117,6 +124,14 @@ class IndexController extends Controller
             $q->where('category_id', $category->id);
         })->get();
 
+        if(request()->isMethod('post')){
+
+            return response([
+                'nextUrl' => $articles->nextPageUrl(),
+                'html'    => view('gzone.partials.ajax.feeds', ['articles' => $articles, 'category' => $category])->render()
+            ]);
+        }
+
         $breadcrumbs = $this->getBreadcrumbs($category);
 
         return view('site.category', compact('category', 'articles', 'tags', 'breadcrumbs'));
@@ -147,7 +162,7 @@ class IndexController extends Controller
 
         $breadcrumbs = $this->getBreadcrumbs($category, $article);
 
-        return view('site.article', compact('article', 'category', 'breadcrumbs', 'recommendation'));
+        return view('gzone.pages.article', compact('article', 'category', 'breadcrumbs', 'recommendation'));
     }
 
     public function articlesByTag($tagSlug, Request $request)
@@ -271,13 +286,13 @@ class IndexController extends Controller
             $resultId = [];
         endif;
 
-        return view('site.search', ['breadcrumbs' => $breadcrumbs, 'articles' => $resultId]);
+        return view('gzone.pages.search', ['breadcrumbs' => $breadcrumbs, 'articles' => $resultId]);
     }
 
     /**
      *
-     * @param  null|ArticlesCategories  $category
-     * @param  null|Articles  $article
+     * @param null|ArticlesCategories $category
+     * @param null|Articles $article
      * @return array
      */
     private function getBreadcrumbs($category = null, $article = null, $tag = null): array
@@ -314,11 +329,19 @@ class IndexController extends Controller
 
         if ($tag) {
             $breadcrumbs[1] = [
-                'title' => 'Статьи по тегу #'.$tag->name,
+                'title' => 'Статьи по тегу #' . $tag->name,
                 'current' => true
             ];
         }
 
         return $breadcrumbs;
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function policy()
+    {
+        return view('gzone.pages.policy');
     }
 }
