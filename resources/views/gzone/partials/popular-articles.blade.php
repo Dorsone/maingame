@@ -25,7 +25,8 @@
                                 </svg>
                             </div>
                         </div>
-                        <a class="article-preview__caption" href="javascript:void(0)">{{ $art->title }}</a>
+                        <a class="article-preview__caption"
+                           href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $art->slug]) }}">{{ $art->title }}</a>
                         <div class="article-preview__info">
                             <div class="article-preview__author">
                                 <div class="article-preview__author-img">
