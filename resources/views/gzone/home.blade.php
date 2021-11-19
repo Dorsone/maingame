@@ -14,7 +14,7 @@
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
                                         <div class="slide-main">
-                                            <div class="slide-main__bg"><img src="./images/image-4.jpg" alt=""/>
+                                            <div class="slide-main__bg"><img src="{{asset('images/image-4.jpg')}}" alt=""/>
                                             </div>
                                             <div class="container-sides-lg">
                                                 <div class="slide-main__body">

@@ -14,7 +14,8 @@
                             @if($art->tags->isNotEmpty())
                                 <div class="hashtags">
                                     @foreach($art->tags as $tag)
-                                        <a href="javascript:void(0)" class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
+                                        <a href="{{route('site.categories', $tag->slug)}}"
+                                           class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
                                     @endforeach
                                 </div>
                             @endif
@@ -30,7 +31,8 @@
                                 <div class="article-preview__author-img">
                                     <img src="{{ asset($art->user->image) }}" alt=""/>
                                 </div>
-                                <a class="article-preview__author-name" href="javascript:void(0)">{{ $art->user->name }}</a>
+                                <a class="article-preview__author-name"
+                                   href="javascript:void(0)">{{ $art->user->name }}</a>
                             </div>
                             @if($art->time_read)
                                 <span class="article-preview__reading">Читать {{ $art->time_read }} мин</span>

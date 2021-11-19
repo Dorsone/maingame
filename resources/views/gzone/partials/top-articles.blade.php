@@ -17,7 +17,8 @@
                             @if($art->tags->isNotEmpty())
                                 <div class="hashtags">
                                     @foreach($art->tags as $tag)
-                                        <a href="javascript:void(0)" class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
+                                        <a href="{{route('site.categories', $tag->slug)}}"
+                                           class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
                                     @endforeach
                                 </div>
                             @endif
@@ -49,7 +50,8 @@
                             @if($art->tags->isNotEmpty())
                                 <div class="hashtags">
                                     @foreach($art->tags as $tag)
-                                        <a href="javascript:void(0)" class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
+                                        <a href="{{route('site.categories', $tag->slug)}}"
+                                           class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
                                     @endforeach
                                 </div>
                             @endif
@@ -59,7 +61,8 @@
                                 </svg>
                             </div>
                         </div>
-                        <a class="article-preview__caption" href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $art->slug]) }}">{{ $art->title }}</a>
+                        <a class="article-preview__caption"
+                           href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $art->slug]) }}">{{ $art->title }}</a>
                         <div class="article-preview__info">
                             <span class="article-preview__date">{{ $art->created_at->format('d M. Y') }}</span>
                             @if($art->time_read)
