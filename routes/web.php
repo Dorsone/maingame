@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Site;
 
@@ -24,3 +27,14 @@ Route::get('tag/{tagSlug}', [Site\IndexController::class, 'articlesByTag'])->nam
 
 Route::post('add-comment', [Site\IndexController::class, 'addComment'])->name('site.add-comment');
 Route::post('subscribe', [Site\MailchimpController::class, 'subscribe'])->name('site.subscribe');
+
+Route::get('entrance', [LoginController::class, 'showLoginForm'])->name('site.entrance');
+Route::post('login', [LoginController::class, 'login'])->name('login');
+Route::post('register', [RegisterController::class, 'register'])->name('register');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('auth/steam', [AuthController::class, 'redirectToSteam'])->name('auth.steam');
+Route::get('auth/steam/handle', [AuthController::class, 'handle'])->name('auth.steam.handle');
+Route::get('send/letter', [LoginController::class, 'sendLetterPage'])->name('send.letter');
+Route::post('registration/letter', [LoginController::class, 'forgotPassword'])->name('registration.letter');
+Route::get('recovery/code', [LoginController::class, 'recoveryCodePage'])->name('recovery.code');
