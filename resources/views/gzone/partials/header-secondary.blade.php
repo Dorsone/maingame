@@ -41,8 +41,49 @@
                 </svg>
             </button>
         </div>
-        <a class="header__enter" href="{{ route('site.login') }}"><span>Войти</span>
-            <div class="header__enter-icon"><img src="{{ asset('images/enter-icon-mob.svg') }}" alt=""/>
-            </div></a>
+        @if(\Illuminate\Support\Facades\Auth::check())
+            <div class="header__user">
+                <div class="header__user-profile"><span class="header__user-name">{{auth()->user()->username}}</span>
+                    <div class="header__user-icon"><img src="{{asset("images/logo-icon.svg")}}" alt=""/>
+                    </div>
+                </div>
+                <div class="header__user-menu user-menu">
+                    <ul>
+                        <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
+                <svg class="icon icon-profile ">
+                  <use xlink:href="./images/sprite-inline.svg#profile"></use>
+                </svg></span>Игровой профиль</a></li>
+                        <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
+                <svg class="icon icon-bookmark ">
+                  <use xlink:href="./images/sprite-inline.svg#bookmark"></use>
+                </svg></span>Мои закладки</a></li>
+                        <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
+                <svg class="icon icon-calendar1 ">
+                  <use xlink:href="./images/sprite-inline.svg#calendar1"></use>
+                </svg></span>История просмотров</a></li>
+                        <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
+                <svg class="icon icon-category ">
+                  <use xlink:href="./images/sprite-inline.svg#category"></use>
+                </svg></span>Мои устройства</a></li>
+                        <li><a class="user-menu__nav-item user-menu__nav-item_premium" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
+                <svg class="icon icon-ticket ">
+                  <use xlink:href="./images/sprite-inline.svg#ticket"></use>
+                </svg></span>Премиум</a></li>
+                        <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
+                <svg class="icon icon-setting ">
+                  <use xlink:href="./images/sprite-inline.svg#setting"></use>
+                </svg></span>Настройки аккаунта</a></li>
+                        <li><a class="user-menu__nav-item user-menu__nav-item_link" href="{{route("logout")}}"><span class="user-menu__nav-item-icon">
+                <svg class="icon icon-logout ">
+                  <use xlink:href="./images/sprite-inline.svg#logout"></use>
+                </svg></span>Выйти</a></li>
+                    </ul>
+                </div>
+            </div>
+        @else
+            <a class="header__enter" href="{{ route('site.login') }}"><span>Войти</span>
+                <div class="header__enter-icon"><img src="{{ asset('images/enter-icon-mob.svg') }}" alt=""/>
+                </div></a>
+        @endif
     </div>
 </header>

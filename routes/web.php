@@ -3,6 +3,7 @@
 use App\Http\Controllers\Site\LoginController;
 use App\Http\Controllers\Site\IndexController;
 use App\Http\Controllers\Site\MailchimpController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,12 +29,11 @@ Route::get('tag/{tagSlug}', [IndexController::class, 'articlesByTag'])->name('si
 Route::post('add-comment', [IndexController::class, 'addComment'])->name('site.add-comment');
 Route::post('subscribe', [MailchimpController::class, 'subscribe'])->name('site.subscribe');
 
-\Illuminate\Support\Facades\Auth::routes();
+Auth::routes();
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('site.login');
 Route::get('policy', [IndexController::class, 'policy'])->name('site.policy');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('send/letter', [LoginController::class, 'sendLetterPage'])->name('send.letter');
 Route::post('recovery/letter', [LoginController::class, 'forgotPassword'])->name('recovery.letter');
-
-
-Route::get('recovery/code', [LoginController::class, 'recoveryCodePage'])->name('recovery.code');
+Route::post('check/recover/{user}', [LoginController::class, 'checkRecoverCode'])->name('check.recoverCode');
+Route::post('change/password/{user}', [LoginController::class, 'changePassword'])->name('change.password');

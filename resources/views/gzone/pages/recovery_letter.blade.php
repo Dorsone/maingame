@@ -192,7 +192,7 @@
                                             </tr>
                                             <tr>
                                                 <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
-                                                    <div style="font-family:roboto;font-size:25px;font-weight:700;letter-spacing:0.35px;line-height:35px;text-align:center;color:#FDFDFD;">код <span style="color:#16D5E1;">3942</span></div>
+                                                    <div style="font-family:roboto;font-size:25px;font-weight:700;letter-spacing:0.35px;line-height:35px;text-align:center;color:#FDFDFD;">код <span style="color:#16D5E1;">{{$random_number}}</span></div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -231,7 +231,7 @@
                                             <tbody>
                                             <tr>
                                                 <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
-                                                    <div style="font-family:roboto;font-size:15px;font-weight:400;letter-spacing:-0.24px;line-height:25px;text-align:center;color:#FDFDFD;">Привет! Ты сообщил нам, что забыл пароль. Введи этот код <span style="color:#16D5E1;font-weight:600;">3942</span>, в форму на сайте и создай новый.</div>
+                                                    <div style="font-family:roboto;font-size:15px;font-weight:400;letter-spacing:-0.24px;line-height:25px;text-align:center;color:#FDFDFD;">Привет! Ты сообщил нам, что забыл пароль. Введи этот код <span style="color:#16D5E1;font-weight:600;">{{$random_number}}</span>, в форму на сайте и создай новый.</div>
                                                 </td>
                                             </tr>
                                             <tr>

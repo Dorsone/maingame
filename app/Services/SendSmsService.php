@@ -25,5 +25,7 @@ class SendSmsService
             $message->to($to_email, $to_name)->subject("Восстановление пароля MainGame");
             $message->from(env("MAIL_USERNAME"), "MainGame");
         });
+
+        return $user;
     }
 }
