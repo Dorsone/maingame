@@ -26,7 +26,7 @@
                                 </form>
                             </li>
                             <li>
-                                <form class="entering-block__form" action="#" method="post">
+                                <form class="entering-block__form" action="{{route("send.registration.letter")}}" method="post">
                                     @csrf
                                     <div class="field-wrapper">
                                         <label for="form-email">Email</label>
@@ -40,6 +40,10 @@
                                         <button class="button" type="submit">Зарегистрироваться</button>
                                     </div>
                                 </form>
+                                <br>
+                                <div class="form-actions">
+                                    <a href="{{route("auth.steam")}}"><button class="button" type="submit">Steam</button></a>
+                                </div>
                             </li>
                         </ul>
                     </div>

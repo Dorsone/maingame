@@ -5,7 +5,7 @@ return [
     /*
      * Redirect URL after login
      */
-    'redirect_url' => '/',
+    'redirect_url' => '/auth/steam/handle',
 
     /*
      * Realm override. Bypass domain ban by Valve.
@@ -23,3 +23,4 @@ return [
      */
     'https' => false,
 ];
+

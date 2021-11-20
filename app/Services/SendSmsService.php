@@ -28,4 +28,17 @@ class SendSmsService
 
         return $user;
     }
+
+    public function sendRegistrationLetter(array $validated)
+    {
+        $to_name = "Регистрация";
+        $to_email = $validated["email"];
+        $recover_code = random_int(1000, 9999);
+        $data = array("random_number" => $recover_code);
+
+        Mail::send("gzone.pages.registration_letter", $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject("Регистрация MainGame");
+            $message->from(env("MAIL_USERNAME"), "MainGame");
+        });
+    }
 }

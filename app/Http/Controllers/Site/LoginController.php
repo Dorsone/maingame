@@ -34,6 +34,7 @@ class LoginController extends Controller
     /**
      * Create a new controller instance.
      * @param SendSmsService $sendSmsService
+     * @param UserService $userService
      */
     public function __construct(SendSmsService $sendSmsService, UserService $userService)
     {

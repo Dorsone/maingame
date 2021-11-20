@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\SteamController;
 use App\Http\Controllers\Site\LoginController;
 use App\Http\Controllers\Site\IndexController;
 use App\Http\Controllers\Site\MailchimpController;
@@ -37,3 +39,8 @@ Route::get('send/letter', [LoginController::class, 'sendLetterPage'])->name('sen
 Route::post('recovery/letter', [LoginController::class, 'forgotPassword'])->name('recovery.letter');
 Route::post('check/recover/{user}', [LoginController::class, 'checkRecoverCode'])->name('check.recoverCode');
 Route::post('change/password/{user}', [LoginController::class, 'changePassword'])->name('change.password');
+
+Route::post('register', [RegisterController::class, 'sendLetter'])->name('send.registration.letter');
+
+Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('auth.steam');
+Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');

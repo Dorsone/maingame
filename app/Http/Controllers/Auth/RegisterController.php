@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewUserEmailRequest;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Services\SendSmsService;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,14 +33,17 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    /** @var SendSmsService $sendSmsService */
+    private $sendSmsService;
+
     /**
      * Create a new controller instance.
-     *
-     * @return void
+     * @param SendSmsService $sendSmsService
      */
-    public function __construct()
+    public function __construct(SendSmsService $sendSmsService)
     {
         $this->middleware('guest');
+        $this->sendSmsService = $sendSmsService;
     }
 
     /**
@@ -60,7 +65,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Models\User
+     * @return User
      */
     protected function create(array $data)
     {
@@ -69,5 +74,11 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function sendLetter(NewUserEmailRequest $request)
+    {
+        $this->sendSmsService->sendRegistrationLetter($request->validated());
+        return "ok";
     }
 }
