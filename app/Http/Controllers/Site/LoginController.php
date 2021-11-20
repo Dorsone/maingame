@@ -8,7 +8,11 @@ use App\Http\Requests\UserPasswordRecoverRequest;
 use App\Models\User;
 use App\Services\SendSmsService;
 use App\Services\UserService;
+use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 /**
@@ -43,16 +47,30 @@ class LoginController extends Controller
         $this->userService = $userService;
     }
 
+    /**
+     * Returns page login
+     * @return Factory|View
+     */
     public function showLoginForm()
     {
         return view('gzone.pages.auth');
     }
 
+    /**
+     * Returns page forgot password
+     * @return Factory|View
+     */
     public function sendLetterPage()
     {
         return view("gzone.pages.forgot_password");
     }
 
+    /**
+     * Returns page enter recover code
+     * @param UserPasswordRecoverRequest $request
+     * @return Factory|View
+     * @throws Exception
+     */
     public function forgotPassword(UserPasswordRecoverRequest $request)
     {
         $user = $this->sendSmsService->sendRecoveryCode($request->validated());
@@ -61,22 +79,34 @@ class LoginController extends Controller
         ]);
     }
 
+    /**
+     * Returns page recover password
+     * @param User $user
+     * @param Request $request
+     * @return Factory|View|RedirectResponse
+     */
     public function checkRecoverCode(User $user, Request $request)
     {
         $recover_code = implode("", $request->codes);
-        if ($user->recover_code == $recover_code) {
-            return view("gzone.pages.recover_password", [
-                "user" => $user
-            ]);
-        } else {
+
+        if ($user->recover_code != $recover_code) {
             return redirect()->route("send.letter");
         }
+
+        return view("gzone.pages.recover_password", [
+            "user" => $user
+        ]);
     }
 
+    /**
+     * Returns index page, after changing password
+     * @param User $user
+     * @param UserCreateNewPasswordRequest $request
+     * @return RedirectResponse
+     */
     public function changePassword(User $user, UserCreateNewPasswordRequest $request)
     {
         $this->userService->recoverPassword($user, $request->validated());
         return redirect()->route("site.index");
     }
-
 }

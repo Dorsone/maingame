@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Services;
 
 use App\Models\User;
@@ -11,6 +10,11 @@ use App\Models\User;
  */
 class UserService
 {
+    /**
+     * Updating user`s password
+     * @param User $user
+     * @param array $validated
+     */
     public function recoverPassword(User $user, array $validated)
     {
         $user->update([

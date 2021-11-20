@@ -82,7 +82,7 @@ class SteamController extends Controller
      */
     protected function findOrNewUser($info)
     {
-        $user = User::where('steamid', $info->steamID64)->first();
+        $user = User::query()->where('steamid', $info->steamID64)->first();
 
         if (!is_null($user)) {
             return $user;

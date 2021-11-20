@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -11,6 +12,12 @@ use Illuminate\Support\Facades\Mail;
  */
 class SendSmsService
 {
+    /**
+     * Sends recovery code to user`s email
+     * @param array $validated
+     * @return mixed
+     * @throws Exception
+     */
     public function sendRecoveryCode(array $validated)
     {
         $user = User::query()->where("email", $validated["email"])->get()->first();
@@ -29,6 +36,11 @@ class SendSmsService
         return $user;
     }
 
+    /**
+     * Sends registration letter to user`s email
+     * @param array $validated
+     * @throws Exception
+     */
     public function sendRegistrationLetter(array $validated)
     {
         $to_name = "Регистрация";

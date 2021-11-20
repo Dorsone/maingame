@@ -145,7 +145,7 @@
                                                     <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
                                                         <tbody>
                                                         <tr>
-                                                            <td style="width:160px;"><a href="index.html" target="_blank"><img height="auto" src="./images/logo.svg" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="160"></a></td>
+                                                            <td style="width:160px;"><a href="index.html" target="_blank"><img height="auto" src="{{asset("images/logo.svg")}}" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="160"></a></td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -187,12 +187,12 @@
                                             <tbody>
                                             <tr>
                                                 <td align="center" style="font-size:0px;padding:0 0 16px 0;word-break:break-word;">
-                                                    <div style="font-family:roboto;font-size:25px;font-weight:700;letter-spacing:0.35px;line-height:35px;text-align:center;color:#FDFDFD;">&Rcy;&iecy;&gcy;&icy;&scy;&tcy;&rcy;&acy;&tscy;&icy;&yacy; MainGame</div>
+                                                    <div style="font-family:roboto;font-size:25px;font-weight:700;letter-spacing:0.35px;line-height:35px;text-align:center;color:#FDFDFD;">Регистрация MainGame</div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
-                                                    <div style="font-family:roboto;font-size:25px;font-weight:700;letter-spacing:0.35px;line-height:35px;text-align:center;color:#FDFDFD;">&kcy;&ocy;&dcy; <span style="color:#16D5E1;">{{$random_number}}</span></div>
+                                                    <div style="font-family:roboto;font-size:25px;font-weight:700;letter-spacing:0.35px;line-height:35px;text-align:center;color:#FDFDFD;">код <span style="color:#16D5E1;">{{$random_number}}</span></div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -231,7 +231,7 @@
                                             <tbody>
                                             <tr>
                                                 <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
-                                                    <div style="font-family:roboto;font-size:15px;font-weight:400;letter-spacing:-0.24px;line-height:25px;text-align:center;color:#FDFDFD;">&Pcy;&rcy;&icy;&vcy;&iecy;&tcy;! &Vcy;&vcy;&iecy;&dcy;&icy; &ecy;&tcy;&ocy;&tcy; &kcy;&ocy;&dcy; <span style="color:#16D5E1;">{{$random_number}}</span>, &chcy;&tcy;&ocy;&bcy;&ycy; &zcy;&acy;&vcy;&iecy;&rcy;&shcy;&icy;&tcy;&softcy; &rcy;&iecy;&gcy;&icy;&scy;&tcy;&rcy;&acy;&tscy;&icy;&yucy; &vcy; &dcy;&vcy;&acy; &scy;&chcy;&iocy;&tcy;&acy;! &Ncy;&iecy; &rcy;&iecy;&gcy;&icy;&scy;&tcy;&rcy;&icy;&rcy;&ocy;&vcy;&acy;&lcy;&scy;&yacy; &vcy; WePlay Esports? &Zcy;&acy;&bcy;&ucy;&dcy;&softcy; &ocy;&bcy; &ecy;&tcy;&ocy;&mcy; &pcy;&icy;&scy;&softcy;&mcy;&iecy;. <span style="color:#16D5E1;">&Ocy;&bcy;&lcy;&icy;&vcy;&icy;&ocy;&ncy;.</span></div>
+                                                    <div style="font-family:roboto;font-size:15px;font-weight:400;letter-spacing:-0.24px;line-height:25px;text-align:center;color:#FDFDFD;">Привет! Введи этот код <span style="color:#16D5E1;">{{$random_number}}</span>, чтобы завершить регистрацию в два счёта! Не регистрировался в WePlay Esports? Забудь об этом письме. <span style="color:#16D5E1;">Обливион.</span></div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -270,7 +270,7 @@
                                             <tbody>
                                             <tr>
                                                 <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
-                                                    <div style="font-family:roboto;font-size:12px;font-weight:400;line-height:20.5px;text-align:center;color:#FDFDFD;">&Ocy;&zcy;&ncy;&acy;&kcy;&ocy;&mcy;&softcy;&scy;&yacy; &scy; <a style="text-decoration:none;font-weight:700;color:#FDFDFD;" href="policy.html" target="_blank">&pcy;&rcy;&acy;&vcy;&icy;&lcy;&acy;&mcy;&icy; &pcy;&ocy;&lcy;&softcy;&zcy;&ocy;&vcy;&acy;&ncy;&icy;&yacy;</a> &icy; <a style="text-decoration:none;font-weight:700;color:#FDFDFD;" href="policy.html" target="_blank">&pcy;&ocy;&lcy;&icy;&tcy;&icy;&kcy;&ocy;&jcy; &kcy;&ocy;&ncy;&fcy;&icy;&dcy;&iecy;&ncy;&tscy;&icy;&acy;&lcy;&softcy;&ncy;&ocy;&scy;&tcy;&icy;</a> &ncy;&acy; &scy;&acy;&jcy;&tcy;&iecy; <a style="text-decoration:none;font-weight:700;color:#FDFDFD;" href="index.html" target="_blank">MainGame</a></div>
+                                                    <div style="font-family:roboto;font-size:12px;font-weight:400;line-height:20.5px;text-align:center;color:#FDFDFD;">Ознакомься с <a style="text-decoration:none;font-weight:700;color:#FDFDFD;" href="policy.html" target="_blank">правилами пользования</a> и <a style="text-decoration:none;font-weight:700;color:#FDFDFD;" href="policy.html" target="_blank">политикой конфиденциальности</a> на сайте <a style="text-decoration:none;font-weight:700;color:#FDFDFD;" href="index.html" target="_blank">MainGame</a></div>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -304,7 +304,7 @@
                                             <tbody>
                                             <tr>
                                                 <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
-                                                    <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:center;color:#000000;"><a style="display:inline-block;margin:16px;text-decoration:none;" href="https://youtube.com" target="_blank"><img src="./images/youtube.svg" alt=""></a><a style="display:inline-block;margin:16px;text-decoration:none;" href="https://google.com" target="_blank"><img src="./images/google.svg" alt=""></a><a style="display:inline-block;margin:16px;text-decoration:none;" href="https://discord.com" target="_blank"><img src="./images/discord.svg" alt=""></a><a style="display:inline-block;margin:16px;text-decoration:none;" href="https://facebook.com" target="_blank"><img src="./images/facebook.svg" alt=""></a></div>
+                                                    <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:center;color:#000000;"><a style="display:inline-block;margin:16px;text-decoration:none;" href="https://youtube.com" target="_blank"><img src="{{asset("images/youtube.svg")}}" alt=""></a><a style="display:inline-block;margin:16px;text-decoration:none;" href="https://google.com" target="_blank"><img src="{{asset("images/google.svg")}}" alt=""></a><a style="display:inline-block;margin:16px;text-decoration:none;" href="https://discord.com" target="_blank"><img src="{{asset("images/discord.svg")}}" alt=""></a><a style="display:inline-block;margin:16px;text-decoration:none;" href="https://facebook.com" target="_blank"><img src="{{asset("images/facebook.svg")}}" alt=""></a></div>
                                                 </td>
                                             </tr>
                                             </tbody>

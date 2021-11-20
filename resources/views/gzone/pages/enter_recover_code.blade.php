@@ -1,5 +1,16 @@
 @extends('gzone.layouts.main')
 
+@section('style')
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        }
+    </style>
+@endsection
+
 @section('content')
     <main class="authorization">
         <div class="authorization__wrapper">
@@ -15,12 +26,13 @@
                         <div class="field-wrapper field-wrapper-code">
                             <label for="form-code">Код</label>
                             <div class="field-wrapper-code-inputs">
-                                <input type="text" class="confirm-code__input" autofocus id="form-code" placeholder="_" name="codes[]" />
-                                <input type="text" class="confirm-code__input" placeholder="_" name="codes[]"/>
-                                <input type="text" class="confirm-code__input" placeholder="_" name="codes[]"/>
-                                <input type="text" class="confirm-code__input" placeholder="_" name="codes[]"/>
+                                <input type="number" class="confirm-code__input" autofocus id="form-code" placeholder="_" name="codes[]" />
+                                <input type="number" class="confirm-code__input" placeholder="_" name="codes[]"/>
+                                <input type="number" class="confirm-code__input" placeholder="_" name="codes[]"/>
+                                <input type="number" class="confirm-code__input" placeholder="_" name="codes[]"/>
                             </div>
-                            <p class="form-message">Код отправлен. Повторить запрос через 15 сек</p>
+                            <p class="form-message">Код отправлен. Повторить запрос через <span id="seconds-counter">15</span> сек</p>
+                            <p class="form-message" id="code-expired" hidden>Код устарел. <a class="underline-link" href="javascript:void(0)" onclick="resendCode()">Прислать код повторно</a></p>
                         </div>
                         <div class="form-actions"><a class="button button_transp-hover" href="{{route("send.letter")}}">Назад</a>
                             <button class="button" type="submit">Далее</button>
@@ -40,16 +52,37 @@
 
 @section("js")
     <script>
-        $(".confirm-code__input").on('keydown keyup',function(e) {
-            const value = $(this).val();
+        $(".confirm-code__input").on('input',function(e) {
+            let value = $(this).val();
 
             if (value.length >= 1) {
+                $(this).val(value.slice(0, 1));
+                // if ($(this).next().length === 0) {
+                //     $('.entering-block__form').submit();
+                // }
                 $(this).next().focus();
             }
-
-            if(!(e.key.match(/[\d]/) || e.keyCode == 8) || value.length >= 1) {
-                return false;
-            }
         });
+
+        function resendCode() {
+            window.location.reload();
+        }
+
+        var seconds = 15;
+        var el = document.getElementById('seconds-counter');
+
+        var cancel = setInterval(incrementSeconds, 1000);
+        function incrementSeconds() {
+            seconds -= 1;
+            el.innerText = seconds;
+            if (seconds == 0)
+            {
+                clearInterval(cancel);
+                document.getElementById('code-expired').removeAttribute('hidden');
+                seconds = 15;
+                el.parentElement.setAttribute('hidden', "hidden");
+            }
+        }
+
     </script>
 @endsection
