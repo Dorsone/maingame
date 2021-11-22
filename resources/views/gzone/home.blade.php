@@ -14,7 +14,8 @@
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
                                         <div class="slide-main">
-                                            <div class="slide-main__bg"><img src="./images/image-4.jpg" alt=""/>
+                                            <div class="slide-main__bg"><img src="{{asset('images/image-4.jpg')}}"
+                                                                             alt=""/>
                                             </div>
                                             <div class="container-sides-lg">
                                                 <div class="slide-main__body">
@@ -306,10 +307,10 @@
                                 </div>
                             </div>
                             <div class="pagination-wrapper">
-                                <div class="swiper-button-prev"><img src="./images/arrow-left.svg" alt=""/>
+                                <div class="swiper-button-prev"><img src="{{asset('images/arrow-left.svg')}}" alt=""/>
                                 </div>
                                 <div class="swiper-pagination"></div>
-                                <div class="swiper-button-next"><img src="./images/arrow-right.svg" alt=""/>
+                                <div class="swiper-button-next"><img src="{{asset('images/arrow-right.svg')}}" alt=""/>
                                 </div>
                             </div>
                         </div>
@@ -318,25 +319,33 @@
                                 @foreach($news as $article)
                                     <div class="section-aside__item">
                                         <div class="news-info">
-                                            <div class="news-info__bg-img"><img src="{{ asset($article->image) }}" alt=""/>
+                                            <div class="news-info__bg-img">
+                                                <img src="{{ asset($article->image) }}" alt=""/>
                                             </div>
-                                            <a href="javascript:void(0)"> </a>
+                                            <a href="{{ route('site.article', ['categorySlug' => $article->category->slug, 'articleSlug' => $article->slug]) }}">
+                                            </a>
                                             <div class="news-info__main">
                                                 <div class="news-info__top">
                                                     @if($article->tags->isNotEmpty())
                                                         <div class="hashtags">
                                                             @foreach($article->tags as $tag)
-                                                                <a href="javascript:void(0)" class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
+                                                                <a href="{{route('site.categories', $tag->slug)}}"
+                                                                   class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
                                                             @endforeach
                                                         </div>
                                                     @endif
                                                     <div class="news-info__action bookmark">
                                                         <svg class="icon icon-mark ">
-                                                            <use xlink:href="{{ asset('/images/sprite-inline.svg#mark') }}"></use>
+                                                            <use
+                                                                xlink:href="{{ asset('/images/sprite-inline.svg#mark') }}"></use>
                                                         </svg>
                                                     </div>
                                                 </div>
-                                                <p class="news-info__caption">{{ $article->title }}</p>
+                                                <p class="news-info__caption">
+                                                    <a href="{{ route('site.article', ['categorySlug' => $article->category->slug, 'articleSlug' => $article->slug]) }}">
+                                                        {{ $article->title }}
+                                                    </a>
+                                                </p>
                                                 <div class="news-info__bottom">
                                                     <span
                                                         class="news-info__date">{{ $article->created_at->format('d M. Y') }}</span>

@@ -14,7 +14,8 @@
                             @if($art->tags->isNotEmpty())
                                 <div class="hashtags">
                                     @foreach($art->tags as $tag)
-                                        <a href="javascript:void(0)" class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
+                                        <a href="{{route('site.categories', $tag->slug)}}"
+                                           class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
                                     @endforeach
                                 </div>
                             @endif
@@ -24,14 +25,16 @@
                                 </svg>
                             </div>
                         </div>
-                        <a class="article-preview__caption" href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $art->slug]) }}">{{ $art->title }}</a>
+                        <a class="article-preview__caption"
+                           href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $art->slug]) }}">{{ $art->title }}</a>
                         <p class="article-preview__text">{{ $art->content_preview }}</p>
                         <div class="article-preview__info">
                             <div class="article-preview__author">
                                 <div class="article-preview__author-img">
                                     <img src="{{ asset($art->user->image) }}" alt=""/>
                                 </div>
-                                <a class="article-preview__author-name" href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $art->slug]) }}">{{ $art->user->name }}</a>
+                                <a class="article-preview__author-name"
+                                   href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $art->slug]) }}">{{ $art->user->name }}</a>
                             </div>
                             @if($art->time_read)
                                 <span class="article-preview__reading">Читать {{ $art->time_read }} мин</span>
@@ -43,12 +46,13 @@
                             <div class="subscribe-banner__desc">
                                 <div class="subscribe-banner__caption">
                                     <svg class="icon icon-maingame ">
-                                        <use xlink:href="./images/sprite-inline.svg#maingame"></use>
+                                        <use xlink:href="{{asset('images/sprite-inline.svg#maingame')}}"></use>
                                     </svg>
                                     <span class="title-h3">Дайджест Maingame!</span>
                                 </div>
-                                <p class="subscribe-banner__text">Новости, лонгриды, мемасики – лучшее из мира
-                                    киберспорта прямо у тебя в почте!</p>
+                                <p class="subscribe-banner__text">
+                                    Новости, лонгриды, мемасики – лучшее из мира киберспорта прямо у тебя в почте!
+                                </p>
                             </div>
                             <div class="subscribe-banner__form">
                                 <form class="subscribe-form">
@@ -61,8 +65,9 @@
                                     </div>
                                     <div class="subscribe-form__agree">
                                         <input type="checkbox" id="subscribe-checkbox-banner"/>
-                                        <label for="subscribe-checkbox-banner">Разрешаю обработку моих личных
-                                            данных</label>
+                                        <label for="subscribe-checkbox-banner">
+                                            Разрешаю обработку моих личных данных
+                                        </label>
                                     </div>
                                 </form>
                             </div>
@@ -71,7 +76,10 @@
                 @endforeach
             </div>
             <div class="load-more" id="show-more-link-articles">
-                <button class="button button_transp-hover" data-link="{{ route('site.category', ['categorySlug' => $category->slug]) }}?page=2">Показать еще</button>
+                <button class="button button_transp-hover"
+                        data-link="{{ route('site.category', ['categorySlug' => $category->slug]) }}?page=2">Показать
+                    еще
+                </button>
             </div>
         </div>
     </div>
