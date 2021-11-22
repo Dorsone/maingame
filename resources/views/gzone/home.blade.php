@@ -1,5 +1,7 @@
 @extends('gzone.layouts.main')
 
+@section('title', 'Maingame')
+
 @section('header')
     @include('gzone.partials.header-main')
 @endsection

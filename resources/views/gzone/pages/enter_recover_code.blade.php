@@ -1,5 +1,7 @@
 @extends('gzone.layouts.main')
 
+@section('title', 'Восстановление пароля - ввести код')
+
 @section('style')
     <style>
         input::-webkit-outer-spin-button,

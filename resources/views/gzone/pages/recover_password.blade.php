@@ -1,5 +1,7 @@
 @extends('gzone.layouts.main')
 
+@section('title', 'Восстановление пароля - отправка кода')
+
 @section('content')
     <main class="authorization">
         <div class="authorization__wrapper">

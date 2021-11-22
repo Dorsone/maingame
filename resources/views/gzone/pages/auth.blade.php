@@ -1,5 +1,7 @@
 @extends('gzone.layouts.main')
 
+@section('title', "Вход/Регистрация")
+
 @section('content')
     <main class="authorization">
         <div class="authorization__wrapper">

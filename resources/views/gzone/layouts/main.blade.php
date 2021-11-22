@@ -12,7 +12,7 @@
     <link rel="mask-icon" href="{{ asset('/images/favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <title>Maingame</title>
+    <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('css/jquery.fancybox.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/swiper.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}"/>
