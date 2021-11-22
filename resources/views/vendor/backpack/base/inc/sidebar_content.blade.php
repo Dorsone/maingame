@@ -27,6 +27,11 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ backpack_url('elfinder') }}">Файлы</a>
         </li>
+        <li class='nav-item'>
+            <a class='nav-link' href='{{ backpack_url('static-info') }}'>
+                Статичная информация
+            </a>
+        </li>
     </ul>
 </li>
 <li class='nav-item'>
