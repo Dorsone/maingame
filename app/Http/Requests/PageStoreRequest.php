@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StaticInfoRequest extends FormRequest
+class PageStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +32,6 @@ class StaticInfoRequest extends FormRequest
                 Rule::unique('articles')->ignore($this->id),
             ],
             'user_id' => 'required',
-            'date' => 'required',
         ];
     }
 
@@ -46,7 +45,6 @@ class StaticInfoRequest extends FormRequest
         return [
             'slug' => 'Url',
             'user_id' => 'Автор',
-            'date' => 'Дата',
         ];
     }
 

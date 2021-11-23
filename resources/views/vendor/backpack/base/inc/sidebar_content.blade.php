@@ -29,7 +29,7 @@
         </li>
         <li class='nav-item'>
             <a class='nav-link' href='{{ backpack_url('static-info') }}'>
-                Статичная информация
+                Страницы
             </a>
         </li>
     </ul>

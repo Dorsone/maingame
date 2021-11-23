@@ -27,5 +27,5 @@ Route::group([
 
     Route::crud('user', 'UserCrudController');
     Route::crud('articlescomments', 'ArticlesCommentsCrudController');
-    Route::crud('static-info', 'StaticInfoCrudController');
+    Route::crud('pages', 'PageController');
 }); // this should be the absolute last line of this file

@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class StaticInfo extends Model
+class Page extends Model
 {
     use CrudTrait, HasFactory, Sluggable;
 
-    protected $table = 'static_infos';
+    protected $table = 'pages';
     protected $guarded = ['id'];
-    protected $dates = ['date'];
 
 
 

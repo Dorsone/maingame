@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStaticInfosTable extends Migration
+class CreatePagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateStaticInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('static_infos', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->boolean('active')->default(0);
             $table->foreignId('user_id')->constrained();
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('content')->nullable();
-            $table->date('date');
 
             $table->string('breadcrumbs_title')->nullable();
             $table->string('seo_title')->nullable();
@@ -43,6 +42,6 @@ class CreateStaticInfosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('static_infos');
+        Schema::dropIfExists('pages');
     }
 }

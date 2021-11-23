@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StaticInfoRequest;
+use App\Http\Requests\PageStoreRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class StaticInfoCrudController
+ * Class PageController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class StaticInfoCrudController extends CrudController
+class PageController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -29,9 +29,9 @@ class StaticInfoCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\StaticInfo::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/static-info');
-        CRUD::setEntityNameStrings('статичную информацию', '');
+        CRUD::setModel(\App\Models\Page::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/pages');
+        CRUD::setEntityNameStrings('', 'Страницы');
     }
 
     /**
@@ -45,7 +45,6 @@ class StaticInfoCrudController extends CrudController
         CRUD::column('active');
         CRUD::column('title');
         CRUD::column('slug');
-        CRUD::column('date');
         CRUD::column('created_at');
 
         /**
@@ -63,21 +62,13 @@ class StaticInfoCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(StaticInfoRequest::class);
+        CRUD::setValidation(PageStoreRequest::class);
 
         $this->crud->addFields([
             [
                 'name' => 'active',
                 'label' => 'Активность',
                 'type' => 'boolean',
-                'wrapperAttributes' => [
-                    'class' => 'form-group col-md-12',
-                ],
-            ],
-            [
-                'name' => 'date',
-                'label' => 'Дата',
-                'type' => 'date',
                 'wrapperAttributes' => [
                     'class' => 'form-group col-md-6',
                 ],
