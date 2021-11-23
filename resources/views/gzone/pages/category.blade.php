@@ -27,12 +27,17 @@
                                 </svg>
                                 <div class="__select__title"></div>
                                 <div class="__select__content">
-                                    <input class="__select__input" type="radio" name="filter" id="new" checked="checked"/>
+                                    <input class="__select__input" type="radio" data-col="date" data-sort="desc" checked="checked"/>
                                     <label class="__select__label" for="new">Сначала новые</label>
-                                    <input class="__select__input" type="radio" name="genderSelect" id="expensive"/>
-                                    <label class="__select__label" for="expensive">від дорогих до дешевих</label>
-                                    <input class="__select__input" type="radio" name="genderSelect" id="cheap"/>
-                                    <label class="__select__label" for="cheap">від дешевих до дорогих</label>
+
+                                    <input class="__select__input" type="radio" data-col="time_read" data-sort="asc" id="short"/>
+                                    <label class="__select__label" for="short">Сначала короткие</label>
+
+                                    <input class="__select__input" type="radio" data-col="time_read" data-sort="desc" id="cheap"/>
+                                    <label class="__select__label" for="cheap">Сначала длинные</label>
+
+                                    <input class="__select__input" type="radio" data-col="views" data-sort="desc" id="views"/>
+                                    <label class="__select__label" for="views">Сначала популярные</label>
                                 </div>
                             </div>
                             <!--.category-filter-current Сначала новые-->
@@ -135,6 +140,55 @@
         $(function () {
             var showMoreLink = $('#show-more-link-articles');
             var itemsWrap = $('#articlesWrap');
+
+            function getArticles(url = null, replace = true) {
+                let content = itemsWrap;
+                let tagsList = $('.button-filter.active');
+                let tags = [];
+                let sort = {};
+
+                if (url === null) {
+                    url = document.location.href;
+                }
+
+                if (tagsList.length > 0) {
+                    tagsList.each(function (key, item) {
+                        tags.push($(item).attr('data-tag'));
+                    })
+                }
+
+                let sortSelected = $('.sort-selected');
+                sort.col = sortSelected.attr('data-col');
+                sort.order = sortSelected.attr('data-sort');
+
+
+                $.post(url, {
+                        tags: tags,
+                        sort: sort,
+                    })
+                    .done(function(response) {
+                        itemsWrap.empty().append(response.html);
+                        if (response.nextUrl) {
+                            showMoreLink.data('link', response.nextUrl)
+                            showMoreLink.show();
+                        } else {
+                            showMoreLink.hide();
+                        }
+                    })
+                    .fail(function() {
+                        console.log('Error : ', response);
+                    });
+            }
+
+            // === current tag ===
+            $('.button-filter').on('click', function () {
+                $(this).toggleClass('active');
+                getArticles();
+            });
+            $('.button-filter').on('click', function () {
+                $('.tag').removeClass('active');
+                getArticles();
+            })
 
             if (showMoreLink.length && itemsWrap.length) {
                 showMoreLink.click(function ($event) {
