@@ -7,7 +7,9 @@
 @section('content')
     <main class="media-page">
         @include('gzone.partials.side-sticky')
-
+        <div class="container-md2">
+            @include('gzone.partials.breadcrumbs')
+        </div>
         @foreach($categories as $key => $category)
             @switch($key)
                 @case(0)
