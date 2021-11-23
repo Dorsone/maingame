@@ -16,7 +16,7 @@
                     <div class="container-md2">
                         <div class="event-banner">
                             <div class="event-banner__content">
-                                <div class="event-banner__bg"><img src="./images/image-19.png" alt=""/>
+                                <div class="event-banner__bg"><img src="{{asset('images/image-19.png')}}" alt=""/>
                                 </div>
                                 <div class="event-banner__desc">
                                     <p class="event-banner__caption title-h3">Врывайся в киберспорт</p>

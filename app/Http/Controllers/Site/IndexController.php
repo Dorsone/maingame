@@ -17,9 +17,11 @@ use App\Models\Search;
 use App\Models\SearchItems;
 use App\Models\User;
 use App\Services\IndexingText;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Response;
 
 class IndexController extends Controller
 {
@@ -58,23 +60,36 @@ class IndexController extends Controller
     }
 
 
-    public function categories()
+    /**
+     * @param string|null $slug
+     * @return Application|Factory|View
+     */
+    public function categories(?string $slug = null)
     {
         $categories = ArticlesCategories::with([
-            'articles' => function ($q) {
+            'articles' => function ($q) use ($slug) {
                 $q->where('active', 1);
                 $q->orderByDesc('date');
                 $q->with(['tags']);
                 $q->withCount(['comments']);
+                if (!is_null($slug)) {
+                    $q->whereHas('tags', function ($q) use ($slug) {
+                        $q->where('articles_tags.slug', '=', $slug);
+                    });
+                }
             }
         ])
-            ->whereHas('articles', function ($q) {
+            ->whereHas('articles', function ($q) use ($slug) {
+                if (!is_null($slug)) {
+                    $q->whereHas('tags', function ($q) use ($slug) {
+                        $q->where('articles_tags.slug', '=', $slug);
+                    });
+                }
                 $q->where('active', 1);
             })
             ->where('active', 1)
             ->orderBy('lft')
             ->get();
-
         $breadcrumbs = $this->getBreadcrumbs(true);
 
         return view('gzone.pages.categories', compact('categories', 'breadcrumbs'));
@@ -124,11 +139,11 @@ class IndexController extends Controller
             $q->where('category_id', $category->id);
         })->get();
 
-        if(request()->isMethod('post')){
+        if (request()->isMethod('post')) {
 
             return response([
                 'nextUrl' => $articles->nextPageUrl(),
-                'html'    => view('gzone.partials.ajax.feeds', ['articles' => $articles, 'category' => $category])->render()
+                'html' => view('gzone.partials.ajax.feeds', ['articles' => $articles, 'category' => $category])->render()
             ]);
         }
 
@@ -236,7 +251,7 @@ class IndexController extends Controller
             'title' => 'Поиск',
             'url' => route('site.search'),
             'current' => true
-        ];;
+        ];
 
         $text = $request->get('q');
 
@@ -338,7 +353,7 @@ class IndexController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function policy()
     {
