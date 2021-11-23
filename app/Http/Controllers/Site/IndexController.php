@@ -214,7 +214,7 @@ class IndexController extends Controller
         $articles = Articles::where('active', 1)
             ->where('user_id', $user->id)
             ->with(['tags', 'user', 'category'])
-            ->paginate(4);
+            ->paginate(6);
 
         $breadcrumbs = $this->getBreadcrumbs();
         $breadcrumbs[] = [
@@ -222,6 +222,14 @@ class IndexController extends Controller
             'url' => route('site.author', ['id' => $user->id]),
             'current' => true
         ];
+
+        if (request()->isMethod('post')) {
+
+            return response([
+                'nextUrl' => $articles->nextPageUrl(),
+                'html' => view('gzone.partials.ajax.author-articles', ['articles' => $articles])->render()
+            ]);
+        }
 
         return view('gzone.pages.author', compact('user', 'articles', 'breadcrumbs'));
     }
