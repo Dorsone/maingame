@@ -45,6 +45,6 @@ class SendSmsService
 
         Cache::put($validated["email"], $recover_code, 300);
 
-        Notification::send($user, new RegistrationCodeNotification($validated["email"], $recover_code));
+        Notification::send($user, new RegistrationCodeNotification($recover_code));
     }
 }

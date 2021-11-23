@@ -11,17 +11,14 @@ class RegistrationCodeNotification extends Notification
     use Queueable;
 
     protected $recovery_code;
-    protected $channel_name;
 
     /**
      * Create a new notification instance.
      *
-     * @param $channel_name
      * @param integer $recovery_code
      */
-    public function __construct($channel_name, $recovery_code)
+    public function __construct($recovery_code)
     {
-        $this->channel_name = $channel_name;
         $this->recovery_code = $recovery_code;
     }
 
