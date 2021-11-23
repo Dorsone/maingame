@@ -42,7 +42,7 @@
                 @endforeach
             </div>
             <div class="latest-news">
-                @foreach($category->articles->take(3) as $art)
+                @foreach($category->articles->skip(2)->take(3) as $art)
                     <div class="article-preview">
                         <div class="article-preview__img">
                             <a href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $art->slug]) }}">
