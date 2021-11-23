@@ -17,3 +17,4 @@ _ide_helper*
 config/debugbar.php
 public/build
 public/uploads
+/.idea
