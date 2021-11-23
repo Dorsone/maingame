@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SteamController;
 use App\Http\Controllers\Site\LoginController;
-use App\Http\Controllers\Site\IndexController;
+use App\Http\Controllers\Site;
 use App\Http\Controllers\Site\MailchimpController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
