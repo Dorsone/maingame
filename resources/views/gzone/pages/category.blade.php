@@ -23,7 +23,7 @@
                         <div class="category-filter">
                             <div class="__select" data-state="">
                                 <svg class="icon icon-arrow-down ">
-                                    <use xlink:href="./images/sprite-inline.svg#arrow-down"></use>
+                                    <use xlink:href="{{ asset('images/sprite-inline.svg#arrow-down') }}"></use>
                                 </svg>
                                 <div class="__select__title"></div>
                                 <div class="__select__content">
