@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Services\SteamService;
 use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Invisnik\LaravelSteamAuth\SteamAuth;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -32,14 +30,19 @@ class SteamController extends Controller
      */
     protected $redirectURL = '/';
 
+    /** @var SteamService $steamService */
+    private $steamService;
+
     /**
      * AuthController constructor.
      *
      * @param SteamAuth $steam
+     * @param SteamService $steamService
      */
-    public function __construct(SteamAuth $steam)
+    public function __construct(SteamAuth $steam, SteamService $steamService)
     {
         $this->steam = $steam;
+        $this->steamService = $steamService;
     }
 
     /**
@@ -64,7 +67,7 @@ class SteamController extends Controller
             $info = $this->steam->getUserInfo();
 
             if (!is_null($info)) {
-                $user = $this->findOrNewUser($info);
+                $user = $this->steamService->findOrNewUser($info);
 
                 Auth::login($user, true);
 
@@ -72,28 +75,5 @@ class SteamController extends Controller
             }
         }
         return $this->redirectToSteam();
-    }
-
-    /**
-     * Getting user by info or created if not exists
-     *
-     * @param $info
-     * @return Builder|Model
-     */
-    protected function findOrNewUser($info)
-    {
-        $user = User::query()->where('steamid', $info->steamID64)->first();
-
-        if (!is_null($user)) {
-            return $user;
-        }
-
-        return User::query()->create([
-            'username' => $info->personaname,
-            'first_name' => $info->realname,
-            'steamid' => $info->steamID64,
-            'password' => bcrypt($info->steamID64),
-        ]);
-
     }
 }

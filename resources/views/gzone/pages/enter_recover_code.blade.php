@@ -28,10 +28,10 @@
                         <div class="field-wrapper field-wrapper-code">
                             <label for="form-code">Код</label>
                             <div class="field-wrapper-code-inputs">
-                                <input type="number" class="confirm-code__input" autofocus id="form-code" placeholder="_" name="codes[]" />
-                                <input type="number" class="confirm-code__input" placeholder="_" name="codes[]"/>
-                                <input type="number" class="confirm-code__input" placeholder="_" name="codes[]"/>
-                                <input type="number" class="confirm-code__input" placeholder="_" name="codes[]"/>
+                                <input type="number" class="confirm-code__input" autofocus id="form-code" placeholder="_" name="codes[]" required/>
+                                <input type="number" class="confirm-code__input" placeholder="_" name="codes[]" required/>
+                                <input type="number" class="confirm-code__input" placeholder="_" name="codes[]" required/>
+                                <input type="number" class="confirm-code__input" placeholder="_" name="codes[]" required/>
                             </div>
                             <p class="form-message">Код отправлен. Повторить запрос через <span id="seconds-counter">15</span> сек</p>
                             <p class="form-message" id="code-expired" hidden>Код устарел. <a class="underline-link" href="javascript:void(0)" onclick="resendCode()">Прислать код повторно</a></p>

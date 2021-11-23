@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->integer("recover_code")->nullable();
             $table->string("steamid")->nullable();
         });
     }

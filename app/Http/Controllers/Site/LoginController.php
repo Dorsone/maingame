@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ConfirmCodeRequest;
 use App\Http\Requests\UserCreateNewPasswordRequest;
 use App\Http\Requests\UserPasswordRecoverRequest;
 use App\Models\User;
@@ -13,7 +14,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class LoginController
@@ -82,14 +83,14 @@ class LoginController extends Controller
     /**
      * Returns page recover password
      * @param User $user
-     * @param Request $request
+     * @param ConfirmCodeRequest $request
      * @return Factory|View|RedirectResponse
      */
-    public function checkRecoverCode(User $user, Request $request)
+    public function checkRecoverCode(User $user, ConfirmCodeRequest $request)
     {
         $recover_code = implode("", $request->codes);
 
-        if ($user->recover_code != $recover_code) {
+        if (Cache::get($user->username) != $recover_code) {
             return redirect()->route("send.letter");
         }
 

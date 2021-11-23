@@ -3,8 +3,11 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Notifications\RecoveryCodeNotification;
+use App\Notifications\RegistrationCodeNotification;
 use Exception;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Notification;
 
 /**
  * Class SendSmsService
@@ -21,18 +24,11 @@ class SendSmsService
     public function sendRecoveryCode(array $validated)
     {
         $user = User::query()->where("email", $validated["email"])->get()->first();
-        $to_name = $user->username;
-        $to_email = $validated["email"];
         $recover_code = random_int(1000, 9999);
-        $data = array("random_number" => $recover_code);
-        $user->recover_code = $recover_code;
-        $user->save();
 
-        Mail::send("gzone.pages.recovery_letter", $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject("Восстановление пароля MainGame");
-            $message->from(env("MAIL_USERNAME"), "MainGame");
-        });
+        Cache::put($user->username, $recover_code, 300);
 
+        Notification::send($user, new RecoveryCodeNotification($validated["email"], $recover_code));
         return $user;
     }
 
@@ -43,14 +39,12 @@ class SendSmsService
      */
     public function sendRegistrationLetter(array $validated)
     {
-        $to_name = "Регистрация";
-        $to_email = $validated["email"];
+        $user = new User();
+        $user->email = $validated["email"];
         $recover_code = random_int(1000, 9999);
-        $data = array("random_number" => $recover_code);
 
-        Mail::send("gzone.pages.registration_letter", $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject("Регистрация MainGame");
-            $message->from(env("MAIL_USERNAME"), "MainGame");
-        });
+        Cache::put($validated["email"], $recover_code, 300);
+
+        Notification::send($user, new RegistrationCodeNotification($validated["email"], $recover_code));
     }
 }
