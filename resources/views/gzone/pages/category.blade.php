@@ -8,9 +8,12 @@
     <main>
         <section class="top-articles">
             <div class="container">
-                <div class="back-link">
-                    <div class="line"></div><a href="javascript:void(0)">Вернуться</a>
-                </div>
+                @if(url()->previous())
+                    <div class="back-link">
+                        <div class="line"></div>
+                        <a href="{{ route('site.categories') }}">Вернуться</a>
+                    </div>
+                @endif
                 <div class="container-md2">
                     @include('gzone.partials.breadcrumbs')
                 </div>
