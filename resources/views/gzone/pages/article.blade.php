@@ -4,6 +4,17 @@
     @include('gzone.partials.header-secondary')
 @endsection
 
+@php
+    /** @var $article \App\Models\Articles */
+    /** @var $recommendation \App\Models\Articles [] */
+    /** @var $category \App\Models\ArticlesCategories */
+    /** @var $tags \App\Models\ArticlesTags [] */
+@endphp
+
+@section('title', $article->seo_title ?? $article->title)
+@section('description', $article->seo_description)
+@section('keywords', $article->seo_keywords)
+
 @section('content')
     <main class="article-page">
         <div class="container-sides-lg">

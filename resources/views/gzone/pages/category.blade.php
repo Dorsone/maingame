@@ -3,6 +3,9 @@
 @section('header')
     @include('gzone.partials.header-secondary')
 @endsection
+@section('title', $category->seo_title ?? $category->title)
+@section('description', $category->seo_description)
+@section('keywords', $category->seo_keywords)
 
 @section('content')
     <main>

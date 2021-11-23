@@ -3,6 +3,7 @@
 @section('header')
     @include('gzone.partials.header-secondary')
 @endsection
+@section('title', 'Поиск')
 
 @section('content')
     <main class="search-results">

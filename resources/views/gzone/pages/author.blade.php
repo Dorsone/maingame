@@ -3,6 +3,7 @@
 @section('header')
     @include('gzone.partials.header-secondary')
 @endsection
+@section('title', $user->name)
 
 @section('content')
     <main class="blog-page">
