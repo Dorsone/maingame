@@ -90,7 +90,8 @@ class IndexController extends Controller
             ->where('active', 1)
             ->orderBy('lft')
             ->get();
-        $breadcrumbs = $this->getBreadcrumbs(true);
+
+        $breadcrumbs = $slug ? $this->getBreadcrumbs(false,  false, false, $slug ) : $this->getBreadcrumbs(true);
 
         return view('gzone.pages.categories', compact('categories', 'breadcrumbs'));
     }
@@ -318,7 +319,7 @@ class IndexController extends Controller
      * @param null|Articles $article
      * @return array
      */
-    private function getBreadcrumbs($category = null, $article = null, $tag = null): array
+    private function getBreadcrumbs($category = null, $article = null, $tag = null, $slug = null): array
     {
         $breadcrumbs = [];
 
@@ -353,6 +354,19 @@ class IndexController extends Controller
         if ($tag) {
             $breadcrumbs[1] = [
                 'title' => 'Статьи по тегу #' . $tag->name,
+                'current' => true
+            ];
+        }
+
+        if ($slug) {
+            $breadcrumbs[0] = [
+                'title' => 'Категории',
+                'url' => route('site.categories'),
+                'current' => false
+            ];
+            $breadcrumbs[1] = [
+                'title' => $slug,
+                'url' => route('site.categories'),
                 'current' => true
             ];
         }

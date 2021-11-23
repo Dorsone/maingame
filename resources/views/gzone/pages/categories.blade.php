@@ -8,7 +8,7 @@
     <main class="media-page">
         @include('gzone.partials.side-sticky')
         <div class="container-md2">
-            @include('gzone.partials.breadcrumbs')
+            @include('gzone.partials.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
         </div>
         @foreach($categories as $key => $category)
             @switch($key)

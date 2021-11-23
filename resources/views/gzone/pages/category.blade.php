@@ -15,7 +15,7 @@
                     </div>
                 @endif
                 <div class="container-md2">
-                    @include('gzone.partials.breadcrumbs')
+                    @include('gzone.partials.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
                 </div>
                 <div class="container-md2">
                     <h1 class="title-h2">{{ $category->seo_h1 ?? $category->title }}</h1>
