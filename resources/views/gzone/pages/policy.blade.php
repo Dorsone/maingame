@@ -6,9 +6,12 @@
 
 @section('content')
     <main class="policy-page">
-        <div class="back-link">
-            <div class="line"></div><a href="javascript:void(0)">Вернуться</a>
-        </div>
+        @if(url()->previous())
+            <div class="back-link">
+                <div class="line"></div>
+                <a href="{{ route('site.categories') }}">Вернуться</a>
+            </div>
+        @endif
         <div class="container">
             <div class="content-text">
                 <h1 class="title-h2">Политика конфиденциальности</h1>

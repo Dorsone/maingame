@@ -7,9 +7,12 @@
 @section('content')
     <main class="blog-page">
         <div class="container">
-            <div class="back-link">
-                <div class="line"></div><a href="{{ route('site.index') }}">Вернуться</a>
-            </div>
+            @if(url()->previous())
+                <div class="back-link">
+                    <div class="line"></div>
+                    <a href="{{ route('site.categories') }}">Вернуться</a>
+                </div>
+            @endif
             @include('gzone.partials.side-sticky')
             <div class="container-md2">
                 <div class="account-info">

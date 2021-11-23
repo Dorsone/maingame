@@ -1,9 +1,11 @@
 <section class="top-articles">
     <div class="container">
-        <div class="back-link">
-            <div class="line"></div>
-            <a href="{{ route('site.index') }}">Вернуться</a>
-        </div>
+        @if(url()->previous())
+            <div class="back-link">
+                <div class="line"></div>
+                <a href="{{ route('site.categories') }}">Вернуться</a>
+            </div>
+        @endif
         <div class="container-md2">
             <h1 class="title-h2">Важные новости киберспорта</h1>
             <div class="top-articles__block">

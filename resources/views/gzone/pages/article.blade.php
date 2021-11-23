@@ -7,10 +7,12 @@
 @section('content')
     <main class="article-page">
         <div class="container-sides-lg">
-            <div class="back-link">
-                <div class="line"></div>
-                <a href="{{ route('site.index') }}">Вернуться</a>
-            </div>
+            @if(url()->previous())
+                <div class="back-link">
+                    <div class="line"></div>
+                    <a href="{{ route('site.categories') }}">Вернуться</a>
+                </div>
+            @endif
             <div class="container-sm">
                 <div class="article-page-inner">
                     <div class="article__tags">
@@ -35,7 +37,7 @@
                             <div class="article__author-img">
                                 <img src="{{ asset($article->user->image) }}" alt=""/>
                             </div>
-                            <a class="article__author-name" href="javascript:void(0)">{{ $article->user->name }}</a>
+                            <a class="article__author-name" href="{{ route('site.author', $article->user->id) }}">{{ $article->user->name }}</a>
                         </div>
                         <span class="article__reading">Читать {{ $article->time_read }} мин</span>
                     </div>
@@ -55,7 +57,7 @@
                             </div>
                             <div class="subscribe-banner__icon">
                                 <svg class="icon icon-maingame ">
-                                    <use xlink:href="./images/sprite-inline.svg#maingame"></use>
+                                    <use xlink:href="{{ asset('images/sprite-inline.svg#maingame') }}"></use>
                                 </svg>
                             </div>
                         </div>

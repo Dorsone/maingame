@@ -27,9 +27,12 @@
             </div>
         </div>
         <div class="container">
-            <div class="back-link">
-                <div class="line"></div><a href="javascript:void(0)">Вернуться</a>
-            </div>
+            @if(url()->previous())
+                <div class="back-link">
+                    <div class="line"></div>
+                    <a href="{{ route('site.categories') }}">Вернуться</a>
+                </div>
+            @endif
 
             @if($articles)
                 <div class="container-md2">
