@@ -149,7 +149,7 @@ class IndexController extends Controller
 
         $breadcrumbs = $this->getBreadcrumbs($category);
 
-        return view('site.category', compact('category', 'articles', 'tags', 'breadcrumbs'));
+        return view('gzone.pages.category', compact('category', 'articles', 'tags', 'breadcrumbs'));
     }
 
     public function article($categorySlug, $articleSlug)
