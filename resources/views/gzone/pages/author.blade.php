@@ -31,7 +31,7 @@
         </div>
         <section>
             <div class="container">
-                <div class="container-md1">
+                <div class="container-md2">
                     <h2 class="title-h2">Статьи автора</h2>
                     <div class="popular-articles__wrapper" id="articlesWrap">
                         @foreach($articles as $article)
