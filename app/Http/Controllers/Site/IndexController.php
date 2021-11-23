@@ -223,7 +223,7 @@ class IndexController extends Controller
             'current' => true
         ];
 
-        return view('site.author', compact('user', 'articles', 'breadcrumbs'));
+        return view('gzone.pages.author', compact('user', 'articles', 'breadcrumbs'));
     }
 
     public function addComment(Request $request)

@@ -9,7 +9,7 @@
         <div class="container-sides-lg">
             <div class="back-link">
                 <div class="line"></div>
-                <a href="javascript:void(0)">Вернуться</a>
+                <a href="{{ route('site.index') }}">Вернуться</a>
             </div>
             <div class="container-sm">
                 <div class="article-page-inner">
