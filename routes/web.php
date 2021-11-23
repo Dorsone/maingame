@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\SteamController;
+use App\Http\Controllers\Site\LoginController;
+use App\Http\Controllers\Site;
+use App\Http\Controllers\Site\MailchimpController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\Site;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +28,19 @@ Route::get('author/{id}', [Site\IndexController::class, 'author'])->name('site.a
 Route::get('search', [Site\IndexController::class, 'search'])->name('site.search');
 Route::get('tag/{tagSlug}', [Site\IndexController::class, 'articlesByTag'])->name('site.articles-by-tag');
 
-Route::post('add-comment', [Site\IndexController::class, 'addComment'])->name('site.add-comment');
-Route::post('subscribe', [Site\MailchimpController::class, 'subscribe'])->name('site.subscribe');
+Route::post('add-comment', [IndexController::class, 'addComment'])->name('site.add-comment');
+Route::post('subscribe', [MailchimpController::class, 'subscribe'])->name('site.subscribe');
 
-Route::get('login', [Site\LoginController::class, 'login'])->name('site.login');
-Route::get('policy', [Site\IndexController::class, 'policy'])->name('site.policy');
+Auth::routes();
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('site.login');
+Route::get('policy', [IndexController::class, 'policy'])->name('site.policy');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('send/letter', [LoginController::class, 'sendLetterPage'])->name('send.letter');
+Route::post('recovery/letter', [LoginController::class, 'forgotPassword'])->name('recovery.letter');
+Route::post('check/recover/{user}', [LoginController::class, 'checkRecoverCode'])->name('check.recoverCode');
+Route::post('change/password/{user}', [LoginController::class, 'changePassword'])->name('change.password');
+
+Route::post('register', [RegisterController::class, 'sendLetter'])->name('send.registration.letter');
+
+Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('auth.steam');
+Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
