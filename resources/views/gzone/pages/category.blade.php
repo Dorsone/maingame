@@ -82,11 +82,6 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="article-preview__action bookmark">
-                                        <svg class="icon icon-mark ">
-                                            <use xlink:href="{{ asset('/images/sprite-inline.svg#mark') }}"></use>
-                                        </svg>
-                                    </div>
                                 </div>
                                 <a class="article-preview__caption" href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $article->slug]) }}">{{ $article->title }}</a>
                                 <p class="article-preview__text">{{ $article->content_preview }}</p>
