@@ -5,17 +5,17 @@
         <ul class="games-list">
             <li><a href="{{ route('site.category', ['categorySlug' => 'cs-go']) }}">
                     <svg class="icon icon-counter-strike ">
-                        <use xlink:href="./images/sprite-inline.svg#counter-strike"></use>
+                        <use xlink:href="{{ asset('images/sprite-inline.svg#counter-strike') }}"></use>
                     </svg>
                 </a></li>
             <li><a href="{{ route('site.category', ['categorySlug' => 'dota']) }}">
                     <svg class="icon icon-dota-2 ">
-                        <use xlink:href="./images/sprite-inline.svg#dota-2"></use>
+                        <use xlink:href="{{ asset('images/sprite-inline.svg#dota-2') }}"></use>
                     </svg>
                 </a></li>
             <li><a href="javascript:void(0)">
                     <svg class="icon icon-mortal-kombat ">
-                        <use xlink:href="./images/sprite-inline.svg#mortal-kombat"></use>
+                        <use xlink:href="{{ asset('images/sprite-inline.svg#mortal-kombat') }}"></use>
                     </svg>
                 </a></li>
         </ul>

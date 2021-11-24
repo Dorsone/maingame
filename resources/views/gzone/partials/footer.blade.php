@@ -1,7 +1,7 @@
 <footer class="footer">
     <aside class="section-aside">
-        <div class="section-aside__social-feed"><img src="./images/social-feed.jpg" alt=""/><img
-                src="./images/social-feed.jpg" alt=""/>
+        <div class="section-aside__social-feed"><img src="{{ asset('images/social-feed.jpg') }}" alt=""/><img
+                src="{{ asset('images/social-feed.jpg') }}" alt=""/>
         </div>
     </aside>
     <div class="container-sides-lg">
@@ -37,7 +37,7 @@
             <div class="content-right">
                 <ul class="social-list">
                     <li><a class="social-list__link" href="javascript:void(0)">
-                            <div class="social-list__icon"><img src="./images/facebook-original.svg" alt=""/>
+                            <div class="social-list__icon"><img src="{{ asset('images/facebook-original.svg') }}" alt=""/>
                             </div>
                             <div class="social-list__desc">
                                 <p class="social-list__title">Facebook</p>
@@ -45,7 +45,7 @@
                             </div>
                         </a></li>
                     <li><a class="social-list__link" href="javascript:void(0)">
-                            <div class="social-list__icon"><img src="./images/twitter-original.svg" alt=""/>
+                            <div class="social-list__icon"><img src="{{ asset('images/twitter-original.svg') }}" alt=""/>
                             </div>
                             <div class="social-list__desc">
                                 <p class="social-list__title">Twitter</p>
@@ -53,7 +53,7 @@
                             </div>
                         </a></li>
                     <li><a class="social-list__link" href="javascript:void(0)">
-                            <div class="social-list__icon"><img src="./images/telegram.svg" alt=""/>
+                            <div class="social-list__icon"><img src="{{ asset('images/telegram.svg') }}" alt=""/>
                             </div>
                             <div class="social-list__desc">
                                 <p class="social-list__title">Telegram</p>
@@ -61,7 +61,7 @@
                             </div>
                         </a></li>
                     <li><a class="social-list__link" href="javascript:void(0)">
-                            <div class="social-list__icon"><img src="./images/instagram.svg" alt=""/>
+                            <div class="social-list__icon"><img src="{{ asset('images/instagram.svg') }}" alt=""/>
                             </div>
                             <div class="social-list__desc">
                                 <p class="social-list__title">Instagram</p>
@@ -69,7 +69,7 @@
                             </div>
                         </a></li>
                     <li><a class="social-list__link" href="javascript:void(0)">
-                            <div class="social-list__icon"><img src="./images/zenhub.svg" alt=""/>
+                            <div class="social-list__icon"><img src="{{ asset('images/zenhub.svg') }}" alt=""/>
                             </div>
                             <div class="social-list__desc">
                                 <p class="social-list__title">Zen</p>
@@ -77,7 +77,7 @@
                             </div>
                         </a></li>
                     <li><a class="social-list__link" href="javascript:void(0)">
-                            <div class="social-list__icon"><img src="./images/discord-original.svg" alt=""/>
+                            <div class="social-list__icon"><img src="{{ asset('images/discord-original.svg') }}" alt=""/>
                             </div>
                             <div class="social-list__desc">
                                 <p class="social-list__title">Discord</p>

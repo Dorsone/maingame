@@ -1,9 +1,11 @@
 <section class="top-articles">
     <div class="container">
-        <div class="back-link">
-            <div class="line"></div>
-            <a href="{{ route('site.index') }}">Вернуться</a>
-        </div>
+        @if(url()->previous())
+            <div class="back-link">
+                <div class="line"></div>
+                <a href="{{ route('site.categories') }}">Вернуться</a>
+            </div>
+        @endif
         <div class="container-md2">
             <h1 class="title-h2">Важные новости киберспорта</h1>
             <div class="top-articles__block">
@@ -40,7 +42,7 @@
                 @endforeach
             </div>
             <div class="latest-news">
-                @foreach($category->articles->take(3) as $art)
+                @foreach($category->articles->skip(2)->take(3) as $art)
                     <div class="article-preview">
                         <div class="article-preview__img">
                             <a href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $art->slug]) }}">

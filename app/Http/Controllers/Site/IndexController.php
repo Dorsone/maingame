@@ -90,7 +90,8 @@ class IndexController extends Controller
             ->where('active', 1)
             ->orderBy('lft')
             ->get();
-        $breadcrumbs = $this->getBreadcrumbs(true);
+
+        $breadcrumbs = $slug ? $this->getBreadcrumbs(false,  false, false, $slug ) : $this->getBreadcrumbs(true);
 
         return view('gzone.pages.categories', compact('categories', 'breadcrumbs'));
     }
@@ -149,7 +150,7 @@ class IndexController extends Controller
 
         $breadcrumbs = $this->getBreadcrumbs($category);
 
-        return view('site.category', compact('category', 'articles', 'tags', 'breadcrumbs'));
+        return view('gzone.pages.category', compact('category', 'articles', 'tags', 'breadcrumbs'));
     }
 
     public function article($categorySlug, $articleSlug)
@@ -214,7 +215,7 @@ class IndexController extends Controller
         $articles = Articles::where('active', 1)
             ->where('user_id', $user->id)
             ->with(['tags', 'user', 'category'])
-            ->paginate(4);
+            ->paginate(6);
 
         $breadcrumbs = $this->getBreadcrumbs();
         $breadcrumbs[] = [
@@ -223,7 +224,15 @@ class IndexController extends Controller
             'current' => true
         ];
 
-        return view('site.author', compact('user', 'articles', 'breadcrumbs'));
+        if (request()->isMethod('post')) {
+
+            return response([
+                'nextUrl' => $articles->nextPageUrl(),
+                'html' => view('gzone.partials.ajax.author-articles', ['articles' => $articles])->render()
+            ]);
+        }
+
+        return view('gzone.pages.author', compact('user', 'articles', 'breadcrumbs'));
     }
 
     public function addComment(Request $request)
@@ -310,7 +319,7 @@ class IndexController extends Controller
      * @param null|Articles $article
      * @return array
      */
-    private function getBreadcrumbs($category = null, $article = null, $tag = null): array
+    private function getBreadcrumbs($category = null, $article = null, $tag = null, $slug = null): array
     {
         $breadcrumbs = [];
 
@@ -345,6 +354,19 @@ class IndexController extends Controller
         if ($tag) {
             $breadcrumbs[1] = [
                 'title' => 'Статьи по тегу #' . $tag->name,
+                'current' => true
+            ];
+        }
+
+        if ($slug) {
+            $breadcrumbs[0] = [
+                'title' => 'Категории',
+                'url' => route('site.categories'),
+                'current' => false
+            ];
+            $breadcrumbs[1] = [
+                'title' => $slug,
+                'url' => route('site.categories'),
                 'current' => true
             ];
         }

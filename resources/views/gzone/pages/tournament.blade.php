@@ -7,12 +7,15 @@
 @section('content')
     <main class="arena-page">
         <section class="arena-main">
-            <div class="background-img"> <img src="./images/arena-main-bg.png" alt=""/>
+            <div class="background-img"> <img src="{{ asset('images/arena-main-bg.png') }}" alt=""/>
             </div>
             <div class="container-sides-lg">
-                <div class="back-link">
-                    <div class="line"></div><a href="javascript:void(0)">Вернуться</a>
-                </div>
+                @if(url()->previous())
+                    <div class="back-link">
+                        <div class="line"></div>
+                        <a href="{{ route('site.categories') }}">Вернуться</a>
+                    </div>
+                @endif
                 <div class="container-md3">
                     <div class="arena-main__content"><span class="tag">Турнирная платформа maingame</span>
                         <h1 class="title-h1">Играй, качай скилл и побеждай!</h1>
@@ -25,7 +28,7 @@
                         <div class="section-aside__items">
                             <div class="section-aside__item">
                                 <div class="media-one game-one">
-                                    <div class="media-one__bg-img"><img src="./images/image-1.jpg" alt=""/>
+                                    <div class="media-one__bg-img"><img src="{{ asset('images/image-1.jpg') }}" alt=""/>
                                     </div>
                                     <div class="media-one__desc">
                                         <svg class="icon icon-counter-strike ">

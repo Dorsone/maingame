@@ -1,7 +1,7 @@
 @foreach($articles as $article)
     <div class="article-preview">
         <div class="article-preview__img">
-            <a href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $article->slug]) }}">
+            <a href="{{ route('site.article', ['categorySlug' => $article->category->slug, 'articleSlug' => $article->slug]) }}">
                 <img src="{{ asset($article->image) }}" alt=""/></a>
         </div>
         <div class="article-preview__tags">
@@ -18,7 +18,7 @@
                 </svg>
             </div>
         </div>
-        <a class="article-preview__caption" href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $article->slug]) }}">{{ $article->title }}</a>
+        <a class="article-preview__caption" href="{{ route('site.article', ['categorySlug' => $article->category->slug, 'articleSlug' => $article->slug]) }}">{{ $article->title }}</a>
         <p class="article-preview__text">{{ $article->content_preview }}</p>
         <div class="article-preview__info">
             <div class="article-preview__author">

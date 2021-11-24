@@ -24,7 +24,7 @@ Route::get('tournament', [Site\IndexController::class, 'tournament'])->name('sit
 Route::get('categories/{slug?}', [Site\IndexController::class, 'categories'])->name('site.categories');
 Route::match(['get', 'post'],'category/{categorySlug}', [Site\IndexController::class, 'category'])->name('site.category');
 Route::get('category/{categorySlug}/{articleSlug}', [Site\IndexController::class, 'article'])->name('site.article');
-Route::get('author/{id}', [Site\IndexController::class, 'author'])->name('site.author');
+Route::match(['get', 'post'],'author/{id}', [Site\IndexController::class, 'author'])->name('site.author');
 Route::get('search', [Site\IndexController::class, 'search'])->name('site.search');
 Route::get('tag/{tagSlug}', [Site\IndexController::class, 'articlesByTag'])->name('site.articles-by-tag');
 
