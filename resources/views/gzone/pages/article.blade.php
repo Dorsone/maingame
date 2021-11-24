@@ -96,7 +96,9 @@
                                 <div class="comment-body">
                                     <p>{{ $comment->comment }}</p>
                                 </div>
-                                <div class="comment-btn button button_transp-hover">Ответить</div>
+                                @auth
+{{--                                    <div class="comment-btn button button_transp-hover comment-item__answer">Ответить</div>--}}
+                                @endauth
                             </div>
                             @if($comment->answer)
                             <div class="comment-block comment-block--answear">
