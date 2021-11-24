@@ -118,14 +118,37 @@
                             </div>
                             @endif
                         @endforeach
-                        <div class="comment-empty">
-                            <p>Чтобы оставить комментарий необходимо <a href='#'>Войти</a> или <a href='#'>Зарегистрироваться</a>
-                            </p>
+                        <div class="comment-empty" id="message-box" style="display: none">
+                            <p>Ваш комментарий получен и будет показан после модерации</p>
                             <div class="comment-empty-icon">
                                 <svg class="icon icon-maingame ">
                                     <use xlink:href="{{ asset('images/sprite-inline.svg#maingame') }}"></use>
                                 </svg>
                             </div>
+                        </div>
+                        <div class="comment-block">
+                            <form class="comment-form js-send-form"
+                                  method="post"
+                                  data-success-block="comment-add-done"
+                                  action="{{ route('site.add-comment') }}">
+                                @csrf
+                                <input type="hidden" name="article_id" value="{{ $article->id }}">
+                                <div class="comment-form-col">
+                                    <div class="comment-form-field">
+                                        <input type="text" name="name" placeholder="Имя" required/>
+                                    </div>
+                                    <div class="comment-form-field">
+                                        <input type="email" name="email" placeholder="E-mail" required/>
+                                    </div>
+                                </div>
+                                <div class="comment-form-col">
+                                    <div class="comment-form-field">
+                                        <textarea rows="4" name="comment" placeholder="Комментарий" required></textarea>
+                                    </div>
+                                </div>
+                                <button class="comment-form-reset" type="reset">Отменить</button>
+                                <button class="comment-form-submit" type="submit">Добавить комментарий</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -190,4 +213,40 @@
         @include('gzone.partials.social-links')
     </main>
     @include('gzone.partials.footer')
+@endsection
+
+@section('js')
+    <script>
+        $('.js-send-form').on('submit', function (e) {
+            e.preventDefault();
+            let form = $(this)
+            let url = form.attr('action')
+            let successMessageBlock = form.attr('data-success-block')
+
+            $.ajax({
+                url: url,
+                data: form.serialize(),
+                type: form.attr('method'),
+                dataType: "json",
+                beforeSend: function () {
+                    if (typeof successMessageBlock !== 'undefined') {
+                        $('.' + successMessageBlock).hide();
+                    }
+                },
+                complete: function () {
+
+                },
+                error: function (jqXHR, exception) {
+                    console.log(jqXHR, exception)
+                },
+                success: function (response) {
+                    $('#message-box').show();
+                    setTimeout(function (){
+                        $('#message-box').slideUp();
+                    }, 2000);
+                    form.trigger("reset");
+                }
+            });
+        });
+    </script>
 @endsection
