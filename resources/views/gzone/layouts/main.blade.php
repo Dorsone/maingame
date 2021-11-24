@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/OverlayScrollbars.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+    @yield('style')
 </head>
 <body class="full-height">
 @yield('header')
