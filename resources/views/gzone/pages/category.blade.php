@@ -30,16 +30,20 @@
                                 </svg>
                                 <div class="__select__title"></div>
                                 <div class="__select__content">
-                                    <input class="__select__input" type="radio" data-col="date" data-sort="desc" checked="checked"/>
+                                    <input class="__select__input" type="radio" id="new" data-col="date"
+                                           data-sort="desc" checked="checked"/>
                                     <label class="__select__label" for="new">Сначала новые</label>
 
-                                    <input class="__select__input" type="radio" data-col="time_read" data-sort="asc" id="short"/>
+                                    <input class="__select__input" type="radio" data-col="time_read" data-sort="asc"
+                                           id="short"/>
                                     <label class="__select__label" for="short">Сначала короткие</label>
 
-                                    <input class="__select__input" type="radio" data-col="time_read" data-sort="desc" id="cheap"/>
+                                    <input class="__select__input" type="radio" data-col="time_read" data-sort="desc"
+                                           id="cheap"/>
                                     <label class="__select__label" for="cheap">Сначала длинные</label>
 
-                                    <input class="__select__input" type="radio" data-col="views" data-sort="desc" id="views"/>
+                                    <input class="__select__input" type="radio" data-col="views" data-sort="desc"
+                                           id="views"/>
                                     <label class="__select__label" for="views">Сначала популярные</label>
                                 </div>
                             </div>
@@ -51,11 +55,11 @@
                             -->
                         </div>
                         @if($tags->isNotEmpty())
-                        <div class="category-tags">
-                            @foreach($tags as $tag)
-                                <button class="button-filter" data-tag="{{ $tag->slug }}">#{{ $tag->name }}</button>
-                            @endforeach
-                        </div>
+                            <div class="category-tags">
+                                @foreach($tags as $tag)
+                                    <button class="button-filter" data-tag="{{ $tag->slug }}">#{{ $tag->name }}</button>
+                                @endforeach
+                            </div>
                         @endif
                     </div>
                     <div class="popular-articles__wrapper" id="articlesWrap">
@@ -69,7 +73,8 @@
                                     @if($article->tags->isNotEmpty())
                                         <div class="hashtags">
                                             @foreach($article->tags as $tag)
-                                                <a href="javascript:void(0)" class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
+                                                <a href="javascript:void(0)"
+                                                   class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
                                             @endforeach
                                         </div>
                                     @endif
@@ -77,12 +82,14 @@
                                         <div class="see">
                                             <svg class="icon icon-eye ">
                                                 <use xlink:href="{{ asset('images/sprite-inline.svg#eye') }}"></use>
-                                            </svg><span>{{ $article->views ?? 0 }}</span>
+                                            </svg>
+                                            <span>{{ $article->views ?? 0 }}</span>
                                         </div>
                                         <div class="comment">
                                             <svg class="icon icon-comment ">
                                                 <use xlink:href="{{ asset('images/sprite-inline.svg#comment') }}"></use>
-                                            </svg><span>{{ $article->comments_count }}</span>
+                                            </svg>
+                                            <span>{{ $article->comments_count }}</span>
                                         </div>
                                         <div class="bookmark">
                                             <svg class="icon icon-mark ">
@@ -91,24 +98,29 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a class="article-preview__caption" href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $article->slug]) }}">{{ $article->title }}</a>
+                                <a class="article-preview__caption"
+                                   href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $article->slug]) }}">{{ $article->title }}</a>
                                 <p class="article-preview__text">{{ $article->content_preview }}</p>
                                 <div class="article-preview__info">
                                     <div class="article-preview__author">
                                         <div class="article-preview__author-img">
                                             <img src="{{ asset($article->user->image) }}" alt=""/>
                                         </div>
-                                        <a class="article-preview__author-name" href="{{ route('site.author', $article->user->id) }}">{{ $article->user->name }}</a>
+                                        <a class="article-preview__author-name"
+                                           href="{{ route('site.author', $article->user->id) }}">{{ $article->user->name }}</a>
                                     </div>
                                     @if($article->time_read)
-                                        <span class="article-preview__reading">Читать {{ $article->time_read }} мин</span>
+                                        <span
+                                            class="article-preview__reading">Читать {{ $article->time_read }} мин</span>
                                     @endif
                                 </div>
                             </div>
                         @endforeach
                     </div>
                     @if($articles->nextPageUrl())
-                        <div class="button button_transp-hover blog--more" id="show-more-link-articles" data-link="{{ $articles->nextPageUrl() }}">Показать еще</div>
+                        <div class="button button_transp-hover blog--more" id="show-more-link-articles"
+                             data-link="{{ $articles->nextPageUrl() }}">Показать еще
+                        </div>
                     @endif
                 </div>
             </div>
@@ -118,19 +130,23 @@
                 <li><a href="https://youtube.com">
                         <svg class="icon icon-youtube ">
                             <use xlink:href="./images/sprite-inline.svg#youtube"></use>
-                        </svg></a></li>
+                        </svg>
+                    </a></li>
                 <li><a href="https://google.com">
                         <svg class="icon icon-google ">
                             <use xlink:href="./images/sprite-inline.svg#google"></use>
-                        </svg></a></li>
+                        </svg>
+                    </a></li>
                 <li><a href="https://discord.com">
                         <svg class="icon icon-discord ">
                             <use xlink:href="./images/sprite-inline.svg#discord"></use>
-                        </svg></a></li>
+                        </svg>
+                    </a></li>
                 <li><a href="https://facebook.com">
                         <svg class="icon icon-facebook ">
                             <use xlink:href="./images/sprite-inline.svg#facebook"></use>
-                        </svg></a></li>
+                        </svg>
+                    </a></li>
             </ul>
         </div>
     </main>
@@ -143,6 +159,14 @@
         $(function () {
             var showMoreLink = $('#show-more-link-articles');
             var itemsWrap = $('#articlesWrap');
+            let sortSelected;
+
+            $('.__select__title').on('DOMSubtreeModified', function ($event) {
+                const targetText = $($event.target).text();
+                const targetIdentifier = $('.__select__label:contains(' + targetText + ')').attr('for');
+                sortSelected = $('#' + targetIdentifier);
+                getArticles();
+            });
 
             function getArticles(url = null, replace = true) {
                 let content = itemsWrap;
@@ -160,16 +184,14 @@
                     })
                 }
 
-                let sortSelected = $('.sort-selected');
                 sort.col = sortSelected.attr('data-col');
                 sort.order = sortSelected.attr('data-sort');
-
-
+                console.log(sort);
                 $.post(url, {
-                        tags: tags,
-                        sort: sort,
-                    })
-                    .done(function(response) {
+                    tags: tags,
+                    sort: sort,
+                })
+                    .done(function (response) {
                         itemsWrap.empty().append(response.html);
                         if (response.nextUrl) {
                             showMoreLink.data('link', response.nextUrl)
@@ -178,7 +200,7 @@
                             showMoreLink.hide();
                         }
                     })
-                    .fail(function() {
+                    .fail(function () {
                         console.log('Error : ', response);
                     });
             }
@@ -199,7 +221,7 @@
                     var url = $(this).data('link');
                     if (url) {
                         $.post(url)
-                            .done(function(response) {
+                            .done(function (response) {
                                 itemsWrap.append(response.html);
                                 if (response.nextUrl) {
                                     showMoreLink.data('link', response.nextUrl)
@@ -207,7 +229,7 @@
                                     showMoreLink.hide();
                                 }
                             })
-                            .fail(function() {
+                            .fail(function () {
                                 console.log('Error : ', response);
                             });
                     }
