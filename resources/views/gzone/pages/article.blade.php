@@ -243,7 +243,7 @@
                     $('#message-box').show();
                     setTimeout(function (){
                         $('#message-box').slideUp();
-                    }, 2000);
+                    }, 4000);
                     form.trigger("reset");
                 }
             });
