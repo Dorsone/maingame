@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SteamController;
 use App\Http\Controllers\Site\LoginController;
+use App\Http\Controllers\Site\ViewHistoryController;
 use App\Http\Controllers\Site;
 use App\Http\Controllers\Site\MailchimpController;
 use Illuminate\Support\Facades\Auth;
@@ -44,3 +45,5 @@ Route::post('register', [RegisterController::class, 'sendLetter'])->name('send.r
 
 Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('auth.steam');
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
+
+Route::get('view-history', [ViewHistoryController::class, 'index'])->name('site.view-history');
