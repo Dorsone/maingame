@@ -12,6 +12,7 @@ class ViewHistoryService
 {
 
     /**
+     * It`s for adding user`s histories to DB
      * @param $articleId
      * @return string
      */
@@ -28,10 +29,11 @@ class ViewHistoryService
 
 
     /**
+     * It`s for deleting user`s histories from DB
      * @param $historyId
      * @return string
      */
-    public function delHistory($historyId) {
+    public function deleteHistory($historyId) {
         ViewHistory::where('article_id', '=', $historyId)->delete();
         return 'Success deleted';
     }

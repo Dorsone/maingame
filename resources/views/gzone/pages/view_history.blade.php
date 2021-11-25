@@ -58,7 +58,7 @@
                             <div class="account-my-bookmarks">
                                 @foreach($histories as $history)
                                     <div class="article-preview">
-                                        <form method="POST" action="{{route('author.history.index', $history->id)}}">
+                                        <form method="POST" action="{{route('author.history.delete', $history->id)}}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bookmark-remove-btn">
@@ -67,11 +67,15 @@
                                                 </svg>
                                             </button>
                                         </form>
-                                        <div class="article-preview__img"><a href="javascript:void(0)"><img src="{{asset("./images/image-20.png")}}" alt=""></a></div>
+                                        <div class="article-preview__img">
+                                            <a href="{{route('site.article', ['categorySlug' => $history->category->slug, 'articleSlug' => $history->slug])}}">
+                                                <img src="{{asset("./images/image-20.png")}}" alt="">
+                                            </a>
+                                        </div>
                                         <div class="article-preview__tags">
                                             <div class="hashtags">
                                                 @foreach($history->tags as $tag)
-                                                    <a href="javascript:void(0)">#{{$tag->name}}</a>
+                                                    <a href="{{route('site.articles-by-tag', ['tagSlug' => $tag->slug])}}">#{{$tag->name}}</a>
                                                 @endforeach
                                             </div>
                                         </div><a class="article-preview__caption" href="javascript:void(0)">{{$history->title}}</a>
@@ -79,7 +83,7 @@
                                         <div class="article-preview__info">
                                             <div class="article-preview__author">
                                                 <div class="article-preview__author-img"><img src="{{asset("./images/post-author-2.png")}}" alt="">
-                                                </div><a class="article-preview__author-name" href="javascript:void(0)">
+                                                </div><a class="article-preview__author-name" href="">
                                                     {{$history->user->username}}
                                                 </a>
                                             </div><span class="article-preview__reading">Читать {{$history->time_read}} мин</span>
