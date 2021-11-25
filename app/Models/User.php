@@ -58,7 +58,7 @@ class User extends Authenticatable
 
     //Relation for View History
     public function histories() {
-        return $this->belongsToMany(Articles::class, 'view_histories', 'user_id', 'article_id');
+        return $this->belongsToMany(Articles::class, 'view_histories', 'user_id', 'article_id')->orderBy('created_at', 'desc');
 
     }
 
