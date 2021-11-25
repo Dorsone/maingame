@@ -12,6 +12,12 @@ use Illuminate\Http\Request;
 
 class ViewHistoryController extends Controller
 {
+
+    public function __construct()
+    {
+
+    }
+
     /**
      * Display a listing of the resource.
      *

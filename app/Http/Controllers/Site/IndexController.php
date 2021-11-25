@@ -16,6 +16,7 @@ use App\Models\MainSlides;
 use App\Models\Search;
 use App\Models\SearchItems;
 use App\Models\User;
+use App\Models\ViewHistory;
 use App\Services\IndexingText;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -177,6 +178,15 @@ class IndexController extends Controller
             ->get();
 
         $breadcrumbs = $this->getBreadcrumbs($category, $article);
+
+        //view history
+        $check_history = ViewHistory::where('article_id', '=', $article->id)->first();
+        if(empty($check_history)){
+            $history = new ViewHistory();
+            $history->user_id = 1;
+            $history->article_id = $article->id;
+            $history->save();
+        }
 
         return view('gzone.pages.article', compact('article', 'category', 'breadcrumbs', 'recommendation'));
     }
