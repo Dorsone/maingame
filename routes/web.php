@@ -46,4 +46,5 @@ Route::post('register', [RegisterController::class, 'sendLetter'])->name('send.r
 Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('auth.steam');
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
 
-Route::get('view-history', [ViewHistoryController::class, 'index'])->name('site.view-history');
+Route::get('view-history', [ViewHistoryController::class, 'index'])->name('site.view-history.index');
+Route::delete('view-history/{history_id}', [ViewHistoryController::class, 'destroy'])->name('site.view-history.delete');

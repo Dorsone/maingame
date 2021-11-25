@@ -76,24 +76,37 @@
                                 </form>
                             </div>
                             <div class="account-my-bookmarks">
-                                <div class="article-preview">
-                                    <button class="bookmark-remove-btn">
-                                        <svg class="icon icon-close1 ">
-                                            <use xlink:href="./images/sprite-inline.svg#close1"></use>
-                                        </svg>
-                                    </button>
-                                    <div class="article-preview__img"><a href="javascript:void(0)"><img src="./images/image-20.png" alt=""></a></div>
-                                    <div class="article-preview__tags">
-                                        <div class="hashtags"><a href="javascript:void(0)">#WEPLAY! VIDEO</a><a href="javascript:void(0)">#DOTA 2</a></div>
-                                    </div><a class="article-preview__caption" href="javascript:void(0)">ODPixel - Techies (feat. BSJ) (Official Video)</a>
-                                    <p class="article-preview__text">Вигго, Мадс и другие киберспортивные тезки знаменитых актеров</p>
-                                    <div class="article-preview__info">
-                                        <div class="article-preview__author">
-                                            <div class="article-preview__author-img"><img src="./images/post-author-2.png" alt="">
-                                            </div><a class="article-preview__author-name" href="javascript:void(0)">Элизбар Рамазашвили</a>
-                                        </div><span class="article-preview__reading">Читать 1 мин</span>
+                                @foreach($histories as $history)
+
+                                    <div class="article-preview">
+                                        <form method="POST" action="{{route('site.view-history.delete', $history->id)}}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="bookmark-remove-btn">
+                                                <svg class="icon icon-close1 ">
+                                                    <use xlink:href="./images/sprite-inline.svg#close1"></use>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        <div class="article-preview__img"><a href="javascript:void(0)"><img src="./images/image-20.png" alt=""></a></div>
+                                        <div class="article-preview__tags">
+                                            <div class="hashtags">
+                                                @foreach($history->tags as $tag)
+                                                    <a href="javascript:void(0)">#{{$tag->name}}</a>
+                                                @endforeach
+                                            </div>
+                                        </div><a class="article-preview__caption" href="javascript:void(0)">{{$history->title}}</a>
+                                        <p class="article-preview__text">{{$history->content_preview}}</p>
+                                        <div class="article-preview__info">
+                                            <div class="article-preview__author">
+                                                <div class="article-preview__author-img"><img src="./images/post-author-2.png" alt="">
+                                                </div><a class="article-preview__author-name" href="javascript:void(0)">
+                                                    {{$history->user->username}}
+                                                </a>
+                                            </div><span class="article-preview__reading">Читать {{$history->time_read}} мин</span>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

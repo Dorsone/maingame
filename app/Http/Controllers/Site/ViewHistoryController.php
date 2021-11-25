@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\ViewHistory;
+use Backpack\CRUD\Tests\Unit\Models\Article;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 
 class ViewHistoryController extends Controller
@@ -10,11 +15,14 @@ class ViewHistoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return view('gzone.pages.view_history');
+        $histories = User::find(1)->histories;
+        return view('gzone.pages.view_history', [
+            'histories' => $histories,
+        ]);
     }
 
     /**
@@ -78,8 +86,10 @@ class ViewHistoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($history_id)
     {
-        //
+        ViewHistory::where('article_id', '=', $history_id)->delete();
+
+        return redirect()->route('site.view-history.index');
     }
 }
