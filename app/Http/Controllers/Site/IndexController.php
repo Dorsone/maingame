@@ -16,7 +16,7 @@ use App\Models\MainSlides;
 use App\Models\Search;
 use App\Models\SearchItems;
 use App\Models\User;
-use App\Models\ViewHistory;
+use App\Services\ViewHistoryService;
 use App\Services\IndexingText;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Cache;
 
 class IndexController extends Controller
 {
+
     public function index()
     {
         $slides = Cache::remember(MainSlides::CACHE_KEY, config('cache.ttl'), function () {
@@ -59,7 +60,6 @@ class IndexController extends Controller
     {
         return view('gzone.pages.tournament');
     }
-
 
     /**
      * @param string|null $slug
@@ -154,9 +154,8 @@ class IndexController extends Controller
         return view('gzone.pages.category', compact('category', 'articles', 'tags', 'breadcrumbs'));
     }
 
-    public function article($categorySlug, $articleSlug)
+    public function article($categorySlug, $articleSlug, ViewHistoryService $viewHistoryService)
     {
-
         $category = ArticlesCategories::where('slug', $categorySlug)
             ->where('active', 1)
             ->firstOrFail();
@@ -179,14 +178,10 @@ class IndexController extends Controller
 
         $breadcrumbs = $this->getBreadcrumbs($category, $article);
 
-        //view history
-        $check_history = ViewHistory::where('article_id', '=', $article->id)->first();
-        if(empty($check_history)){
-            $history = new ViewHistory();
-            $history->user_id = 1;
-            $history->article_id = $article->id;
-            $history->save();
-        }
+        /**
+         * Service for adding history
+         */
+        $viewHistoryService->addHistory($article->id);
 
         return view('gzone.pages.article', compact('article', 'category', 'breadcrumbs', 'recommendation'));
     }
@@ -230,7 +225,7 @@ class IndexController extends Controller
         $breadcrumbs = $this->getBreadcrumbs();
         $breadcrumbs[] = [
             'title' => $user->name,
-            'url' => route('site.author', ['id' => $user->id]),
+            'url' => route('author.index', ['id' => $user->id]),
             'current' => true
         ];
 

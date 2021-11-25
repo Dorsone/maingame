@@ -51,7 +51,7 @@
                             <div class="article__author-img">
                                 <img src="{{ asset($article->user->image) }}" alt=""/>
                             </div>
-                            <a class="article__author-name" href="{{ route('site.author', $article->user->id) }}">{{ $article->user->name }}</a>
+                            <a class="article__author-name" href="{{ route('author.index', $article->user->id) }}">{{ $article->user->name }}</a>
                         </div>
                         <span class="article__reading">Читать {{ $article->time_read }} мин</span>
                     </div>

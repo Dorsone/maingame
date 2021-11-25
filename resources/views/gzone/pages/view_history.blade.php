@@ -9,19 +9,19 @@
         @include('gzone.partials.side-sticky')
         <div class="container">
             <div class="back-link">
-                <div class="line"></div><a href="javascript:void(0)">Вернуться</a>
+                <div class="line"></div><a href="{{route('author.index', 1)}}">Вернуться</a>
             </div>
             <div class="container-md1">
                 <div class="account-info">
                     <div class="account-info-actions">
                         <button class="account-info-btn" type="button">
                             <svg class="icon icon-edit ">
-                                <use xlink:href="./images/sprite-inline.svg#edit"></use>
+                                <use xlink:href="{{asset("./images/sprite-inline.svg#edit")}}"></use>
                             </svg>Редактировать профиль
                         </button>
                         <button class="account-info-btn" type="button">
                             <svg class="icon icon-image ">
-                                <use xlink:href="./images/sprite-inline.svg#image"></use>
+                                <use xlink:href="{{asset("./images/sprite-inline.svg#image")}}"></use>
                             </svg>Изменить обложку
                         </button>
                     </div>
@@ -42,34 +42,14 @@
             <div class="container">
                 <div class="container-md1">
                     <div class="account-main">
-                        <div class="account-menu"><a class="account-menu-link" href="javascript:void(0)">
-                                <svg class="icon icon-bookmark ">
-                                    <use xlink:href="./images/sprite-inline.svg#bookmark"></use>
-                                </svg>Мои закладки</a><a class="account-menu-link account-menu-link--current" href="javascript:void(0)">
-                                <svg class="icon icon-calendar1 ">
-                                    <use xlink:href="./images/sprite-inline.svg#calendar1"></use>
-                                </svg>История просмотров</a><a class="account-menu-link" href="javascript:void(0)">
-                                <svg class="icon icon-category ">
-                                    <use xlink:href="./images/sprite-inline.svg#category"></use>
-                                </svg>Мои устройства</a><a class="account-menu-link account-menu-link--premium" href="javascript:void(0)">
-                                <svg class="icon icon-ticket ">
-                                    <use xlink:href="./images/sprite-inline.svg#ticket"></use>
-                                </svg>Премиум</a>
-                            <hr><a class="account-menu-link" href="javascript:void(0)">
-                                <svg class="icon icon-setting ">
-                                    <use xlink:href="./images/sprite-inline.svg#setting"></use>
-                                </svg>Настройки аккаунта</a><a class="account-menu-link" href="javascript:void(0)">
-                                <svg class="icon icon-logout ">
-                                    <use xlink:href="./images/sprite-inline.svg#logout"></use>
-                                </svg>Выйти</a>
-                        </div>
+                        @include('gzone.partials.account-menu')
                         <div class="account-content">
                             <div class="account-title-block">
                                 <h1 class="title-h3">История просмотров</h1>
                                 <form class="account-search-form" action="#">
                                     <button>
                                         <svg class="icon icon-search ">
-                                            <use xlink:href="./images/sprite-inline.svg#search"></use>
+                                            <use xlink:href="{{asset("./images/sprite-inline.svg#search")}}"></use>
                                         </svg>
                                     </button>
                                     <input type="text" placeholder="Что-то ищешь?">
@@ -77,18 +57,17 @@
                             </div>
                             <div class="account-my-bookmarks">
                                 @foreach($histories as $history)
-
                                     <div class="article-preview">
-                                        <form method="POST" action="{{route('site.view-history.delete', $history->id)}}">
+                                        <form method="POST" action="{{route('author.history.index', $history->id)}}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bookmark-remove-btn">
                                                 <svg class="icon icon-close1 ">
-                                                    <use xlink:href="./images/sprite-inline.svg#close1"></use>
+                                                    <use xlink:href="{{asset("./images/sprite-inline.svg#close1")}}"></use>
                                                 </svg>
                                             </button>
                                         </form>
-                                        <div class="article-preview__img"><a href="javascript:void(0)"><img src="./images/image-20.png" alt=""></a></div>
+                                        <div class="article-preview__img"><a href="javascript:void(0)"><img src="{{asset("./images/image-20.png")}}" alt=""></a></div>
                                         <div class="article-preview__tags">
                                             <div class="hashtags">
                                                 @foreach($history->tags as $tag)
@@ -99,7 +78,7 @@
                                         <p class="article-preview__text">{{$history->content_preview}}</p>
                                         <div class="article-preview__info">
                                             <div class="article-preview__author">
-                                                <div class="article-preview__author-img"><img src="./images/post-author-2.png" alt="">
+                                                <div class="article-preview__author-img"><img src="{{asset("./images/post-author-2.png")}}" alt="">
                                                 </div><a class="article-preview__author-name" href="javascript:void(0)">
                                                     {{$history->user->username}}
                                                 </a>

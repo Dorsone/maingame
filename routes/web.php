@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SteamController;
 use App\Http\Controllers\Site\LoginController;
-use App\Http\Controllers\Site\ViewHistoryController;
+use App\Http\Controllers\Site\AccountController;
 use App\Http\Controllers\Site;
 use App\Http\Controllers\Site\MailchimpController;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +25,6 @@ Route::get('tournament', [Site\IndexController::class, 'tournament'])->name('sit
 Route::get('categories/{slug?}', [Site\IndexController::class, 'categories'])->name('site.categories');
 Route::match(['get', 'post'],'category/{categorySlug}', [Site\IndexController::class, 'category'])->name('site.category');
 Route::get('category/{categorySlug}/{articleSlug}', [Site\IndexController::class, 'article'])->name('site.article');
-Route::match(['get', 'post'],'author/{id}', [Site\IndexController::class, 'author'])->name('site.author');
 Route::get('search', [Site\IndexController::class, 'search'])->name('site.search');
 Route::get('tag/{tagSlug}', [Site\IndexController::class, 'articlesByTag'])->name('site.articles-by-tag');
 
@@ -46,5 +45,8 @@ Route::post('register', [RegisterController::class, 'sendLetter'])->name('send.r
 Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('auth.steam');
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
 
-Route::get('view-history', [ViewHistoryController::class, 'index'])->name('site.view-history.index');
-Route::delete('view-history/{history_id}', [ViewHistoryController::class, 'destroy'])->name('site.view-history.delete');
+Route::group(['prefix' => 'author', 'as' => 'author.'], function () {
+    Route::get('history', [AccountController::class, 'index'])->name('history.index');
+    Route::match(['get', 'post'],'{id}', [Site\IndexController::class, 'author'])->name('index');
+    Route::delete('history/{history_id}', [AccountController::class, 'destroy'])->name('history.delete');
+});
