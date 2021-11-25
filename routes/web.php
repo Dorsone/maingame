@@ -28,12 +28,12 @@ Route::match(['get', 'post'],'author/{id}', [Site\IndexController::class, 'autho
 Route::get('search', [Site\IndexController::class, 'search'])->name('site.search');
 Route::get('tag/{tagSlug}', [Site\IndexController::class, 'articlesByTag'])->name('site.articles-by-tag');
 
-Route::post('add-comment', [IndexController::class, 'addComment'])->name('site.add-comment');
+Route::post('add-comment', [Site\IndexController::class, 'addComment'])->name('site.add-comment');
 Route::post('subscribe', [MailchimpController::class, 'subscribe'])->name('site.subscribe');
 
 Auth::routes();
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('site.login');
-Route::get('policy', [IndexController::class, 'policy'])->name('site.policy');
+Route::get('policy', [Site\IndexController::class, 'policy'])->name('site.policy');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('send/letter', [LoginController::class, 'sendLetterPage'])->name('send.letter');
 Route::post('recovery/letter', [LoginController::class, 'forgotPassword'])->name('recovery.letter');
