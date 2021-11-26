@@ -1,5 +1,9 @@
 @extends('gzone.layouts.main')
 
+@section('title')
+    {{$user->username}} - Profile
+@endsection
+
 @section('header')
     @include('gzone.partials.header-secondary')
 @endsection
@@ -31,8 +35,8 @@
                     <div class="account-info-desc">
                         <div class="account-info-avatar"></div>
                         <div class="account-info-name">
-                            <p>Mirror111</p>
-                            <div class="account-info-date">Играет с 21 июля 2021</div>
+                            <p>{{$user->username}}</p>
+                            <div class="account-info-date">Играет с {{$user->created_at->format('d M Y')}}</div>
                         </div>
                     </div>
                 </div>

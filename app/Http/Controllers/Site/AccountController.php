@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Articles;
+use App\Models\User;
 use App\Models\ViewHistory;
 use App\Services\ViewHistoryService;
 use Backpack\CRUD\Tests\Unit\Models\Article;
@@ -51,6 +52,8 @@ class AccountController extends Controller
      * @return Application|Factory|View
      */
     public function profile(){
-        return view('gzone.pages.user_profile');
+        return view('gzone.pages.user_profile', [
+            'user' => auth()->user(),
+        ]);
     }
 }
