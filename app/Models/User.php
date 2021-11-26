@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Models\Traits\setImageHelper;
+use Backpack\CRUD\Tests\Unit\Models\Article;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -53,6 +55,15 @@ class User extends Authenticatable
     public function articles()
     {
         return $this->hasMany(Articles::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return BelongsToMany
+     * Relation for View History
+     */
+    public function histories() {
+        return $this->belongsToMany(Articles::class, 'view_histories', 'user_id', 'article_id')->orderBy('created_at', 'desc');
+
     }
 
     public function getHowLongAgoAttribute($key)
