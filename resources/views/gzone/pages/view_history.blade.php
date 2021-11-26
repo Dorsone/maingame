@@ -9,7 +9,7 @@
         @include('gzone.partials.side-sticky')
         <div class="container">
             <div class="back-link">
-                <div class="line"></div><a href="{{route('author.index', 1)}}">Вернуться</a>
+                <div class="line"></div><a href="{{route('site.index')}}">Вернуться</a>
             </div>
             <div class="container-md1">
                 <div class="account-info">

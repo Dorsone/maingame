@@ -15,8 +15,8 @@ use Illuminate\Http\RedirectResponse;
 class AccountController extends Controller
 {
     /**
-     * AccountController constructor.
      * Checking Auth
+     * AccountController constructor.
      */
     public function __construct()
     {
@@ -24,9 +24,10 @@ class AccountController extends Controller
     }
 
     /**
+     * It`s a view of User`s history page
      * @return Application|Factory|View
      */
-    public function index()
+    public function history()
     {
         return view('gzone.pages.view_history', [
             'histories' => auth()->user()->histories
@@ -34,13 +35,22 @@ class AccountController extends Controller
     }
 
     /**
+     * It`s for destroying User`s history
      * @param $articles
      * @param ViewHistoryService $viewHistoryService
      * @return RedirectResponse
      */
-    public function destroy(Articles $articles, ViewHistoryService $viewHistoryService)
+    public function destroyHistory(Articles $articles, ViewHistoryService $viewHistoryService)
     {
         $viewHistoryService->deleteHistory($articles, auth()->user()->id);
         return redirect()->route('author.history.index');
+    }
+
+    /**
+     * Index page of User`s profile
+     * @return Application|Factory|View
+     */
+    public function profile(){
+        return view('gzone.pages.user_profile');
     }
 }
