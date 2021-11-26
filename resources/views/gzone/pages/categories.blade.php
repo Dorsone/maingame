@@ -7,37 +7,76 @@
 @section('content')
     <main class="media-page">
         @include('gzone.partials.side-sticky')
-        <div class="container-md2">
-            @include('gzone.partials.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
-        </div>
         @foreach($categories as $key => $category)
-            @switch($key)
-                @case(0)
-                    @include('gzone.partials.top-articles', ['category' => $category])
+            @php $isEven = ($key+1) % 2 == 0  @endphp
+            @if(!$isEven)
+                <div class="top-articles">
                     <div class="container">
-                    <div class="container-md2">
-                        <div class="event-banner">
-                            <div class="event-banner__content">
-                                <div class="event-banner__bg"><img src="{{asset('images/image-19.png')}}" alt=""/>
+                        @if($loop->first)
+                            @if(url()->previous())
+                                <div class="back-link">
+                                    <div class="line"></div>
+                                    <a href="{{ route('site.categories') }}">Вернуться</a>
                                 </div>
-                                <div class="event-banner__desc">
-                                    <p class="event-banner__caption title-h3">Врывайся в киберспорт</p>
-                                    <p class="event-banner__text">Участвуй в призовых турнирах по CS:GO, Dota 2, Dota Underlords
-                                        и TFT</p>
-                                    <button class="button">Играть</button>
+                            @endif
+                            <div class="container-md2">
+                                @include('gzone.partials.breadcrumbs')
+                            </div>
+                        @endif
+
+                        <div class="container-md2">
+                            @if($key == 2)
+                                <div class="subscribe-banner">
+                                    <div class="subscribe-banner__desc">
+                                        <div class="subscribe-banner__caption">
+                                            <svg class="icon icon-maingame ">
+                                                <use xlink:href="./images/sprite-inline.svg#maingame"></use>
+                                            </svg><span class="title-h3">Дайджест Maingame!</span>
+                                        </div>
+                                        <p class="subscribe-banner__text">Новости, лонгриды, мемасики – лучшее из мира киберспорта прямо у тебя в почте!</p>
+                                    </div>
+                                    <div class="subscribe-banner__form">
+                                        <form method="post"
+                                              data-success-block="footer-subscribe-done"
+                                              class="subscribe-form"
+                                              action="{{ route('site.subscribe') }}">
+                                            @csrf
+                                            <label class="subscribe-form__email-label" for="subscribe-email-banner">Email</label>
+                                            <div class="subscribe-form__banner-field">
+                                                <input class="subscribe-form__email-input" name="email" type="email" id="subscribe-email-banner" placeholder="Hideo_Kojima@mail.com"/>
+                                                <button class="subscribe-form__submit">Подписаться</button>
+                                            </div>
+                                            <div class="subscribe-form__agree">
+                                                <input type="checkbox" id="subscribe-checkbox-banner"/>
+                                                <label for="subscribe-checkbox-banner">Разрешаю обработку моих личных данных</label>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
+                            @endif
+                            <div class="top-articles-title">
+                                <h2 class="title-h2">{{ $category->title }}</h2><a class="button button_transp-hover" href="{{ route('site.category', $category->slug) }}">Узнать больше</a>
+                            </div>
+                            <div class="popular-articles__wrapper">
+                                @include('gzone.partials.articles', ['articles' => $category->articles->take(3)])
                             </div>
                         </div>
                     </div>
                 </div>
-                @break
-                @case(1)
-                    @include('gzone.partials.popular-articles', ['category' => $category])
-                @break
-                @case(2)
-                    @include('gzone.partials.news-feed', ['category' => $category])
-                @break
-            @endswitch
+                @continue
+            @endif
+            <div class="popular-articles">
+                <div class="container">
+                    <div class="container-md2">
+                        <div class="top-articles-title">
+                            <h2 class="title-h2">{{ $category->title }}</h2><a class="button button_transp-hover" href="{{ route('site.category', $category->slug) }}">Узнать больше</a>
+                        </div>
+                        <div class="popular-articles__wrapper">
+                            @include('gzone.partials.articles', ['articles' => $category->articles->take(3)])
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endforeach
 
         @include('gzone.partials.social-links')
