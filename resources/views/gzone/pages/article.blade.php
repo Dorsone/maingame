@@ -59,11 +59,11 @@
                                 </svg>
                                 <span>{{ $article->views }}</span>
                             </div>
-<<<<<<< HEAD
+
                             <a class="article__author-name" href="{{ route('author.index', $article->user->id) }}">{{ $article->user->name }}</a>
-=======
+
                             <span class="article__reading">Читать {{ $article->time_read }} мин</span>
->>>>>>> d90c9ffbc645cd12d10e7e7d0c289f4274a2739c
+
                         </div>
                         <div class="article__img" style="margin-bottom: 45px;">
                             <div class="article__img-wrapper">

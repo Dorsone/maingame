@@ -44,12 +44,9 @@ Route::post('register', [RegisterController::class, 'sendLetter'])->name('send.r
 
 Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('auth.steam');
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
-<<<<<<< HEAD
 
 Route::group(['prefix' => 'author', 'as' => 'author.'], function () {
     Route::delete('history/{articles}', [AccountController::class, 'destroy'])->name('history.delete');
     Route::get('history', [AccountController::class, 'index'])->name('history.index');
     Route::match(['get', 'post'],'{id}', [Site\IndexController::class, 'author'])->name('index');
 });
-=======
->>>>>>> d90c9ffbc645cd12d10e7e7d0c289f4274a2739c
