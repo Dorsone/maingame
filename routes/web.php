@@ -28,12 +28,12 @@ Route::get('category/{categorySlug}/{articleSlug}', [Site\IndexController::class
 Route::get('search', [Site\IndexController::class, 'search'])->name('site.search');
 Route::get('tag/{tagSlug}', [Site\IndexController::class, 'articlesByTag'])->name('site.articles-by-tag');
 
-Route::post('add-comment', [IndexController::class, 'addComment'])->name('site.add-comment');
+Route::post('add-comment', [Site\IndexController::class, 'addComment'])->name('site.add-comment');
 Route::post('subscribe', [MailchimpController::class, 'subscribe'])->name('site.subscribe');
 
 Auth::routes();
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('site.login');
-Route::get('policy', [IndexController::class, 'policy'])->name('site.policy');
+Route::get('policy', [Site\IndexController::class, 'policy'])->name('site.policy');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('send/letter', [LoginController::class, 'sendLetterPage'])->name('send.letter');
 Route::post('recovery/letter', [LoginController::class, 'forgotPassword'])->name('recovery.letter');
@@ -44,9 +44,12 @@ Route::post('register', [RegisterController::class, 'sendLetter'])->name('send.r
 
 Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('auth.steam');
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
+<<<<<<< HEAD
 
 Route::group(['prefix' => 'author', 'as' => 'author.'], function () {
     Route::delete('history/{articles}', [AccountController::class, 'destroy'])->name('history.delete');
     Route::get('history', [AccountController::class, 'index'])->name('history.index');
     Route::match(['get', 'post'],'{id}', [Site\IndexController::class, 'author'])->name('index');
 });
+=======
+>>>>>>> d90c9ffbc645cd12d10e7e7d0c289f4274a2739c
