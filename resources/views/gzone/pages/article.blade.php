@@ -297,9 +297,8 @@
                 e.preventDefault();
                 let form = $(this)
                 let url = form.attr('action')
-                let successMessageBlock = form.attr('data-success-block')
+                let successMessageBlock = form.attr('data-success-block');
 
-                const data = $(  ) ? form.serialize();
                 $.ajax({
                     url: url,
                     data: form.serialize(),
