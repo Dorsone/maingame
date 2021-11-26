@@ -289,7 +289,7 @@
            $(this).hide();
            $(this).attr('id', 'answer-button')
            const formContainer = $(this).parent().after('<div class="comment-block comment-block--answear" id="answer-form"></div>').append();
-           $('#answer-form').append($('.js-send-form').clone().append('<input name="is_answer" type="hidden">'));
+           $('#answer-form').append($('.js-send-form').clone());
            formAction();
         });
         function formAction(){
