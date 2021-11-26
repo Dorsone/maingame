@@ -97,7 +97,7 @@
                                     <p>{{ $comment->comment }}</p>
                                 </div>
                                 @auth
-{{--                                    <div class="comment-btn button button_transp-hover comment-item__answer">Ответить</div>--}}
+                                    <div class="comment-btn button button_transp-hover comment-item__answer">Ответить</div>
                                 @endauth
                             </div>
                             @if($comment->answer)
@@ -285,36 +285,48 @@
 
 @section('js')
     <script>
-        $('.js-send-form').on('submit', function (e) {
-            e.preventDefault();
-            let form = $(this)
-            let url = form.attr('action')
-            let successMessageBlock = form.attr('data-success-block')
-
-            $.ajax({
-                url: url,
-                data: form.serialize(),
-                type: form.attr('method'),
-                dataType: "json",
-                beforeSend: function () {
-                    if (typeof successMessageBlock !== 'undefined') {
-                        $('.' + successMessageBlock).hide();
-                    }
-                },
-                complete: function () {
-
-                },
-                error: function (jqXHR, exception) {
-                    console.log(jqXHR, exception)
-                },
-                success: function (response) {
-                    $('#message-box').show();
-                    setTimeout(function (){
-                        $('#message-box').slideUp();
-                    }, 4000);
-                    form.trigger("reset");
-                }
-            });
+        $('.comment-item__answer').on('click', function (){
+           $(this).hide();
+           $(this).attr('id', 'answer-button')
+           const formContainer = $(this).parent().after('<div class="comment-block comment-block--answear" id="answer-form"></div>').append();
+           $('#answer-form').append($('.js-send-form').clone().append('<input name="is_answer" type="hidden">'));
+           formAction();
         });
+        function formAction(){
+            $('.js-send-form').on('submit', function (e) {
+                e.preventDefault();
+                let form = $(this)
+                let url = form.attr('action')
+                let successMessageBlock = form.attr('data-success-block')
+
+                const data = $(  ) ? form.serialize();
+                $.ajax({
+                    url: url,
+                    data: form.serialize(),
+                    type: form.attr('method'),
+                    dataType: "json",
+                    beforeSend: function () {
+                        if (typeof successMessageBlock !== 'undefined') {
+                            $('.' + successMessageBlock).hide();
+                        }
+                    },
+                    complete: function () {
+
+                    },
+                    error: function (jqXHR, exception) {
+                        console.log(jqXHR, exception)
+                    },
+                    success: function (response) {
+                        $('#message-box').show();
+                        setTimeout(function (){
+                            $('#message-box').slideUp();
+                        }, 4000);
+                        form.trigger("reset");
+                        $('#answer-form').remove();
+                        $('#answer-button').show();
+                    }
+                });
+            });
+        }
     </script>
 @endsection
