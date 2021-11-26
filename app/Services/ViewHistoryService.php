@@ -30,12 +30,18 @@ class ViewHistoryService
 
     /**
      * It`s for deleting user`s histories from DB
-     * @param $historyId
+     * @param $articles
+     * @param $userId
      * @return string
      */
-    public function deleteHistory($historyId) {
-        ViewHistory::where('article_id', '=', $historyId)->delete();
-        return 'Success deleted';
+    public function deleteHistory($articles, $userId) {
+        $history = ViewHistory::where('article_id', '=', $articles->id)->first();
+        if($history->user_id == $userId){
+            $history->delete();
+            return 'Success deleted';
+        }else {
+            return view('errors.404');
+        }
     }
 
 }

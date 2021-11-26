@@ -46,7 +46,7 @@ Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('aut
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
 
 Route::group(['prefix' => 'author', 'as' => 'author.'], function () {
-    Route::delete('history/{history_id}', [AccountController::class, 'destroy'])->name('history.delete');
+    Route::delete('history/{articles}', [AccountController::class, 'destroy'])->name('history.delete');
     Route::get('history', [AccountController::class, 'index'])->name('history.index');
     Route::match(['get', 'post'],'{id}', [Site\IndexController::class, 'author'])->name('index');
 });

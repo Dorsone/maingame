@@ -69,7 +69,7 @@
                                         </form>
                                         <div class="article-preview__img">
                                             <a href="{{route('site.article', ['categorySlug' => $history->category->slug, 'articleSlug' => $history->slug])}}">
-                                                <img src="{{asset("./images/image-20.png")}}" alt="">
+                                                <img src="{{asset($history->image)}}" alt="">
                                             </a>
                                         </div>
                                         <div class="article-preview__tags">
@@ -78,12 +78,12 @@
                                                     <a href="{{route('site.articles-by-tag', ['tagSlug' => $tag->slug])}}">#{{$tag->name}}</a>
                                                 @endforeach
                                             </div>
-                                        </div><a class="article-preview__caption" href="javascript:void(0)">{{$history->title}}</a>
+                                        </div><a class="article-preview__caption" href="{{route('site.article', ['categorySlug' => $history->category->slug, 'articleSlug' => $history->slug])}}">{{$history->title}}</a>
                                         <p class="article-preview__text">{{$history->content_preview}}</p>
                                         <div class="article-preview__info">
                                             <div class="article-preview__author">
-                                                <div class="article-preview__author-img"><img src="{{asset("./images/post-author-2.png")}}" alt="">
-                                                </div><a class="article-preview__author-name" href="">
+                                                <div class="article-preview__author-img"><img src="{{asset($history->user->image)}}" alt="">
+                                                </div><a class="article-preview__author-name" href="{{route('author.index', $history->user->id)}}">
                                                     {{$history->user->username}}
                                                 </a>
                                             </div><span class="article-preview__reading">Читать {{$history->time_read}} мин</span>

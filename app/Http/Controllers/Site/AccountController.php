@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Articles;
+use App\Models\ViewHistory;
 use App\Services\ViewHistoryService;
+use Backpack\CRUD\Tests\Unit\Models\Article;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -31,13 +34,13 @@ class AccountController extends Controller
     }
 
     /**
-     * @param $history_id
+     * @param $articles
      * @param ViewHistoryService $viewHistoryService
      * @return RedirectResponse
      */
-    public function destroy($history_id, ViewHistoryService $viewHistoryService)
+    public function destroy(Articles $articles, ViewHistoryService $viewHistoryService)
     {
-        $viewHistoryService->deleteHistory($history_id);
+        $viewHistoryService->deleteHistory($articles, auth()->user()->id);
         return redirect()->route('author.history.index');
     }
 }
