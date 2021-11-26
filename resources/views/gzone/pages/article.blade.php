@@ -24,10 +24,8 @@
                     <a href="{{ route('site.categories') }}">Вернуться</a>
                 </div>
             @endif
-            <div class="container-md2">
-                @include('gzone.partials.breadcrumbs')
-            </div>
             <div class="container-sm">
+                @include('gzone.partials.breadcrumbs')
                 <div class="article-page-inner">
                     <div class="text">
                         <div class="article__tags">
