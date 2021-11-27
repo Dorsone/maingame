@@ -5,10 +5,10 @@ namespace App\Services;
 use App\Models\ViewHistory;
 
 /**
- * Class ViewHistoryService
+ * Class AccountService
  * @package App\Services
  */
-class ViewHistoryService
+class AccountService
 {
 
     /**
@@ -41,6 +41,18 @@ class ViewHistoryService
             return 'Success deleted';
         }else {
             return view('errors.404');
+        }
+    }
+
+    public function storeCover($request) {
+        $user = auth()->user();
+        if($request->hasFile('userCoverFile')){
+            if(empty(auth()->user()->getMedia('covers')[0])){
+                $user->addMedia($request->userCoverFile)->toMediaCollection('covers');
+            }else{
+                $user->getMedia('covers')[0]->delete();
+                $user->addMedia($request->userCoverFile)->toMediaCollection('covers');
+            }
         }
     }
 

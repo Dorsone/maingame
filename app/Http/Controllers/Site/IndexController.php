@@ -16,7 +16,7 @@ use App\Models\MainSlides;
 use App\Models\Search;
 use App\Models\SearchItems;
 use App\Models\User;
-use App\Services\ViewHistoryService;
+use App\Services\AccountService;
 use App\Services\IndexingText;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -154,7 +154,7 @@ class IndexController extends Controller
         return view('gzone.pages.category', compact('category', 'articles', 'tags', 'breadcrumbs'));
     }
 
-    public function article($categorySlug, $articleSlug, ViewHistoryService $viewHistoryService)
+    public function article($categorySlug, $articleSlug, AccountService $viewHistoryService)
     {
         $category = ArticlesCategories::where('slug', $categorySlug)
             ->where('active', 1)

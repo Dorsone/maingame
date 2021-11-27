@@ -23,14 +23,22 @@
                                 <use xlink:href="{{asset("./images/sprite-inline.svg#edit")}}"></use>
                             </svg>Редактировать профиль
                         </button>
-                        <button class="account-info-btn" type="button">
-                            <svg class="icon icon-image ">
-                                <use xlink:href="{{asset("./images/sprite-inline.svg#image")}}"></use>
-                            </svg>Изменить обложку
-                        </button>
+                        <form action="{{route('profile.cover.store')}}" enctype="multipart/form-data" method="post">
+                            @csrf
+                            @method('PUT')
+                            <span class="account-info-btn">
+                                <input type="file" name="userCoverFile" onchange="this.form.submit()">
+                                    <svg class="icon icon-image">
+                                        <use xlink:href="{{asset("./images/sprite-inline.svg#image")}}"></use>
+                                    </svg>Изменить обложку
+                                </input>
+                            </span>
+                        </form>
                     </div>
                     <div class="account-info-cover">
-                        <img src="{{asset("./images/arena-main-bg.png")}}" alt="">
+                        @if (isset($media))
+                            <img src="{{$media->getUrl()}}" alt="">
+                        @endif
                     </div>
                     <div class="account-info-desc">
                         <div class="account-info-avatar"></div>
