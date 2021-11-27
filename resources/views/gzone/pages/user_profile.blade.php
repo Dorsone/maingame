@@ -27,7 +27,7 @@
                             @csrf
                             @method('PUT')
                             <span class="account-info-btn">
-                                <input type="file" name="userCoverFile" onchange="this.form.submit()">
+                                <input accept=".jpg,.jpeg,.png" type="file" name="userCoverFile" onchange="this.form.submit()">
                                     <svg class="icon icon-image">
                                         <use xlink:href="{{asset("./images/sprite-inline.svg#image")}}"></use>
                                     </svg>Изменить обложку

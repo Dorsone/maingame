@@ -3,16 +3,13 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CoverImageRequest;
 use App\Models\Articles;
 use App\Services\AccountService;
-use http\Client\Curl\User;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class AccountController extends Controller
 {
@@ -68,11 +65,11 @@ class AccountController extends Controller
 
     /**
      * It`s for editing User`s cover
-     * @param Request $request
+     * @param CoverImageRequest $request
      * @param AccountService $accountService
      * @return void
      */
-    public function userCoverStore(Request $request, AccountService $accountService)
+    public function userCoverStore(CoverImageRequest $request, AccountService $accountService)
     {
         $accountService->storeCover($request);
         return redirect()->route('profile.index');
