@@ -49,7 +49,7 @@
                             <div class="article__author">
                                 <div class="article__author-img"><img src="{{ asset($article->user->image) }}" alt=""/>
                                 </div>
-                                <a class="article__author-name" href="{{ route('site.author', $article->user->id) }}">{{ $article->user->name }}</a>
+                                <a class="article__author-name" href="{{ route('author.index', $article->user->id) }}">{{ $article->user->name }}</a>
                             </div>
                             <div class="see">
                                 <svg class="icon icon-eye ">
@@ -57,7 +57,11 @@
                                 </svg>
                                 <span>{{ $article->views }}</span>
                             </div>
+
+                            <a class="article__author-name" href="{{ route('author.index', $article->user->id) }}">{{ $article->user->name }}</a>
+
                             <span class="article__reading">Читать {{ $article->time_read }} мин</span>
+
                         </div>
                         <div class="article__img" style="margin-bottom: 45px;">
                             <div class="article__img-wrapper">
@@ -200,7 +204,7 @@
                                 <div class="article-preview__author">
                                     <div class="article-preview__author-img"><img src="{{ asset($recomm->user->image) }}" alt=""/>
                                     </div>
-                                    <a class="article-preview__author-name" href="{{ route('site.author', $recomm->user->id) }}">{{ $recomm->user->name }}</a>
+                                    <a class="article-preview__author-name" href="{{ route('author.index', $recomm->user->id) }}">{{ $recomm->user->name }}</a>
                                 </div>
                                 <span class="article-preview__reading">Читать {{ $recomm->time_read }} мин</span>
                             </div>

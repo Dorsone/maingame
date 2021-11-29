@@ -107,7 +107,7 @@
                                             <img src="{{ asset($article->user->image) }}" alt=""/>
                                         </div>
                                         <a class="article-preview__author-name"
-                                           href="{{ route('site.author', $article->user->id) }}">{{ $article->user->name }}</a>
+                                           href="{{ route('author.index', $article->user->id) }}">{{ $article->user->name }}</a>
                                     </div>
                                     @if($article->time_read)
                                         <span
