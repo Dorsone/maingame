@@ -58,8 +58,21 @@
                                 <h2 class="title-h2">{{ $category->title }}</h2><a class="button button_transp-hover" href="{{ route('site.category', $category->slug) }}">Узнать больше</a>
                             </div>
                             <div class="popular-articles__wrapper">
-                                @include('gzone.partials.articles', ['articles' => $category->articles->take(3)])
+                                @include('gzone.partials.articles', ['articles' => $category->articles->take(3), 'withAuthor' => $loop->first ? false : true])
                             </div>
+                            @if($loop->first)
+                                    <div class="event-banner">
+                                        <div class="event-banner__content">
+                                            <div class="event-banner__bg"><img src="{{ asset('images/image-19.png') }}" alt=""/>
+                                            </div>
+                                            <div class="event-banner__desc">
+                                                <p class="event-banner__caption title-h3">Врывайся в киберспорт</p>
+                                                <p class="event-banner__text">Участвуй в призовых турнирах по CS:GO, Dota 2, Dota Underlords и TFT</p>
+                                                <button class="button">Играть</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                            @endif
                         </div>
                     </div>
                 </div>
