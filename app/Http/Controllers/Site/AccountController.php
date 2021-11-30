@@ -10,6 +10,8 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class AccountController extends Controller
 {
@@ -41,7 +43,7 @@ class AccountController extends Controller
      */
     public function destroyHistory(Articles $articles, AccountService $viewHistoryService)
     {
-        $viewHistoryService->deleteHistory($articles, auth()->user()->id);
+        $viewHistoryService->deleteHistory($articles, auth()->user());
         return redirect()->route('author.history.index');
     }
 
@@ -67,7 +69,9 @@ class AccountController extends Controller
      * It`s for editing User`s cover
      * @param CoverImageRequest $request
      * @param AccountService $accountService
-     * @return void
+     * @return RedirectResponse
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function userCoverStore(CoverImageRequest $request, AccountService $accountService)
     {

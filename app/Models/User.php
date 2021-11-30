@@ -3,8 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\setImageHelper;
-use Backpack\CRUD\Tests\Unit\Models\Article;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,8 +13,10 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class User extends Authenticatable implements HasMedia
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+    use CrudTrait;
     use HasFactory, Notifiable, setImageHelper, InteractsWithMedia;
+
+    const COVER_IMAGE_COLLECTION = 'covers';
 
     /**
      * The attributes that are mass assignable.

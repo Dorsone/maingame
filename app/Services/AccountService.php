@@ -2,7 +2,11 @@
 
 
 namespace App\Services;
+
+use App\Models\User;
 use App\Models\ViewHistory;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 /**
  * Class AccountService
@@ -31,12 +35,12 @@ class AccountService
     /**
      * It`s for deleting user`s histories from DB
      * @param $articles
-     * @param $userId
+     * @param $user
      * @return string
      */
-    public function deleteHistory($articles, $userId) {
+    public function deleteHistory($articles, $user) {
         $history = ViewHistory::where('article_id', '=', $articles->id)->first();
-        if($history->user_id == $userId){
+        if($history->user_id == $user->id){
             $history->delete();
             return 'Success deleted';
         }else {
@@ -44,16 +48,15 @@ class AccountService
         }
     }
 
+    /**
+     * It`s for adding the cover to DB
+     * @param $request
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
     public function storeCover($request) {
-        $user = auth()->user();
-        if($request->hasFile('userCoverFile')){
-            if(empty(auth()->user()->getMedia('covers')[0])){
-                $user->addMedia($request->userCoverFile)->toMediaCollection('covers');
-            }else{
-                $user->getMedia('covers')[0]->delete();
-                $user->addMedia($request->userCoverFile)->toMediaCollection('covers');
-            }
-        }
+        auth()->user()->clearMediaCollection(User::COVER_IMAGE_COLLECTION);
+        auth()->user()->addMedia($request->userCoverFile)->toMediaCollection(User::COVER_IMAGE_COLLECTION);
     }
 
 }
