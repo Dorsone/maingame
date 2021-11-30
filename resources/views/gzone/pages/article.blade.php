@@ -246,7 +246,7 @@
                                 <div class="section-aside__item">
                                     <div class="news-info">
                                         <div class="news-info__bg-img"><img src="{{ asset($sideItem->image) }}" alt=""/>
-                                        </div><a href="{{ route('site.article', ['categorySlug' => $sideItem->category->slug, 'articleSlug' => $sideItem->slug]) }}"></a>
+                                        </div>
                                         <div class="news-info__main">
                                             <div class="news-info__top">
                                                 <div class="hashtags">
@@ -260,7 +260,7 @@
                                                     </svg>
                                                 </div>
                                             </div>
-                                            <p class="news-info__caption">{{ $sideItem->title }}</p>
+                                            <a href="{{ route('site.article', ['categorySlug' => $sideItem->category->slug, 'articleSlug' => $sideItem->slug]) }}" class="news-info__caption">{{ $sideItem->title }}</a>
                                             <div class="news-info__bottom"><span class="news-info__date">{{ $sideItem->created_at->format('d M. Y') }}</span>
                                                 @if($article->time_read)
                                                     <span class="article-info__reading">Читать {{ $article->time_read }} мин</span>
