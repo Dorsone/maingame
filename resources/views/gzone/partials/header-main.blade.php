@@ -49,7 +49,7 @@
             </div>
             <div class="header__user-menu user-menu">
                 <ul>
-                    <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
+                    <li><a class="user-menu__nav-item user-menu__nav-item_link" href="{{route('profile.index')}}"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-profile ">
                   <use xlink:href="./images/sprite-inline.svg#profile"></use>
                 </svg></span>Игровой профиль</a></li>

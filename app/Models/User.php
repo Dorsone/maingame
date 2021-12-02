@@ -3,17 +3,20 @@
 namespace App\Models;
 
 use App\Models\Traits\setImageHelper;
-use Backpack\CRUD\Tests\Unit\Models\Article;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
-    use HasFactory, Notifiable, setImageHelper;
+    use CrudTrait;
+    use HasFactory, Notifiable, setImageHelper, InteractsWithMedia;
+
+    const COVER_IMAGE_COLLECTION = 'covers';
 
     /**
      * The attributes that are mass assignable.
@@ -63,7 +66,6 @@ class User extends Authenticatable
      */
     public function histories() {
         return $this->belongsToMany(Articles::class, 'view_histories', 'user_id', 'article_id')->orderBy('created_at', 'desc');
-
     }
 
     public function getHowLongAgoAttribute($key)
