@@ -23,7 +23,7 @@
                                 <use xlink:href="{{asset("./images/sprite-inline.svg#edit")}}"></use>
                             </svg>Редактировать профиль
                         </button>
-                        <form action="{{route('profile.cover.store')}}" enctype="multipart/form-data" method="post">
+                        <form action="{{route('profile.cover.store', auth()->user()->id)}}" enctype="multipart/form-data" method="post">
                             @csrf
                             @method('PUT')
                             <span class="account-info-btn">

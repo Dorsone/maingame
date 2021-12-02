@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CoverImageRequest;
 use App\Models\Articles;
+use App\Models\User;
 use App\Services\AccountService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -67,15 +68,15 @@ class AccountController extends Controller
 
     /**
      * It`s for editing User`s cover
-     * @param CoverImageRequest $request
      * @param AccountService $accountService
+     * @param User $user
      * @return RedirectResponse
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function userCoverStore(CoverImageRequest $request, AccountService $accountService)
+    public function userCoverStore(AccountService $accountService, User $user)
     {
-        $accountService->storeCover($request);
+        $accountService->storeCover($user);
         return redirect()->route('profile.index');
     }
 }

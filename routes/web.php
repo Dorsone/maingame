@@ -53,5 +53,5 @@ Route::group(['prefix' => 'author', 'as' => 'author.'], function () {
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
     Route::get('', [AccountController::class, 'profile'])->name('index');
-    Route::put('/cover/store', [AccountController::class, 'userCoverStore'])->name('cover.store');
+    Route::put('/cover/store/{user}', [AccountController::class, 'userCoverStore'])->name('cover.store');
 });

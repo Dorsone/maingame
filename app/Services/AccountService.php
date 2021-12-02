@@ -50,13 +50,13 @@ class AccountService
 
     /**
      * It`s for adding the cover to DB
-     * @param $request
+     * @param User $user
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function storeCover($request) {
-        auth()->user()->clearMediaCollection(User::COVER_IMAGE_COLLECTION);
-        auth()->user()->addMedia($request->userCoverFile)->toMediaCollection(User::COVER_IMAGE_COLLECTION);
+    public function storeCover($user) {
+        $user->clearMediaCollection(User::COVER_IMAGE_COLLECTION);
+        $user->addMediaFromRequest('userCoverFile')->toMediaCollection(User::COVER_IMAGE_COLLECTION);
     }
 
 }
