@@ -24,10 +24,8 @@
                     <a href="{{ route('site.categories') }}">Вернуться</a>
                 </div>
             @endif
-            <div class="container-md2">
-                @include('gzone.partials.breadcrumbs')
-            </div>
             <div class="container-sm">
+                @include('gzone.partials.breadcrumbs')
                 <div class="article-page-inner">
                     <div class="text">
                         <div class="article__tags">
@@ -101,7 +99,7 @@
                                     <p>{{ $comment->comment }}</p>
                                 </div>
                                 @auth
-{{--                                    <div class="comment-btn button button_transp-hover comment-item__answer">Ответить</div>--}}
+                                    <div class="comment-btn button button_transp-hover comment-item__answer">Ответить</div>
                                 @endauth
                             </div>
                             @if($comment->answer)
@@ -215,6 +213,72 @@
                     </div>
             </div>
             @endif
+            <div class="container-sm">
+                    <div class="subscribe-banner">
+                        <div class="subscribe-banner__top">
+                            <div class="subscribe-banner__desc">
+                                <div class="subscribe-banner__caption"><span class="title-h3">Дайджест Maingame!</span></div>
+                                <p class="subscribe-banner__text">Новости, лонгриды, мемасики – лучшее из мира киберспорта прямо у тебя в почте!</p>
+                            </div>
+                            <div class="subscribe-banner__icon">
+                                <svg class="icon icon-maingame ">
+                                    <use xlink:href="./images/sprite-inline.svg#maingame"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="subscribe-banner__form">
+                            <form class="subscribe-form">
+                                <label class="subscribe-form__email-label" for="subscribe-email-banner">Email</label>
+                                <div class="subscribe-form__banner-field">
+                                    <input class="subscribe-form__email-input" type="email" id="subscribe-email-banner" placeholder="Hideo_Kojima@mail.com"/>
+                                    <button class="subscribe-form__submit">Подписаться</button>
+                                </div>
+                                <div class="subscribe-form__agree">
+                                    <input type="checkbox" id="subscribe-checkbox-banner"/>
+                                    <label for="subscribe-checkbox-banner">Разрешаю обработку моих личных данных</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <aside class="section-aside">
+                        <div class="section-aside__items">
+                            @foreach($article->category->articles->where('id', '!=', $article->id)->take(3) as $sideItem)
+                                <div class="section-aside__item">
+                                    <div class="news-info">
+                                        <div class="news-info__bg-img"><img src="{{ asset($sideItem->image) }}" alt=""/>
+                                        </div>
+                                        <div class="news-info__main">
+                                            <div class="news-info__top">
+                                                <div class="hashtags">
+                                                    @foreach($article->tags as $tag)
+                                                        <a href="javascript:void(0)" class="{{ $tag->color_class }}">#{{ $tag->name }}</a>
+                                                    @endforeach
+                                                </div>
+                                                <div class="news-info__action bookmark">
+                                                    <svg class="icon icon-mark ">
+                                                        <use xlink:href="{{ asset('images/sprite-inline.svg#mark') }}"></use>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <a href="{{ route('site.article', ['categorySlug' => $sideItem->category->slug, 'articleSlug' => $sideItem->slug]) }}" class="news-info__caption">{{ $sideItem->title }}</a>
+                                            <div class="news-info__bottom"><span class="news-info__date">{{ $sideItem->created_at->format('d M. Y') }}</span>
+                                                @if($article->time_read)
+                                                    <span class="article-info__reading">Читать {{ $article->time_read }} мин</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <div class="section-aside__item section-aside__item_show-md">
+                                <div class="news-info news-info_coming">
+                                    <div class="hashtags"><a href="javascript:void(0)">#Next article</a></div>
+                                    <p>Coming soon...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
         </div>
         @include('gzone.partials.social-links')
     </main>
@@ -223,36 +287,47 @@
 
 @section('js')
     <script>
-        $('.js-send-form').on('submit', function (e) {
-            e.preventDefault();
-            let form = $(this)
-            let url = form.attr('action')
-            let successMessageBlock = form.attr('data-success-block')
-
-            $.ajax({
-                url: url,
-                data: form.serialize(),
-                type: form.attr('method'),
-                dataType: "json",
-                beforeSend: function () {
-                    if (typeof successMessageBlock !== 'undefined') {
-                        $('.' + successMessageBlock).hide();
-                    }
-                },
-                complete: function () {
-
-                },
-                error: function (jqXHR, exception) {
-                    console.log(jqXHR, exception)
-                },
-                success: function (response) {
-                    $('#message-box').show();
-                    setTimeout(function (){
-                        $('#message-box').slideUp();
-                    }, 4000);
-                    form.trigger("reset");
-                }
-            });
+        $('.comment-item__answer').on('click', function (){
+           $(this).hide();
+           $(this).attr('id', 'answer-button')
+           const formContainer = $(this).parent().after('<div class="comment-block comment-block--answear" id="answer-form"></div>').append();
+           $('#answer-form').append($('.js-send-form').clone());
+           formAction();
         });
+        function formAction(){
+            $('.js-send-form').on('submit', function (e) {
+                e.preventDefault();
+                let form = $(this)
+                let url = form.attr('action')
+                let successMessageBlock = form.attr('data-success-block');
+
+                $.ajax({
+                    url: url,
+                    data: form.serialize(),
+                    type: form.attr('method'),
+                    dataType: "json",
+                    beforeSend: function () {
+                        if (typeof successMessageBlock !== 'undefined') {
+                            $('.' + successMessageBlock).hide();
+                        }
+                    },
+                    complete: function () {
+
+                    },
+                    error: function (jqXHR, exception) {
+                        console.log(jqXHR, exception)
+                    },
+                    success: function (response) {
+                        $('#message-box').show();
+                        setTimeout(function (){
+                            $('#message-box').slideUp();
+                        }, 4000);
+                        form.trigger("reset");
+                        $('#answer-form').remove();
+                        $('#answer-button').show();
+                    }
+                });
+            });
+        }
     </script>
 @endsection
