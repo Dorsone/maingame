@@ -39,7 +39,7 @@ class AccountService
      * @return string
      */
     public function deleteHistory($articles, $user) {
-        $user->history($articles->id)->detach();
+        $user->histories()->detach($articles->id);
     }
 
     /**
