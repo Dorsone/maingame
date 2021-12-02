@@ -39,13 +39,7 @@ class AccountService
      * @return string
      */
     public function deleteHistory($articles, $user) {
-        $history = ViewHistory::where('article_id', '=', $articles->id)->first();
-        if($history->user_id == $user->id){
-            $history->delete();
-            return 'Success deleted';
-        }else {
-            return view('errors.404');
-        }
+        $user->history($articles->id)->detach();
     }
 
     /**

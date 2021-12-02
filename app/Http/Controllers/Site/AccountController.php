@@ -54,14 +54,10 @@ class AccountController extends Controller
      */
     public function profile()
     {
-        if(isset(auth()->user()->getMedia('covers')[0])){
-            $media = auth()->user()->getMedia('covers')[0];
-        }else{
-            $media = null;
-        }
+        $cover = auth()->user()->getMedia(User::COVER_IMAGE_COLLECTION)->first();
         return view('gzone.pages.user_profile', [
             'user' => auth()->user(),
-            'media' => $media,
+            'cover' => $cover ? $cover->getUrl() : '',
         ]);
     }
 

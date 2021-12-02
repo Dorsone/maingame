@@ -36,9 +36,7 @@
                         </form>
                     </div>
                     <div class="account-info-cover">
-                        @if (isset($media))
-                            <img src="{{$media->getUrl()}}" alt="">
-                        @endif
+                        <img src="{{$cover}}" alt="cover image">
                     </div>
                     <div class="account-info-desc">
                         <div class="account-info-avatar"></div>
