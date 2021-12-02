@@ -3052,6 +3052,7 @@
                 }
             ],
             "time": "2021-11-21T11:48:40+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "maennchen/zipstream-php",
@@ -3123,6 +3124,8 @@
                 }
             ],
             "time": "2020-05-30T13:11:16+00:00"
+=======
+>>>>>>> ef356603d101b6f62ed9f2a2ba64b895dedfbe9b
         },
         {
             "name": "mailchimp/marketing",
