@@ -3,17 +3,25 @@
 namespace App\Models;
 
 use App\Models\Traits\setImageHelper;
-use Backpack\CRUD\Tests\Unit\Models\Article;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class User extends Authenticatable
+/**
+ * Class User
+ * @package App\Models
+ */
+class User extends Authenticatable implements HasMedia
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+    use CrudTrait;
     use HasFactory, Notifiable, setImageHelper;
+    use HasMediaTrait;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -26,10 +34,13 @@ class User extends Authenticatable
         'surname',
         'email',
         'password',
-        'steamid',
+        'steam_id',
         'image',
         'description',
-        'interests'
+        'interests',
+        'gender',
+        'birth_date',
+        'country'
     ];
 
     /**

@@ -22,8 +22,12 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string("steam_id")->nullable();
+            $table->string("gender")->default("male");
+            $table->string("birth_date")->nullable();
+            $table->string("country")->nullable();
             $table->timestamps();
-            $table->string("steamid")->nullable();
+            $table->softDeletes();
         });
     }
 
