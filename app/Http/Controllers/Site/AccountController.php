@@ -39,12 +39,12 @@ class AccountController extends Controller
     /**
      * It`s for destroying User`s history
      * @param $articles
-     * @param AccountService $viewHistoryService
+     * @param AccountService $accountService
      * @return RedirectResponse
      */
-    public function destroyHistory(Articles $articles, AccountService $viewHistoryService)
+    public function destroyHistory(Articles $articles, AccountService $accountService)
     {
-        $viewHistoryService->deleteHistory($articles, auth()->user());
+        $accountService->deleteHistory($articles, auth()->user());
         return redirect()->route('author.history.index');
     }
 
@@ -74,6 +74,28 @@ class AccountController extends Controller
     {
         $accountService->storeCover($user);
         return redirect()->route('profile.index');
+    }
+
+    /**
+     * Index page of User`s page
+     * @return Application|Factory|View
+     */
+    public function bookmarks() {
+        return view('gzone.pages.bookmarks', [
+            'bookmarks' => auth()->user()->bookmarks,
+            'articles' => Articles::latest()->take(3)->get(),
+        ]);
+    }
+
+    /**
+     * Deleting Bookmark
+     * @param Articles $articles
+     * @param AccountService $accountService
+     * @return RedirectResponse
+     */
+    public function destroyBookmark(Articles $articles, AccountService $accountService) {
+        $accountService->deleteBookmark($articles, auth()->user());
+        return redirect()->route('author.bookmarks.index');
     }
 }
 

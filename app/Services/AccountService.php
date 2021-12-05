@@ -43,6 +43,15 @@ class AccountService
     }
 
     /**
+     * It`s for deleting user`s bookmarks from DB
+     * @param $articles
+     * @param $user
+     */
+    public function deleteBookmark($articles, $user) {
+        $user->bookmarks()->detach($articles->id);
+    }
+
+    /**
      * It`s for adding the cover to DB
      * @param User $user
      * @throws FileDoesNotExist
