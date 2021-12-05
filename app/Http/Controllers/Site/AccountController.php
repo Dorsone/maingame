@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CoverImageRequest;
 use App\Models\Articles;
 use App\Models\User;
 use App\Services\AccountService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -22,7 +22,7 @@ class AccountController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
     /**
@@ -84,6 +84,30 @@ class AccountController extends Controller
         return view('gzone.pages.bookmarks', [
             'bookmarks' => auth()->user()->bookmarks,
             'articles' => Articles::latest()->take(3)->get(),
+        ]);
+    }
+
+    /**
+     * @param Articles $articles
+     * @param AccountService $accountService
+     * @return JsonResponse
+     */
+    public function addBookmark(Articles $articles, AccountService $accountService) {
+        $accountService->storeBookmark($articles, auth()->user());
+        return response()->json([
+            'message' => 'Сохранено!',
+        ]);
+    }
+
+    /**
+     * @param Articles $articles
+     * @param AccountService $accountService
+     * @return JsonResponse
+     */
+    public function destroyBookmarkAjax(Articles $articles, AccountService $accountService) {
+        $accountService->deleteBookmark($articles, auth()->user());
+        return response()->json([
+            'message' => 'Удалено!',
         ]);
     }
 

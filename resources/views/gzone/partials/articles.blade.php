@@ -25,7 +25,13 @@
                         </svg>
                         <span>{{ $article->comments->count() }}</span>
                     </div>
-                    <div class="bookmark">
+                    <div onclick="bookmark({{$article->id}}, this)" class="bookmark
+                        @foreach ($article->bookmarks as $bookmark)
+                            @if($bookmark->user_id == auth()->user()->id)
+                                {{'add'}}
+                            @endif
+                        @endforeach
+                    ">
                         <svg class="icon icon-mark ">
                             <use xlink:href="{{ asset('images/sprite-inline.svg#mark') }}"></use>
                         </svg>

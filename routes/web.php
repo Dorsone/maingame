@@ -45,15 +45,17 @@ Route::post('register', [RegisterController::class, 'sendLetter'])->name('send.r
 Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('auth.steam');
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
 
-Route::group(['prefix' => 'author', 'as' => 'author.'], function () {
+Route::prefix('author')->middleware('auth')->name('author.')->group(function () {
     Route::get('bookmarks', [AccountController::class, 'bookmarks'])->name('bookmarks.index');
     Route::get('history', [AccountController::class, 'history'])->name('history.index');
+    Route::put('bookmark/store/{articles}', [AccountController::class, 'addBookmark'])->name('bookmark.store')->middleware('auth');
+    Route::delete('ajax/bookmarks/{articles}', [AccountController::class, 'destroyBookmarkAjax'])->name('ajax.bookmark.delete');
     Route::delete('bookmarks/{articles}', [AccountController::class, 'destroyBookmark'])->name('bookmark.delete');
     Route::delete('history/{articles}', [AccountController::class, 'destroyHistory'])->name('history.delete');
     Route::match(['get', 'post'],'{id}', [Site\IndexController::class, 'author'])->name('index');
 });
 
-Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+Route::prefix('profile')->middleware('auth')->name('profile.')->group(function () {
     Route::get('', [AccountController::class, 'profile'])->name('index');
     Route::put('/cover/store/{user}', [AccountController::class, 'userCoverStore'])->name('cover.store');
 });

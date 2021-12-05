@@ -49,6 +49,10 @@ class Articles extends Model
         return $this->belongsTo(ArticlesCategories::class, 'category_id', 'id');
     }
 
+    public function bookmarks() {
+        return $this->hasMany(UserBookmark::class, 'article_id', 'id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

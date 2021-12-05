@@ -34,6 +34,7 @@
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/datepicker-ru.js') }}"></script>
 <script src="{{ asset('js/jquery.overlayScrollbars.min.js') }}"></script>
+<script src="{{ asset('js/add-bookmark.js') }}"></script>
 @yield('js')
 <!-- REMOVE THIS SCRIPT \/ ON REAL SITE-->
 <script defer="defer" src="{{ asset('js/dev-js.js') }}"></script>
