@@ -30,8 +30,7 @@
                             @if($bookmark->user_id == auth()->user()->id)
                                 {{'add'}}
                             @endif
-                        @endforeach
-                    ">
+                        @endforeach">
                         <svg class="icon icon-mark ">
                             <use xlink:href="{{ asset('images/sprite-inline.svg#mark') }}"></use>
                         </svg>

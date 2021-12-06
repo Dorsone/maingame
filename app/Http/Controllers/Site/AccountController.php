@@ -17,15 +17,6 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 class AccountController extends Controller
 {
     /**
-     * Checking Auth
-     * AccountController constructor.
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
      * It`s a view of User`s history page
      * @return Application|Factory|View
      */
@@ -61,7 +52,6 @@ class AccountController extends Controller
         ]);
     }
 
-
     /**
      * It`s for editing User`s cover
      * @param AccountService $accountService
@@ -88,6 +78,7 @@ class AccountController extends Controller
     }
 
     /**
+     * Creating bookmarks
      * @param Articles $articles
      * @param AccountService $accountService
      * @return JsonResponse
@@ -100,6 +91,7 @@ class AccountController extends Controller
     }
 
     /**
+     * Deleting bookmarks with API request
      * @param Articles $articles
      * @param AccountService $accountService
      * @return JsonResponse
@@ -112,14 +104,14 @@ class AccountController extends Controller
     }
 
     /**
-     * Deleting Bookmark
+     * Basic deleting bookmarks
      * @param Articles $articles
      * @param AccountService $accountService
      * @return RedirectResponse
      */
     public function destroyBookmark(Articles $articles, AccountService $accountService) {
         $accountService->deleteBookmark($articles, auth()->user());
-        return redirect()->route('author.bookmarks.index');
+        return redirect()->route('author.bookmark.index');
     }
 }
 

@@ -45,16 +45,32 @@ Route::post('register', [RegisterController::class, 'sendLetter'])->name('send.r
 Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('auth.steam');
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
 
+/**
+ * Author routes
+ */
 Route::prefix('author')->middleware('auth')->name('author.')->group(function () {
-    Route::get('bookmarks', [AccountController::class, 'bookmarks'])->name('bookmarks.index');
-    Route::get('history', [AccountController::class, 'history'])->name('history.index');
-    Route::put('bookmark/store/{articles}', [AccountController::class, 'addBookmark'])->name('bookmark.store')->middleware('auth');
-    Route::delete('ajax/bookmarks/{articles}', [AccountController::class, 'destroyBookmarkAjax'])->name('ajax.bookmark.delete');
-    Route::delete('bookmarks/{articles}', [AccountController::class, 'destroyBookmark'])->name('bookmark.delete');
-    Route::delete('history/{articles}', [AccountController::class, 'destroyHistory'])->name('history.delete');
+    /**
+     * Bookmark routes
+     */
+    Route::group(['prefix' => 'bookmark', 'as' => 'bookmark.'], function () {
+        Route::get('', [AccountController::class, 'bookmarks'])->name('index');
+        Route::put('store/{articles}', [AccountController::class, 'addBookmark'])->name('store');
+        Route::delete('ajax/{articles}', [AccountController::class, 'destroyBookmarkAjax'])->name('ajax.delete');
+        Route::delete('{articles}', [AccountController::class, 'destroyBookmark'])->name('delete');
+    });
+    /**
+     * History routes
+     */
+    Route::group(['prefix' => 'history', 'as' => 'history.'], function () {
+        Route::get('', [AccountController::class, 'history'])->name('index');
+        Route::delete('{articles}', [AccountController::class, 'destroyHistory'])->name('delete');
+    });
+
     Route::match(['get', 'post'],'{id}', [Site\IndexController::class, 'author'])->name('index');
 });
-
+/**
+ * Profile routes
+ */
 Route::prefix('profile')->middleware('auth')->name('profile.')->group(function () {
     Route::get('', [AccountController::class, 'profile'])->name('index');
     Route::put('/cover/store/{user}', [AccountController::class, 'userCoverStore'])->name('cover.store');

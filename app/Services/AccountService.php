@@ -32,7 +32,6 @@ class AccountService
         return 'Success added';
     }
 
-
     /**
      * It`s for deleting user`s histories from DB
      * @param $articles
@@ -53,6 +52,7 @@ class AccountService
     }
 
     /**
+     * Store the bookmark
      * @param $article
      * @param $user
      */
