@@ -6,15 +6,22 @@ use App\Models\Traits\setImageHelper;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
+/**
+ * Class User
+ * @package App\Models
+ */
 class User extends Authenticatable implements HasMedia
 {
     use CrudTrait;
-    use HasFactory, Notifiable, setImageHelper, InteractsWithMedia;
+    use HasFactory, Notifiable, setImageHelper;
+    use HasMediaTrait;
+    use SoftDeletes;
 
     const COVER_IMAGE_COLLECTION = 'covers';
 
@@ -29,10 +36,13 @@ class User extends Authenticatable implements HasMedia
         'surname',
         'email',
         'password',
-        'steamid',
+        'steam_id',
         'image',
         'description',
-        'interests'
+        'interests',
+        'gender',
+        'birth_date',
+        'country'
     ];
 
     /**

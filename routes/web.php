@@ -6,6 +6,7 @@ use App\Http\Controllers\Site\LoginController;
 use App\Http\Controllers\Site\AccountController;
 use App\Http\Controllers\Site;
 use App\Http\Controllers\Site\MailchimpController;
+use App\Http\Controllers\Site\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,16 @@ Route::group(['prefix' => 'author', 'as' => 'author.'], function () {
     Route::delete('history/{articles}', [AccountController::class, 'destroyHistory'])->name('history.delete');
     Route::get('history', [AccountController::class, 'history'])->name('history.index');
     Route::match(['get', 'post'],'{id}', [Site\IndexController::class, 'author'])->name('index');
+});
+
+Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ["auth"]], function () {
+    Route::get('settings', [UserController::class, 'settings'])->name('settings');
+    Route::post('settings', [UserController::class, 'update'])->name('update');
+    Route::post('file', [UserController::class, 'addFile'])->name('add.file');
+    Route::delete('file/delete/{media}', [UserController::class, 'deleteFile'])->name('delete.file');
+    Route::put('change/email', [UserController::class, 'changeEmail'])->name('change.email');
+    Route::put('change/password', [UserController::class, 'changePassword'])->name('change.password');
+    Route::delete('delete', [UserController::class, 'destroy'])->name('delete');
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
