@@ -140,10 +140,10 @@
                                             </svg>
                                             <div class="__select__title"></div>
                                             <div class="__select__content">
-                                                @foreach($genders as $gender => $value)
-                                                    <input class="__select__input" type="radio" name="{{$gender}}" id="{{$gender}}-gender" {{$user->gender == $gender ? "checked" : ""}}/>
-                                                    <label class="__select__label" for="{{$gender}}-gender">{{$value}}</label>
-                                                @endforeach
+                                                <input class="__select__input" type="radio" name="gender" value="male" id="male-gender" {{$user->gender != "male" ?: "checked"}}/>
+                                                <label class="__select__label" for="male-gender">Мужской</label>
+                                                <input class="__select__input" type="radio" name="gender" value="female" id="female-gender" {{$user->gender != "female" ?: "checked"}}/>
+                                                <label class="__select__label" for="female-gender">Женский</label>
                                             </div>
                                         </div>
                                     </div>
@@ -164,12 +164,19 @@
                                             </svg>
                                             <div class="__select__title"></div>
                                             <div class="__select__content">
-                                                <input class="__select__input" type="radio" name="countrySelect" id="country1" checked="checked"/>
-                                                <label class="__select__label" for="country1">Страна1</label>
-                                                <input class="__select__input" type="radio" name="countrySelect" id="country2"/>
-                                                <label class="__select__label" for="country2">Страна2</label>
-                                                <input class="__select__input" type="radio" name="countrySelect" id="country3"/>
-                                                <label class="__select__label" for="country3">Страна3</label>
+                                                @foreach($countries as $country)
+                                                <input class="__select__input" type="radio" name="{{$country->code}}" id="{{$country->code}}" {{$user->country == $country->code ? "checked" : ""}}/>
+                                                <label class="__select__label" for="{{$country->code}}">{{$country->name}}</label>
+                                                @endforeach
+
+
+{{--                                                <input class="__select__input" type="radio" name="countrySelect" id="country1" checked="checked"/>--}}
+{{--                                                <label class="__select__label" for="country1">Страна1</label>--}}
+{{--                                                <input class="__select__input" type="radio" name="countrySelect" id="country2"/>--}}
+{{--                                                <label class="__select__label" for="country2">Страна2</label>--}}
+{{--                                                <input class="__select__input" type="radio" name="countrySelect" id="country3"/>--}}
+{{--                                                <label class="__select__label" for="country3">Страна3</label>--}}
+{{--                                                <input class="__select__input" type="radio" name="countrySelect" id="country2"/>--}}
                                             </div>
                                         </div>
                                     </div>
@@ -268,6 +275,7 @@
 @endsection
 
 @section('js')
+    <script src="{{asset("assets/js/new-document.js")}}"></script>
     <script>
         document.getElementById("add-foto").onchange = function() {
             var formData = new FormData(document.getElementById("form-document"));
@@ -281,41 +289,8 @@
                 enctype: 'multipart/form-data',
                 processData: false,
                 success: function (response) {
-                    var documentId = response['id'];
-
-                    var div1 = document.createElement("div");
-                    div1.className = "account-settings-document-block";
-                    div1.id = `document-${documentId}`;
-
-                    var div2 = document.createElement("div");
-                    div2.className = "account-settings-document-item";
-
-                    var div3 = document.createElement("div");
-                    div3.className = "account-settings-document-icon";
-
-                    var svg = document.createElement("svg");
-                    svg.className = "icon icon-file-blank";
-
-                    var use = document.createElement("use");
-                    svg.innerHTML = `<use xlink:href="{{asset("images/sprite-inline.svg#file-blank")}}"></use>`;
-                    div3.appendChild(svg);
-
-                    var p = document.createElement("p");
-                    p.className = "account-settings-document-label";
-                    p.innerHTML = response['file_name'];
-
-                    var button = document.createElement("button");
-                    button.className = "account-settings-document-btn";
-                    button.setAttribute('onclick', `deleteFile(${documentId})`);
-                    button.innerHTML = "Удалить";
-
-                    div2.appendChild(div3);
-                    div2.appendChild(p);
-                    div2.appendChild(button);
-                    div1.appendChild(div2);
-
-                    var referenceNode = document.getElementById('upload-file');
-                    referenceNode.parentNode.insertBefore(div1, referenceNode);
+                    var file = addFile(response);
+                    $("#upload-file").before(file);
                 }
             })
         };

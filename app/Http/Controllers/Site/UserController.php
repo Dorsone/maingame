@@ -8,6 +8,7 @@ use App\Http\Requests\NewUserEmailRequest;
 use App\Http\Requests\UserCreateNewPasswordRequest;
 use App\Http\Requests\UserDocumentRequest;
 use App\Http\Requests\UserSettingsUpdateRequest;
+use App\Models\Country;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Contracts\View\Factory;
@@ -44,7 +45,7 @@ class UserController extends Controller
         return view("gzone.pages.settings", [
             "user" => $user,
             "documents" => $user->getMedia("user_documents"),
-            "genders" => GenderConstant::translateList()
+            "countries" => Country::all()
         ]);
     }
 

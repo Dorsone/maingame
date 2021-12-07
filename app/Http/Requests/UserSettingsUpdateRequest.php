@@ -28,6 +28,7 @@ class UserSettingsUpdateRequest extends FormRequest
             "email" => "required|email",
             "first_name" => "string|nullable",
             "surname" => "string|nullable",
+            "gender" => "string",
             "birth_date" => "string|nullable",
             "country" => "string|nullable",
         ];
