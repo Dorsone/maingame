@@ -165,18 +165,10 @@
                                             <div class="__select__title"></div>
                                             <div class="__select__content">
                                                 @foreach($countries as $country)
-                                                <input class="__select__input" type="radio" name="{{$country->code}}" id="{{$country->code}}" {{$user->country == $country->code ? "checked" : ""}}/>
+                                                <input class="__select__input" type="radio" name="country" id="{{$country->code}}"
+                                                        value="{{$country->code}}" {{$user->country == $country->code ? "checked" : ""}}/>
                                                 <label class="__select__label" for="{{$country->code}}">{{$country->name}}</label>
                                                 @endforeach
-
-
-{{--                                                <input class="__select__input" type="radio" name="countrySelect" id="country1" checked="checked"/>--}}
-{{--                                                <label class="__select__label" for="country1">Страна1</label>--}}
-{{--                                                <input class="__select__input" type="radio" name="countrySelect" id="country2"/>--}}
-{{--                                                <label class="__select__label" for="country2">Страна2</label>--}}
-{{--                                                <input class="__select__input" type="radio" name="countrySelect" id="country3"/>--}}
-{{--                                                <label class="__select__label" for="country3">Страна3</label>--}}
-{{--                                                <input class="__select__input" type="radio" name="countrySelect" id="country2"/>--}}
                                             </div>
                                         </div>
                                     </div>
