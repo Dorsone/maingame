@@ -47,8 +47,8 @@ Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('aut
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
 
 Route::group(['prefix' => 'author', 'as' => 'author.'], function () {
-    Route::delete('history/{articles}', [AccountController::class, 'destroy'])->name('history.delete');
-    Route::get('history', [AccountController::class, 'index'])->name('history.index');
+    Route::delete('history/{articles}', [AccountController::class, 'destroyHistory'])->name('history.delete');
+    Route::get('history', [AccountController::class, 'history'])->name('history.index');
     Route::match(['get', 'post'],'{id}', [Site\IndexController::class, 'author'])->name('index');
 });
 
@@ -60,4 +60,9 @@ Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ["auth"]], fu
     Route::put('change/email', [UserController::class, 'changeEmail'])->name('change.email');
     Route::put('change/password', [UserController::class, 'changePassword'])->name('change.password');
     Route::delete('delete', [UserController::class, 'destroy'])->name('delete');
+});
+
+Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+    Route::get('', [AccountController::class, 'profile'])->name('index');
+    Route::put('/cover/store/{user}', [AccountController::class, 'userCoverStore'])->name('cover.store');
 });

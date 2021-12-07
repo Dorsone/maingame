@@ -3,20 +3,22 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CoverImageRequest;
 use App\Models\Articles;
-use App\Models\ViewHistory;
-use App\Services\ViewHistoryService;
-use Backpack\CRUD\Tests\Unit\Models\Article;
+use App\Models\User;
+use App\Services\AccountService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class AccountController extends Controller
 {
     /**
-     * AccountController constructor.
      * Checking Auth
+     * AccountController constructor.
      */
     public function __construct()
     {
@@ -24,9 +26,10 @@ class AccountController extends Controller
     }
 
     /**
+     * It`s a view of User`s history page
      * @return Application|Factory|View
      */
-    public function index()
+    public function history()
     {
         return view('gzone.pages.view_history', [
             'histories' => auth()->user()->histories
@@ -34,13 +37,43 @@ class AccountController extends Controller
     }
 
     /**
+     * It`s for destroying User`s history
      * @param $articles
-     * @param ViewHistoryService $viewHistoryService
+     * @param AccountService $viewHistoryService
      * @return RedirectResponse
      */
-    public function destroy(Articles $articles, ViewHistoryService $viewHistoryService)
+    public function destroyHistory(Articles $articles, AccountService $viewHistoryService)
     {
-        $viewHistoryService->deleteHistory($articles, auth()->user()->id);
+        $viewHistoryService->deleteHistory($articles, auth()->user());
         return redirect()->route('author.history.index');
     }
+
+    /**
+     * Index page of User`s profile
+     * @return Application|Factory|View
+     */
+    public function profile()
+    {
+        $cover = auth()->user()->getMedia(User::COVER_IMAGE_COLLECTION)->first();
+        return view('gzone.pages.user_profile', [
+            'user' => auth()->user(),
+            'cover' => $cover ? $cover->getUrl() : '',
+        ]);
+    }
+
+
+    /**
+     * It`s for editing User`s cover
+     * @param AccountService $accountService
+     * @param User $user
+     * @return RedirectResponse
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function userCoverStore(AccountService $accountService, User $user)
+    {
+        $accountService->storeCover($user);
+        return redirect()->route('profile.index');
+    }
 }
+

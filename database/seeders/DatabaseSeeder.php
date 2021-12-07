@@ -15,5 +15,18 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(CountrySeeder::class);
+        $this->call([
+            UserSeeder::class,
+            GameSeeder::class,
+            MatchFormatSeeder::class,
+            TournamentSeeder::class,
+            PullItemSeeder::class,
+            TournamentPullItemSeeder::class,
+            TeamSeeder::class,
+            TeamUserSeeder::class,
+            TeamTournamentSeeder::class,
+            MatchSeeder::class,
+            MatchDetailSeeder::class,
+        ]);
     }
 }

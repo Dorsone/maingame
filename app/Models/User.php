@@ -23,6 +23,8 @@ class User extends Authenticatable implements HasMedia
     use HasMediaTrait;
     use SoftDeletes;
 
+    const COVER_IMAGE_COLLECTION = 'covers';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -74,7 +76,6 @@ class User extends Authenticatable implements HasMedia
      */
     public function histories() {
         return $this->belongsToMany(Articles::class, 'view_histories', 'user_id', 'article_id')->orderBy('created_at', 'desc');
-
     }
 
     public function getHowLongAgoAttribute($key)

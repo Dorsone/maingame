@@ -20,7 +20,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "mailchimp/marketing": "^3.0",
-        "spatie/laravel-medialibrary": "^7.0.0"
+        "spatie/laravel-medialibrary": "^9.0.0"
     },
     "require-dev": {
         "backpack/generators": "^3.1",
