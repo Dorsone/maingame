@@ -20,7 +20,7 @@ class SteamService
      */
     public function findOrNewUser($info)
     {
-        $user = User::query()->where('steamid', $info->steamID64)->first();
+        $user = User::query()->where('steam_id', $info->steamID64)->first();
 
         if (!is_null($user)) {
             return $user;
@@ -29,7 +29,7 @@ class SteamService
         return User::query()->create([
             'username' => $info->personaname,
             'first_name' => $info->realname,
-            'steamid' => $info->steamID64,
+            'steam_id' => $info->steamID64,
             'password' => bcrypt($info->steamID64),
         ]);
 
