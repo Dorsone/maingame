@@ -23,7 +23,7 @@
                         <svg class="icon icon-comment ">
                             <use xlink:href="{{ asset('images/sprite-inline.svg#comment') }}"></use>
                         </svg>
-                        <span>{{ $article->comments->count() }}</span>
+                        <span>{{ $article->comments_count }}</span>
                     </div>
                     <div
                         onclick="bookmark({{$article->id}}, this)"
