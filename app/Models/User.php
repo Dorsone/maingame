@@ -69,7 +69,7 @@ class User extends Authenticatable implements HasMedia
     }
 
     public function bookmarks() {
-        return $this->belongsToMany(Articles::class, 'user_bookmarks', 'user_id', 'article_id')->orderBy('created_at', 'desc');
+        return $this->belongsToMany(Articles::class, 'user_bookmarks', 'article_id', 'user_id')->orderBy('created_at', 'desc');
     }
 
     public function getHowLongAgoAttribute($key)

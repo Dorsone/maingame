@@ -50,7 +50,8 @@ class Articles extends Model
     }
 
     public function bookmarks() {
-        return $this->hasMany(UserBookmark::class, 'article_id', 'id');
+//        return $this->hasMany(UserBookmark::class, 'article_id', 'id');
+        return $this->belongsToMany(User::class, 'user_bookmarks', 'user_id', 'article_id');
     }
 
     public function user()
