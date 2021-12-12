@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class User
@@ -20,7 +20,7 @@ class User extends Authenticatable implements HasMedia
 {
     use CrudTrait;
     use HasFactory, Notifiable, setImageHelper;
-    use HasMediaTrait;
+    use InteractsWithMedia;
     use SoftDeletes;
 
     const COVER_IMAGE_COLLECTION = 'covers';
