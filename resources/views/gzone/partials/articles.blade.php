@@ -23,9 +23,12 @@
                         <svg class="icon icon-comment ">
                             <use xlink:href="{{ asset('images/sprite-inline.svg#comment') }}"></use>
                         </svg>
-                        <span>{{ $article->comments->count() }}</span>
+                        <span>{{ $article->comments_count }}</span>
                     </div>
-                    <div class="bookmark">
+                    <div
+                        onclick="bookmark({{$article->id}}, this)"
+                        class="bookmark
+                        {{!in_array($article->id ,auth()->user()->bookmarks->pluck('id')->toArray()) ?: 'add'}}">
                         <svg class="icon icon-mark ">
                             <use xlink:href="{{ asset('images/sprite-inline.svg#mark') }}"></use>
                         </svg>
@@ -33,7 +36,8 @@
                 </div>
             @endif
         </div>
-        <a class="article-preview__caption" href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $article->slug]) }}">{{ $article->title }}</a>
+        <a class="article-preview__caption"
+           href="{{ route('site.article', ['categorySlug' => $category->slug, 'articleSlug' => $article->slug]) }}">{{ $article->title }}</a>
         <p class="article-preview__text">{{ $article->content_preview }}</p>
         <div class="article-preview__info">
             @if($withAuthor)
@@ -41,7 +45,8 @@
                     <div class="article-preview__author-img">
                         <img src="{{ asset($article->user->image) }}" alt=""/>
                     </div>
-                    <a class="article-preview__author-name" href="{{ route('author.index', $article->user->id) }}">{{ $article->user->name }}</a>
+                    <a class="article-preview__author-name"
+                       href="{{ route('author.index', $article->user->id) }}">{{ $article->user->name }}</a>
                 </div>
             @endif
             <span class="article-preview__date">{{ $article->created_at->format('d M. Y') }}</span>

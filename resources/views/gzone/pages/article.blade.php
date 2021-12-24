@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="comment">
-                        <h2 class="title-h3">Комментарии <span>{{ $article->comments->count() }}</span></h2>
+                        <h2 class="title-h3">Комментарии <span>{{ $article->comments_count }}</span></h2>
                         @foreach($article->comments as $comment)
                             <div class="comment-block">
                                 <div class="comment-head">
@@ -190,7 +190,7 @@
                                         <svg class="icon icon-comment ">
                                             <use xlink:href="{{ asset('images/sprite-inline.svg#comment') }}"></use>
                                         </svg>
-                                        <span>{{ $recomm->comments->count() }}</span>
+                                        <span>{{ $recomm->comments_count }}</span>
                                     </div>
                                     <div class="bookmark">
                                         <svg class="icon icon-mark ">

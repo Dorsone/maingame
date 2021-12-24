@@ -92,7 +92,7 @@ class IndexController extends Controller
             ->orderBy('lft')
             ->get();
 
-        $breadcrumbs = $slug ? $this->getBreadcrumbs(false,  false, false, $slug ) : $this->getBreadcrumbs(true);
+        $breadcrumbs = $slug ? $this->getBreadcrumbs(false, false, false, $slug) : $this->getBreadcrumbs(true);
 
         return view('gzone.pages.categories', compact('categories', 'breadcrumbs'));
     }
@@ -163,6 +163,7 @@ class IndexController extends Controller
         $article = Articles::where('active', 1)
             ->where('category_id', $category->id)
             ->where('slug', $articleSlug)
+            ->withCount(['comments'])
             ->with(['tags', 'user', 'comments'])
             ->firstOrFail();
 
@@ -172,6 +173,7 @@ class IndexController extends Controller
         $recommendation = Articles::where('active', 1)
             ->where('id', '<>', $article->id)
             ->with(['tags', 'category'])
+            ->withCount(['comments'])
             ->orderByDesc('views')
             ->limit(4)
             ->get();

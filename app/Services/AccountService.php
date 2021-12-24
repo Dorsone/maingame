@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\UserBookmark;
 use App\Models\ViewHistory;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -31,7 +32,6 @@ class AccountService
         return 'Success added';
     }
 
-
     /**
      * It`s for deleting user`s histories from DB
      * @param $articles
@@ -40,6 +40,27 @@ class AccountService
      */
     public function deleteHistory($articles, $user) {
         $user->histories()->detach($articles->id);
+    }
+
+    /**
+     * It`s for deleting user`s bookmarks from DB
+     * @param $articles
+     * @param $user
+     */
+    public function deleteBookmark($articles, $user) {
+        $user->bookmarks()->detach($articles->id);
+    }
+
+    /**
+     * Store the bookmark
+     * @param $article
+     * @param $user
+     */
+    public function storeBookmark($article, $user){
+        $bookmark = new UserBookmark;
+        $bookmark->article_id = $article->id;
+        $bookmark->user_id = $user->id;
+        $bookmark->save();
     }
 
     /**

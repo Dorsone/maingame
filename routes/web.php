@@ -46,13 +46,30 @@ Route::post('register', [RegisterController::class, 'sendLetter'])->name('send.r
 Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('auth.steam');
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
 
-Route::group(['prefix' => 'author', 'as' => 'author.'], function () {
-    Route::delete('history/{articles}', [AccountController::class, 'destroyHistory'])->name('history.delete');
-    Route::get('history', [AccountController::class, 'history'])->name('history.index');
+/**
+ * Author routes
+ */
+Route::prefix('author')->middleware('auth')->name('author.')->group(function () {
+    /**
+     * Bookmark routes
+     */
+    Route::group(['prefix' => 'bookmark', 'as' => 'bookmark.'], function () {
+        Route::get('', [AccountController::class, 'bookmarks'])->name('index');
+        Route::put('store/{articles}', [AccountController::class, 'addBookmark'])->name('store');
+        Route::delete('ajax/{articles}', [AccountController::class, 'destroyBookmarkAjax'])->name('ajax.delete');
+        Route::delete('{articles}', [AccountController::class, 'destroyBookmark'])->name('delete');
+    });
+    /**
+     * History routes
+     */
+    Route::group(['prefix' => 'history', 'as' => 'history.'], function () {
+        Route::get('', [AccountController::class, 'history'])->name('index');
+        Route::delete('{articles}', [AccountController::class, 'destroyHistory'])->name('delete');
+    });
+
     Route::match(['get', 'post'],'{id}', [Site\IndexController::class, 'author'])->name('index');
 });
-
-Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ["auth"]], function () {
+Route::prefix('profile')->middleware('auth')->name('profile.')->group(function () {
     Route::get('settings', [UserController::class, 'settings'])->name('settings');
     Route::post('settings', [UserController::class, 'update'])->name('update');
     Route::post('file', [UserController::class, 'addFile'])->name('add.file');
@@ -60,9 +77,6 @@ Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ["auth"]], fu
     Route::put('change/email', [UserController::class, 'changeEmail'])->name('change.email');
     Route::put('change/password', [UserController::class, 'changePassword'])->name('change.password');
     Route::delete('delete', [UserController::class, 'destroy'])->name('delete');
-});
-
-Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
     Route::get('', [AccountController::class, 'profile'])->name('index');
     Route::put('/cover/store/{user}', [AccountController::class, 'userCoverStore'])->name('cover.store');
 });
