@@ -69,7 +69,7 @@
                 <svg class="icon icon-ticket ">
                   <use xlink:href="./images/sprite-inline.svg#ticket"></use>
                 </svg></span>Премиум</a></li>
-                    <li><a class="user-menu__nav-item user-menu__nav-item_link" href="{{route("user.settings")}}"><span class="user-menu__nav-item-icon">
+                    <li><a class="user-menu__nav-item user-menu__nav-item_link" href="{{route("profile.settings")}}"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-setting ">
                   <use xlink:href="./images/sprite-inline.svg#setting"></use>
                 </svg></span>Настройки аккаунта</a></li>

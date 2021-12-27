@@ -69,6 +69,7 @@ Route::prefix('author')->middleware('auth')->name('author.')->group(function () 
 
     Route::match(['get', 'post'],'{id}', [Site\IndexController::class, 'author'])->name('index');
 });
+
 Route::prefix('profile')->middleware('auth')->name('profile.')->group(function () {
     Route::get('settings', [UserController::class, 'settings'])->name('settings');
     Route::post('settings', [UserController::class, 'update'])->name('update');

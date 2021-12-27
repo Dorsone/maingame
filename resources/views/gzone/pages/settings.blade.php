@@ -108,7 +108,7 @@
                             <h1 class="title-h3">Настройки аккаунта</h1>
                         </div>
                         <div class="profile-form-data-wrap">
-                            <form class="profile-form profile-form--data" action="{{route("user.update")}}" method="post" id="update-form">
+                            <form class="profile-form profile-form--data" action="{{route("user.update", $user->id)}}" method="post" id="update-form">
                                 @csrf
                                 <div class="profile-form-2-col-block">
                                     <div class="profile-form-field-wrap">
@@ -197,7 +197,7 @@
                             <!-- /if document file has been loaded-->
                             <div class="account-settings-file-loading" id="upload-file">
                                 <p>Добавляйте файлы в форматах JPG, PNG, размером до 4 Мб и максимальным разрешением 2000px x 2000px</p>
-                                <form class="profile-form-file-loading" id="form-document" action="{{route("user.add.file")}}" method="post" enctype="multipart/form-data">
+                                <form class="profile-form-file-loading" id="form-document" action="{{route("profile.add.file")}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="file" accept="image/jpeg, image/png, image/jpg" id="add-foto" name="document"/>
                                     <label class="button_transp-hover" for="add-foto">Загрузить файлы</label>
@@ -206,7 +206,7 @@
                         </div>
                         <div class="account-settings-block">
                             <p class="account-settings-title">Изменить пароль</p>
-                            <form class="profile-form profile-form-pwd-changing" method="post" action="{{route("user.change.password")}}">
+                            <form class="profile-form profile-form-pwd-changing" method="post" action="{{route("profile.change.password")}}">
                                 @csrf
                                 @method("PUT")
                                 <div class="profile-form-2-col-block">
@@ -231,7 +231,7 @@
                         <div class="account-settings-block account-settings-block--account-del">
                             <p class="account-settings-title">Удалить аккаунт</p>
                             <p class="account-settings-subtitle">Вы навсегда удалите свои данные, и это действие нельзя будет отменить.</p>
-                            <form action="{{route("user.delete")}}" method="post">
+                            <form action="{{route("profile.delete")}}" method="post">
                                 @csrf
                                 @method("DELETE")
                             <button class="button button_red" type="submit">Удалить аккаунт</button>
