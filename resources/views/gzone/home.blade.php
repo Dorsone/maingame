@@ -373,8 +373,8 @@
                 <div class="swiper-slide screen">
                     <section class="footer">
                         <aside class="section-aside">
-                            <div class="section-aside__social-feed"><img src="./images/social-feed.jpg" alt=""/><img
-                                    src="./images/social-feed.jpg" alt=""/>
+                            <div class="section-aside__social-feed">
+                                <a class="twitter-timeline"  data-lang="ru" data-tweet-limit="3" data-chrome="noheader nofooter" data-width="255" data-height="750" data-theme="light" href="https://twitter.com/twitterDev?ref_src=twsrc%5Etfw"></a>
                             </div>
                         </aside>
                         <div class="container-sides-lg">
