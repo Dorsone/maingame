@@ -6,6 +6,7 @@ use App\Http\Controllers\Site\LoginController;
 use App\Http\Controllers\Site\AccountController;
 use App\Http\Controllers\Site;
 use App\Http\Controllers\Site\MailchimpController;
+use App\Http\Controllers\Site\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,8 +46,30 @@ Route::post('register', [RegisterController::class, 'sendLetter'])->name('send.r
 Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('auth.steam');
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
 
-Route::group(['prefix' => 'author', 'as' => 'author.'], function () {
-    Route::delete('history/{articles}', [AccountController::class, 'destroy'])->name('history.delete');
-    Route::get('history', [AccountController::class, 'index'])->name('history.index');
+Route::prefix('author')->middleware('auth')->name('author.')->group(function () {
+    Route::group(['prefix' => 'bookmark', 'as' => 'bookmark.'], function () {
+        Route::get('', [AccountController::class, 'bookmarks'])->name('index');
+        Route::put('store/{articles}', [AccountController::class, 'addBookmark'])->name('store');
+        Route::delete('ajax/{articles}', [AccountController::class, 'destroyBookmarkAjax'])->name('ajax.delete');
+        Route::delete('{articles}', [AccountController::class, 'destroyBookmark'])->name('delete');
+    });
+    Route::group(['prefix' => 'history', 'as' => 'history.'], function () {
+        Route::get('', [AccountController::class, 'history'])->name('index');
+        Route::delete('{articles}', [AccountController::class, 'destroyHistory'])->name('delete');
+    });
     Route::match(['get', 'post'],'{id}', [Site\IndexController::class, 'author'])->name('index');
 });
+
+Route::prefix('profile')->middleware('auth')->name('profile.')->group(function () {
+    Route::get('settings', [UserController::class, 'settings'])->name('settings');
+    Route::post('settings', [UserController::class, 'update'])->name('update');
+    Route::post('file', [UserController::class, 'addFile'])->name('add.file');
+    Route::delete('file/delete/{media}', [UserController::class, 'deleteFile'])->name('delete.file');
+    Route::put('change/email', [UserController::class, 'changeEmail'])->name('change.email');
+    Route::put('change/password', [UserController::class, 'changePassword'])->name('change.password');
+    Route::delete('delete', [UserController::class, 'destroy'])->name('delete');
+    Route::get('', [AccountController::class, 'profile'])->name('index');
+    Route::put('/cover/store/{user}', [AccountController::class, 'userCoverStore'])->name('cover.store');
+});
+
+Route::get('articles/{slug?}', [Site\IndexController::class, 'articles'])->name('site.articles');

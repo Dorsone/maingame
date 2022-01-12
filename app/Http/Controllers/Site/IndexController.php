@@ -16,7 +16,7 @@ use App\Models\MainSlides;
 use App\Models\Search;
 use App\Models\SearchItems;
 use App\Models\User;
-use App\Services\ViewHistoryService;
+use App\Services\AccountService;
 use App\Services\IndexingText;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -92,7 +92,7 @@ class IndexController extends Controller
             ->orderBy('lft')
             ->get();
 
-        $breadcrumbs = $slug ? $this->getBreadcrumbs(false,  false, false, $slug ) : $this->getBreadcrumbs(true);
+        $breadcrumbs = $slug ? $this->getBreadcrumbs(false, false, false, $slug) : $this->getBreadcrumbs(true);
 
         return view('gzone.pages.categories', compact('categories', 'breadcrumbs'));
     }
@@ -154,7 +154,7 @@ class IndexController extends Controller
         return view('gzone.pages.category', compact('category', 'articles', 'tags', 'breadcrumbs'));
     }
 
-    public function article($categorySlug, $articleSlug, ViewHistoryService $viewHistoryService)
+    public function article($categorySlug, $articleSlug, AccountService $viewHistoryService)
     {
         $category = ArticlesCategories::where('slug', $categorySlug)
             ->where('active', 1)
@@ -163,6 +163,7 @@ class IndexController extends Controller
         $article = Articles::where('active', 1)
             ->where('category_id', $category->id)
             ->where('slug', $articleSlug)
+            ->withCount(['comments'])
             ->with(['tags', 'user', 'comments'])
             ->firstOrFail();
 
@@ -172,6 +173,7 @@ class IndexController extends Controller
         $recommendation = Articles::where('active', 1)
             ->where('id', '<>', $article->id)
             ->with(['tags', 'category'])
+            ->withCount(['comments'])
             ->orderByDesc('views')
             ->limit(4)
             ->get();
@@ -324,7 +326,7 @@ class IndexController extends Controller
      * @param null|Articles $article
      * @return array
      */
-    private function getBreadcrumbs($category = null, $article = null, $tag = null, $slug = null): array
+    private function getBreadcrumbs($category = null, $article = null, $tag = null, $slug = null, $articles = null): array
     {
         $breadcrumbs = [];
 
@@ -332,6 +334,14 @@ class IndexController extends Controller
             $breadcrumbs[0] = [
                 'title' => 'Категории',
                 'url' => route('site.categories'),
+                'current' => true
+            ];
+        }
+
+        if($articles){
+            $breadcrumbs[0] = [
+                'title' => 'Последние новости',
+                'url' => route('site.articles'),
                 'current' => true
             ];
         }
@@ -385,5 +395,23 @@ class IndexController extends Controller
     public function policy()
     {
         return view('gzone.pages.policy');
+    }
+
+    /**
+     * Articles index page
+     * @param string|null $slug
+     * @return Application|Factory|View
+     */
+    public function articles(?string $slug = null) {
+
+        $articles = Articles::where('active', 1)
+            ->with('category')
+            ->latest()
+            ->take(12)
+            ->get();
+
+        $breadcrumbs = $slug ? $this->getBreadcrumbs(false, false, false, $slug, false) : $this->getBreadcrumbs(false, false, false, false, true);
+
+        return view('gzone.pages.articles', compact('articles', 'breadcrumbs'));
     }
 }

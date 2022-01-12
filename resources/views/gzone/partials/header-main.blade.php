@@ -10,6 +10,7 @@
         <div class="header__menu">
             <nav class="header__nav">
                 <ul>
+                    <li><a href="{{ route('site.articles') }}">Новости</a></li>
                     <li><a href="{{ route('site.categories') }}">Meдиа</a></li>
                     <li><a href="{{ url('site.learning') }}">Академия</a></li>
                     <li><a href="{{ route('site.tournament') }}">Арена</a></li>
@@ -49,7 +50,7 @@
             </div>
             <div class="header__user-menu user-menu">
                 <ul>
-                    <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
+                    <li><a class="user-menu__nav-item user-menu__nav-item_link" href="{{route('profile.index')}}"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-profile ">
                   <use xlink:href="./images/sprite-inline.svg#profile"></use>
                 </svg></span>Игровой профиль</a></li>
@@ -69,7 +70,7 @@
                 <svg class="icon icon-ticket ">
                   <use xlink:href="./images/sprite-inline.svg#ticket"></use>
                 </svg></span>Премиум</a></li>
-                    <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
+                    <li><a class="user-menu__nav-item user-menu__nav-item_link" href="{{route("profile.settings")}}"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-setting ">
                   <use xlink:href="./images/sprite-inline.svg#setting"></use>
                 </svg></span>Настройки аккаунта</a></li>

@@ -1,7 +1,7 @@
 <div class="popup popup__searching">
     <button class="searching__close-btn">
         <svg class="icon icon-close1 ">
-            <use xlink:href="./images/sprite-inline.svg#close1"></use>
+            <use xlink:href="{{asset("images/sprite-inline.svg#close1")}}"></use>
         </svg>
     </button>
     <div class="container-sides-lg">

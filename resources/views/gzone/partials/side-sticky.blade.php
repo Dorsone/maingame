@@ -19,5 +19,25 @@
                     </svg>
                 </a></li>
         </ul>
+        <ul class="tournaments-submenu">
+            <li>
+                <!-- add class "active" to "a" tag with "premium" class to make active element--><a class="premium active" href="javascript:void(0)">
+                    <svg class="icon icon-ticket-star ">
+                        <use xlink:href="./images/sprite-inline.svg#ticket-star"></use>
+                    </svg></a>
+            </li>
+            <li><a href="javascript:void(0)">
+                    <svg class="icon icon-discord ">
+                        <use xlink:href="./images/sprite-inline.svg#discord"></use>
+                    </svg></a></li>
+            <li><a href="javascript:void(0)">
+                    <svg class="icon icon-message ">
+                        <use xlink:href="./images/sprite-inline.svg#message"></use>
+                    </svg></a></li>
+            <li><a href="javascript:void(0)">
+                    <svg class="icon icon-question ">
+                        <use xlink:href="./images/sprite-inline.svg#question"></use>
+                    </svg></a></li>
+        </ul>
     </div>
 </div>

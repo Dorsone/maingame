@@ -10,6 +10,7 @@
         <div class="header__menu">
             <nav class="header__nav">
                 <ul>
+                    <li><a href="{{ route('site.articles') }}">Новости</a></li>
                     <li><a href="{{ route('site.categories') }}">Meдиа</a></li>
                     <li><a href="{{ url('learning') }}">Академия</a></li>
                     <li><a href="{{ url('tournament') }}">Арена</a></li>
@@ -51,31 +52,31 @@
                     <ul>
                         <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-profile ">
-                  <use xlink:href="./images/sprite-inline.svg#profile"></use>
+                  <use xlink:href="{{asset("images/sprite-inline.svg#profile")}}"></use>
                 </svg></span>Игровой профиль</a></li>
                         <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-bookmark ">
-                  <use xlink:href="./images/sprite-inline.svg#bookmark"></use>
+                  <use xlink:href="{{asset("images/sprite-inline.svg#bookmark")}}"></use>
                 </svg></span>Мои закладки</a></li>
                         <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-calendar1 ">
-                  <use xlink:href="./images/sprite-inline.svg#calendar1"></use>
+                  <use xlink:href="{{asset("images/sprite-inline.svg#calendar1")}}"></use>
                 </svg></span>История просмотров</a></li>
                         <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-category ">
-                  <use xlink:href="./images/sprite-inline.svg#category"></use>
+                  <use xlink:href="{{asset("images/sprite-inline.svg#category")}}"></use>
                 </svg></span>Мои устройства</a></li>
                         <li><a class="user-menu__nav-item user-menu__nav-item_premium" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-ticket ">
-                  <use xlink:href="./images/sprite-inline.svg#ticket"></use>
+                  <use xlink:href="{{asset("images/sprite-inline.svg#ticket")}}"></use>
                 </svg></span>Премиум</a></li>
-                        <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
+                        <li><a class="user-menu__nav-item user-menu__nav-item_link" href="{{route("profile.settings")}}"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-setting ">
-                  <use xlink:href="./images/sprite-inline.svg#setting"></use>
+                  <use xlink:href="{{asset("images/sprite-inline.svg#setting")}}"></use>
                 </svg></span>Настройки аккаунта</a></li>
                         <li><a class="user-menu__nav-item user-menu__nav-item_link" href="{{route("logout")}}"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-logout ">
-                  <use xlink:href="./images/sprite-inline.svg#logout"></use>
+                  <use xlink:href="{{asset("images/sprite-inline.svg#logout")}}"></use>
                 </svg></span>Выйти</a></li>
                     </ul>
                 </div>
