@@ -24,7 +24,7 @@ return [
     // ----
 
     // Project name. Shown in the window title.
-    'project_name' => 'GameZone',
+    'project_name' => 'Maingame',
 
     // When clicking on the admin panel's top-left logo/name,
     // where should the user be redirected?
@@ -71,7 +71,7 @@ return [
     // ------
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo'   => '<b>Game</b>Zone',
+    'project_logo'   => '<b>Main</b>Game',
 
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,
