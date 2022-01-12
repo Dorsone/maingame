@@ -19,6 +19,7 @@ class CreateTournamentsTable extends Migration
             $table->text('description')->nullable();
             $table->boolean('is_private')->default(false);
             $table->string('prize_type');
+            $table->string('status')->nullable();
             $table->string('prize_amount');
             $table->integer('teams_amount');
             $table->integer('teams_players_amount');

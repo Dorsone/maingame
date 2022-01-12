@@ -18,6 +18,7 @@ class CreateMatchFormatsTable extends Migration
             $table->string('name')->comment('Название формата матча, Best of 3 и др.');
             $table->text('description')->nullable();
             $table->string('format')->nullable();
+            $table->string('slug');
             $table->timestamps();
             $table->softDeletes();
         });
