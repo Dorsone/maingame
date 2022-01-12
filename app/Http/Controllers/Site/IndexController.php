@@ -388,4 +388,22 @@ class IndexController extends Controller
     {
         return view('gzone.pages.policy');
     }
+
+    /**
+     * Articles index page
+     * @param string|null $slug
+     * @return Application|Factory|View
+     */
+    public function articles(?string $slug = null) {
+
+        $articles = Articles::where('active', 1)
+            ->with('category')
+            ->latest()
+            ->take(12)
+            ->get();
+
+        $breadcrumbs = $slug ? $this->getBreadcrumbs(false, false, false, ) : $this->getBreadcrumbs(true);
+
+        return view('gzone.pages.articles', compact('articles', 'breadcrumbs'));
+    }
 }
