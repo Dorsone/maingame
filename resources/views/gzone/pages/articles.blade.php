@@ -23,7 +23,7 @@
             <div class="container-md2">
                 <div class="popular-articles__wrapper">
                     @foreach($articles as $article)
-                        @include('gzone.partials.article-item', ['articles' => $articles, 'withAuthor' => $loop->first ? false : true, 'category' => $article->category])
+                        @include('gzone.partials.article-item', ['articles' => $articles, 'withAuthor' => true, 'category' => $article->category])
                     @endforeach
                 </div>
             </div>

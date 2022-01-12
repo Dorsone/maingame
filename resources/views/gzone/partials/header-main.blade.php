@@ -10,6 +10,7 @@
         <div class="header__menu">
             <nav class="header__nav">
                 <ul>
+                    <li><a href="{{ route('site.articles') }}">Новости</a></li>
                     <li><a href="{{ route('site.categories') }}">Meдиа</a></li>
                     <li><a href="{{ url('site.learning') }}">Академия</a></li>
                     <li><a href="{{ route('site.tournament') }}">Арена</a></li>
