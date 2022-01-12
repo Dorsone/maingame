@@ -71,3 +71,5 @@ Route::prefix('profile')->middleware('auth')->name('profile.')->group(function (
     Route::get('', [AccountController::class, 'profile'])->name('index');
     Route::put('/cover/store/{user}', [AccountController::class, 'userCoverStore'])->name('cover.store');
 });
+
+Route::get('articles/{slug?}', [Site\IndexController::class, 'articles'])->name('site.articles');
