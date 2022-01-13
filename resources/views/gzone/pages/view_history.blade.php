@@ -12,30 +12,7 @@
                 <div class="line"></div><a href="{{route('site.index')}}">Вернуться</a>
             </div>
             <div class="container-md1">
-                <div class="account-info">
-                    <div class="account-info-actions">
-                        <button class="account-info-btn" type="button">
-                            <svg class="icon icon-edit ">
-                                <use xlink:href="{{asset("./images/sprite-inline.svg#edit")}}"></use>
-                            </svg>Редактировать профиль
-                        </button>
-                        <button class="account-info-btn" type="button">
-                            <svg class="icon icon-image ">
-                                <use xlink:href="{{asset("./images/sprite-inline.svg#image")}}"></use>
-                            </svg>Изменить обложку
-                        </button>
-                    </div>
-                    <div class="account-info-cover">
-                        <!--<img src="./images/arena-main-bg.png" alt="">-->
-                    </div>
-                    <div class="account-info-desc">
-                        <div class="account-info-avatar"></div>
-                        <div class="account-info-name">
-                            <p>Mirror111</p>
-                            <div class="account-info-date">Играет с 21 июля 2021</div>
-                        </div>
-                    </div>
-                </div>
+                @include('gzone.partials.account-info')
             </div>
         </div>
         <section>

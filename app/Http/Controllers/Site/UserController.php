@@ -41,10 +41,12 @@ class UserController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
+        $cover = auth()->user()->getMedia(User::COVER_IMAGE_COLLECTION)->first();
         return view("gzone.pages.settings", [
             "user" => $user,
             "documents" => $user->getMedia("user_documents"),
-            "countries" => Country::all()
+            "countries" => Country::all(),
+            'cover' => $cover ? $cover->getUrl() : '',
         ]);
     }
 

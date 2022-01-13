@@ -16,18 +16,7 @@
             @endif
             @include('gzone.partials.side-sticky')
             <div class="container-md2">
-                <div class="account-info">
-                    <div class="account-info-cover">
-                        <!--<img src="./images/arena-main-bg.png" alt="">-->
-                    </div>
-                    <div class="account-info-desc">
-                        <div class="account-info-avatar"></div>
-                        <div class="account-info-name">
-                            <p>{{ $user->name }}</p>
-                            <div class="account-info-date">Играет с {{ $user->created_at->format('d M Y') }}</div>
-                        </div>
-                    </div>
-                </div>
+                @include('gzone.partials.account-info')
             </div>
         </div>
         <section>

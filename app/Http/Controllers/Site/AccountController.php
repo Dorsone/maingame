@@ -22,8 +22,11 @@ class AccountController extends Controller
      */
     public function history()
     {
+        $cover = auth()->user()->getMedia(User::COVER_IMAGE_COLLECTION)->first();
         return view('gzone.pages.view_history', [
-            'histories' => auth()->user()->histories
+            'histories' => auth()->user()->histories,
+            'user' => auth()->user(),
+            'cover' => $cover ? $cover->getUrl() : '',
         ]);
     }
 
@@ -71,9 +74,12 @@ class AccountController extends Controller
      * @return Application|Factory|View
      */
     public function bookmarks() {
+        $cover = auth()->user()->getMedia(User::COVER_IMAGE_COLLECTION)->first();
         return view('gzone.pages.bookmarks', [
             'bookmarks' => auth()->user()->bookmarks,
             'articles' => Articles::latest()->take(3)->get(),
+            'user' => auth()->user(),
+            'cover' => $cover ? $cover->getUrl() : '',
         ]);
     }
 

@@ -54,11 +54,11 @@
                 <svg class="icon icon-profile ">
                   <use xlink:href="./images/sprite-inline.svg#profile"></use>
                 </svg></span>Игровой профиль</a></li>
-                    <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
+                    <li><a class="user-menu__nav-item user-menu__nav-item_link" href="{{route('profile.bookmark.index')}}"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-bookmark ">
                   <use xlink:href="./images/sprite-inline.svg#bookmark"></use>
                 </svg></span>Мои закладки</a></li>
-                    <li><a class="user-menu__nav-item user-menu__nav-item_link" href="javascript:void(0)"><span class="user-menu__nav-item-icon">
+                    <li><a class="user-menu__nav-item user-menu__nav-item_link" href="{{route('profile.history.index')}}"><span class="user-menu__nav-item-icon">
                 <svg class="icon icon-calendar1 ">
                   <use xlink:href="./images/sprite-inline.svg#calendar1"></use>
                 </svg></span>История просмотров</a></li>
