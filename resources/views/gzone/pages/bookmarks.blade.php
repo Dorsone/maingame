@@ -59,7 +59,7 @@
                                 <div class="account-my-bookmarks">
                                     @foreach($bookmarks as $bookmark)
                                             <div class="article-preview">
-                                                <form method="POST" action="{{route('author.bookmark.delete', $bookmark->id)}}">
+                                                <form method="POST" action="{{route('profile.bookmark.delete', $bookmark->id)}}">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="bookmark-remove-btn">
@@ -85,7 +85,7 @@
                                                 <div class="article-preview__info">
                                                     <div class="article-preview__author">
                                                         <div class="article-preview__author-img"><img src="{{asset($bookmark->user->image)}}" alt="">
-                                                        </div><a class="article-preview__author-name" href="{{route('author.index', $bookmark->user->id)}}">
+                                                        </div><a class="article-preview__author-name" href="{{route('profile.index', $bookmark->user->id)}}">
                                                             {{$bookmark->user->username}}
                                                         </a>
                                                     </div><span class="article-preview__reading">Читать {{$bookmark->time_read}} мин</span>
@@ -124,7 +124,7 @@
                                             <div class="article-preview__info">
                                                 <div class="article-preview__author">
                                                     <div class="article-preview__author-img"><img src="{{asset($article->user->image)}}" alt="">
-                                                    </div><a class="article-preview__author-name" href="{{route('author.index', $article->user->id)}}">
+                                                    </div><a class="article-preview__author-name" href="{{route('profile.index', $article->user->id)}}">
                                                         {{$article->user->username}}
                                                     </a>
                                                 </div><span class="article-preview__reading">Читать {{$article->time_read}} мин</span>

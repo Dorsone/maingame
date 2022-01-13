@@ -46,7 +46,7 @@
                         <img src="{{ asset($article->user->image) }}" alt=""/>
                     </div>
                     <a class="article-preview__author-name"
-                       href="{{ route('author.index', $article->user->id) }}">{{ $article->user->name }}</a>
+                       href="{{ route('profile.index', $article->user->id) }}">{{ $article->user->name }}</a>
                 </div>
             @endif
             <span class="article-preview__date">{{ $article->created_at->format('d M. Y') }}</span>

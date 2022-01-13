@@ -48,6 +48,13 @@ Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('aut
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
 
 Route::prefix('author')->middleware('auth')->name('author.')->group(function () {
+
+});
+
+/** User settings */
+Route::prefix('profile')->middleware('auth')->name('profile.')->group(function () {
+    Route::get('settings', [UserController::class, 'settings'])->name('settings');
+    Route::post('settings', [UserController::class, 'update'])->name('update');
     Route::group(['prefix' => 'bookmark', 'as' => 'bookmark.'], function () {
         Route::get('', [AccountController::class, 'bookmarks'])->name('index');
         Route::put('store/{articles}', [AccountController::class, 'addBookmark'])->name('store');
@@ -59,12 +66,6 @@ Route::prefix('author')->middleware('auth')->name('author.')->group(function () 
         Route::delete('{articles}', [AccountController::class, 'destroyHistory'])->name('delete');
     });
     Route::match(['get', 'post'],'{id}', [IndexController::class, 'author'])->name('index');
-});
-
-/** User settings */
-Route::prefix('profile')->middleware('auth')->name('profile.')->group(function () {
-    Route::get('settings', [UserController::class, 'settings'])->name('settings');
-    Route::post('settings', [UserController::class, 'update'])->name('update');
     Route::post('file', [UserController::class, 'addFile'])->name('add.file');
     Route::delete('file/delete/{media}', [UserController::class, 'deleteFile'])->name('delete.file');
     Route::put('change/email', [UserController::class, 'changeEmail'])->name('change.email');
@@ -78,4 +79,4 @@ Route::prefix('profile')->middleware('auth')->name('profile.')->group(function (
 Route::group(["prefix" => "tournaments", "as" => "tournament."], function () {
    Route::get("{game:slug}", [TournamentController::class, "index"])->name("index");
 });
-Route::get('articles/{slug?}', [Site\IndexController::class, 'articles'])->name('site.articles');
+Route::get('articles/{slug?}', [IndexController::class, 'articles'])->name('site.articles');

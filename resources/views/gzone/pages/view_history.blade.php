@@ -58,7 +58,7 @@
                             <div class="account-my-bookmarks">
                                 @foreach($histories as $history)
                                     <div class="article-preview">
-                                        <form method="POST" action="{{route('author.history.delete', $history->id)}}">
+                                        <form method="POST" action="{{route('profile.history.delete', $history->id)}}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bookmark-remove-btn">
@@ -83,7 +83,7 @@
                                         <div class="article-preview__info">
                                             <div class="article-preview__author">
                                                 <div class="article-preview__author-img"><img src="{{asset($history->user->image)}}" alt="">
-                                                </div><a class="article-preview__author-name" href="{{route('author.index', $history->user->id)}}">
+                                                </div><a class="article-preview__author-name" href="{{route('profile.index', $history->user->id)}}">
                                                     {{$history->user->username}}
                                                 </a>
                                             </div><span class="article-preview__reading">Читать {{$history->time_read}} мин</span>

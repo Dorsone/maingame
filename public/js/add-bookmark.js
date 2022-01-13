@@ -20,7 +20,7 @@ let bookmark = function (articleId, element) {
 let addBookmark = function (articleId) {
     $.ajax({
         method: 'PUT',
-        url: `${window.location.origin}/author/bookmark/store/${articleId}`,
+        url: `${window.location.origin}/profile/bookmark/store/${articleId}`,
         data: {
             _token,
         },
@@ -37,7 +37,7 @@ let addBookmark = function (articleId) {
 let deleteBookmark = function (articleId) {
     $.ajax({
         method: 'DELETE',
-        url: `${window.location.origin}/author/bookmark/ajax/${articleId}`,
+        url: `${window.location.origin}/profile/bookmark/ajax/${articleId}`,
         data: {
             _token,
         },

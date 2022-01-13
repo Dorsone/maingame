@@ -36,7 +36,7 @@ class AccountController extends Controller
     public function destroyHistory(Articles $articles, AccountService $accountService)
     {
         $accountService->deleteHistory($articles, auth()->user());
-        return redirect()->route('author.history.index');
+        return redirect()->route('profile.history.index');
     }
 
     /**
@@ -111,7 +111,7 @@ class AccountController extends Controller
      */
     public function destroyBookmark(Articles $articles, AccountService $accountService) {
         $accountService->deleteBookmark($articles, auth()->user());
-        return redirect()->route('author.bookmark.index');
+        return redirect()->route('profile.bookmark.index');
     }
 }
 

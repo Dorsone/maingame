@@ -227,7 +227,7 @@ class IndexController extends Controller
         $breadcrumbs = $this->getBreadcrumbs();
         $breadcrumbs[] = [
             'title' => $user->name,
-            'url' => route('author.index', ['id' => $user->id]),
+            'url' => route('profile.index', ['id' => $user->id]),
             'current' => true
         ];
 
