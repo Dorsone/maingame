@@ -51,7 +51,7 @@ class IndexController extends Controller
         $news = Articles::where('active', 1)
             ->with(['category'])
             ->withCount(['comments'])
-            ->orderByDesc('date')->orderByDesc('id')->limit(4)->get();
+            ->orderByDesc('date')->orderByDesc('id')->limit(5)->get();
 
         return view('gzone.home', compact('slides', 'categories', 'news'));
     }
