@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Models\Game;
 use App\Models\MatchFormat;
-use App\Models\Tournament;
 use App\Services\TournamentService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -29,6 +28,7 @@ class TournamentController extends Controller
     }
 
     /**
+     * Returns tournaments list view
      * @param Game $game
      * @return Factory|View
      */
@@ -42,10 +42,5 @@ class TournamentController extends Controller
             "active_tournaments" => $this->tournamentService->activeTournaments($game),
             "finished_tournaments" => $this->tournamentService->finishedTournaments($game),
         ]);
-    }
-
-    public function show(Tournament $tournament)
-    {
-        return view("", compact('tournament'));
     }
 }

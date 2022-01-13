@@ -8,11 +8,11 @@ namespace App\Constants;
  */
 class TournamentStatusConstant
 {
-    const UPCOMING = "Предстоящий";
+    const UPCOMING = "upcoming";
 
-    const CURRENT = "Текущий";
+    const CURRENT = "current";
 
-    const FINISHED = "Завершен";
+    const FINISHED = "finished";
 
-    const CANCELED = "Отменен";
+    const CANCELED = "canceled";
 }
