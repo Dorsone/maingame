@@ -5,6 +5,12 @@
 @endsection
 @section('title', 'Турниры')
 
+@php($months = array(
+    '01' => 'января', '02' => 'февраля', '03' => 'марта', '04' => 'апреля',
+    '05' => 'мая', '06' => 'июня', '07' => 'июля', '08' => 'августа',
+    '09' => 'сентября', '10' => 'октября', '11' => 'ноября', '12' => 'декабря'
+))
+
 @section('content')
     <main class="tournaments-page">
         <div class="container">
@@ -27,8 +33,8 @@
                     </ul>
                     <ul class="tournaments-submenu">
                         <li><a href="javascript:void(0)">
-                                {{--                            <!-- add class "active" to "a" tag with "premium" class to make active element-->
-                                                                <a class="premium active" href="javascript:void(0)">--}}
+                                {{--<!-- add class "active" to "a" tag with "premium" class to make active element-->
+                                    <a class="premium active" href="javascript:void(0)">--}}
                                 <svg class="icon icon-ticket-star ">
                                     <use xlink:href="{{asset("images/sprite-inline.svg#ticket-star")}}"></use>
                                 </svg>
@@ -96,14 +102,14 @@
                                             </svg>
                                         </button>
                                         <ul class="select-block__list">
-                                            <li class="active">
-                                                <span>Все режимы</span>
+                                            <li class="{{url()->full() == route("tournament.index", $game->slug) ? 'active' : ''}}">
+                                                <a href="{{route("tournament.index", $game->slug)}}"><span>Все режимы</span></a>
                                             </li>
-                                            <li>
-                                                <a href="{{route("tournament.index", [$game->slug,'format' => '1v1'])}}">1v1</a>
+                                            @foreach($match_formats as $match_format)
+                                            <li class="{{url()->full() == route("tournament.index", [$game->slug,'format' => $match_format->slug]) ? 'active' : ''}}">
+                                                <a href="{{route("tournament.index", [$game->slug,'format' => $match_format->slug])}}"><span>{{$match_format->name}}</span></a>
                                             </li>
-                                            <li><span>2v2</span></li>
-                                            <li><span>5v5</span></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                     <div class="tournaments-block__select-block select-block">
@@ -113,9 +119,15 @@
                                             </svg>
                                         </button>
                                         <ul class="select-block__list">
-                                            <li class="active"><span>Все статусы</span></li>
-                                            <li><span>Предстоящий</span></li>
-                                            <li><span>Текущий</span></li>
+                                            <li class="active">
+                                                <span>Все статусы</span>
+                                            </li>
+                                            <li>
+                                                <span>Предстоящий</span>
+                                            </li>
+                                            <li>
+                                                <span>Текущий</span>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="tournaments-block__select-block select-block">
@@ -164,7 +176,8 @@
                                                 <p class="tournament-card__column-title">Время</p>
                                                 <p class="tournament-card__status tournament-card__status_current">
                                                     Текущий</p>
-                                                <p class="tournament-card__date">26 июля 2021 - 15:00</p>
+                                                @php($strtotime = strtotime($tournament->start_time))
+                                                <p class="tournament-card__date">{{date("d", $strtotime)}} {{$months[date("m", $strtotime)]}} {{date("Y"), $strtotime}} - {{date("H:i", $strtotime)}}</p>
                                             </td>
                                             <td class="tournament-card__column tournament-card__column_half">
                                                 <p class="tournament-card__column-title">Режим</p>
@@ -197,17 +210,10 @@
                                 </table>
                                 <div class="pagination">
                                     <a class="pagination__prev" href="{{$active_tournaments->previousPageUrl()}}"></a>
-                                    <a class="pagination__item" href="{{$active_tournaments->url(1)}}">1</a>
-                                    {{--                                    @foreach($active_tournaments as $paginator)--}}
-
-                                    {{--                                    @endforeach--}}
-
-                                    {{--                                    <a class="pagination__item current" href="javascript:void(0)">2</a>--}}
-                                    {{--                                    <a class="pagination__item" href="javascript:void(0)">3</a>--}}
-                                    {{--                                    <a class="pagination__item" href="javascript:void(0)">4</a>--}}
-                                    {{--                                    <a class="pagination__item pagination__item_dash" href="javascript:void(0)"></a>--}}
-                                    <a class="pagination__item"
-                                       href="{{$active_tournaments->url($active_tournaments->lastPage())}}">{{$active_tournaments->lastPage()}}</a>
+                                    @for($i = 1; $i <= $active_tournaments->lastPage(); $i++)
+                                        <a class="pagination__item {{$active_tournaments->currentPage() == $i ? 'current' : ''}}"
+                                           href="{{$active_tournaments->url($i)}}">{{$i}}</a>
+                                    @endfor
                                     <a class="pagination__next" href="{{$active_tournaments->nextPageUrl()}}"></a>
                                 </div>
                             </li>
@@ -220,10 +226,14 @@
                                             </svg>
                                         </button>
                                         <ul class="select-block__list">
-                                            <li class="active"><span>Все режимы</span></li>
-                                            <li><span>1v1</span></li>
-                                            <li><span>2v2</span></li>
-                                            <li><span>5v5</span></li>
+                                            <li class="{{url()->full() == route("tournament.index", $game->slug) ? 'active' : ''}}">
+                                                <a href="{{route("tournament.index", $game->slug)}}"><span>Все режимы</span></a>
+                                            </li>
+                                            @foreach($match_formats as $match_format)
+                                                <li class="{{url()->full() == route("tournament.index", [$game->slug,'format' => $match_format->slug]) ? 'active' : ''}}">
+                                                    <a href="{{route("tournament.index", [$game->slug,'format' => $match_format->slug])}}"><span>{{$match_format->name}}</span></a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                     <div class="tournaments-block__select-block select-block">
@@ -273,7 +283,8 @@
                                                 <p class="tournament-card__column-title">Время</p>
                                                 <p class="tournament-card__status tournament-card__status_completed">
                                                     Завершен</p>
-                                                <p class="tournament-card__date">26 июля 2021 - 15:00</p>
+                                                @php($strtotime = strtotime($tournament->start_time))
+                                                <p class="tournament-card__date">{{date("d", $strtotime)}} {{$months[date("m", $strtotime)]}} {{date("Y"), $strtotime}} - {{date("H:i", $strtotime)}}</p>
                                             </td>
                                             <td class="tournament-card__column tournament-card__column_half">
                                                 <p class="tournament-card__column-title">Режим</p>
@@ -305,14 +316,12 @@
                                     </tbody>
                                 </table>
                                 <div class="pagination">
-                                    <a class="pagination__prev" href="javascript:void(0)"></a>
-                                    <a class="pagination__item" href="javascript:void(0)">1</a>
-                                    <a class="pagination__item current" href="javascript:void(0)">2</a>
-                                    <a class="pagination__item" href="javascript:void(0)">3</a>
-                                    <a class="pagination__item" href="javascript:void(0)">4</a>
-                                    <a class="pagination__item pagination__item_dash" href="javascript:void(0)"></a>
-                                    <a class="pagination__item" href="javascript:void(0)">10</a>
-                                    <a class="pagination__next" href="javascript:void(0)"></a>
+                                    <a class="pagination__prev" href="{{$finished_tournaments->previousPageUrl()}}"></a>
+                                    @for($i = 1; $i <= $finished_tournaments->lastPage(); $i++)
+                                        <a class="pagination__item {{$finished_tournaments->currentPage() == $i ? 'current' : ''}}"
+                                           href="{{$finished_tournaments->url($i)}}">{{$i}}</a>
+                                    @endfor
+                                    <a class="pagination__next" href="{{$finished_tournaments->nextPageUrl()}}"></a>
                                 </div>
                             </li>
                         </ul>

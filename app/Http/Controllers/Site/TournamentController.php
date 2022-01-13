@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Game;
+use App\Models\MatchFormat;
 use App\Models\Tournament;
 use App\Services\TournamentService;
 use Illuminate\Contracts\View\Factory;
@@ -36,6 +37,7 @@ class TournamentController extends Controller
         return view("gzone.pages.tournaments", [
             "game" => $game,
             "games" => Game::query()->get(),
+            "match_formats" => MatchFormat::query()->get(),
             "top_tournaments" => $this->tournamentService->topTournaments($game),
             "active_tournaments" => $this->tournamentService->activeTournaments($game),
             "finished_tournaments" => $this->tournamentService->finishedTournaments($game),

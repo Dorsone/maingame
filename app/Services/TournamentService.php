@@ -42,6 +42,7 @@ class TournamentService
             ->where("tournaments.game_id", $game->id)
             ->where("tournaments.is_finished", true)
             ->orderByDesc("tournaments.id")
+            ->allowedFilters(["status"])
             ->paginate(4)
             ->withQueryString();
         return $finished_tournaments;

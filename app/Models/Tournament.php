@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constants\TournamentStatusConstant;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -81,5 +82,4 @@ class Tournament extends Model
             ->join("match_formats", "tournaments.match_format_id", "=", "match_formats.id")
             ->where("match_formats.name", "=", $format);
     }
-
 }
