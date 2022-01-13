@@ -24,26 +24,8 @@ class User extends Authenticatable implements HasMedia
     use SoftDeletes;
 
     const COVER_IMAGE_COLLECTION = 'covers';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'username',
-        'first_name',
-        'surname',
-        'email',
-        'password',
-        'steam_id',
-        'image',
-        'description',
-        'interests',
-        'gender',
-        'birth_date',
-        'country'
-    ];
+  
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for arrays.

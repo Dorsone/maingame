@@ -47,27 +47,17 @@ Route::post('register', [RegisterController::class, 'sendLetter'])->name('send.r
 Route::get('auth/steam', [SteamController::class, 'redirectToSteam'])->name('auth.steam');
 Route::get('auth/steam/handle', [SteamController::class, 'handle'])->name('auth.steam.handle');
 
-/**
- * Author routes
- */
 Route::prefix('author')->middleware('auth')->name('author.')->group(function () {
-    /**
-     * Bookmark routes
-     */
     Route::group(['prefix' => 'bookmark', 'as' => 'bookmark.'], function () {
         Route::get('', [AccountController::class, 'bookmarks'])->name('index');
         Route::put('store/{articles}', [AccountController::class, 'addBookmark'])->name('store');
         Route::delete('ajax/{articles}', [AccountController::class, 'destroyBookmarkAjax'])->name('ajax.delete');
         Route::delete('{articles}', [AccountController::class, 'destroyBookmark'])->name('delete');
     });
-    /**
-     * History routes
-     */
     Route::group(['prefix' => 'history', 'as' => 'history.'], function () {
         Route::get('', [AccountController::class, 'history'])->name('index');
         Route::delete('{articles}', [AccountController::class, 'destroyHistory'])->name('delete');
     });
-
     Route::match(['get', 'post'],'{id}', [IndexController::class, 'author'])->name('index');
 });
 
@@ -88,3 +78,4 @@ Route::prefix('profile')->middleware('auth')->name('profile.')->group(function (
 Route::group(["prefix" => "tournaments", "as" => "tournament."], function () {
    Route::get("{game:slug}", [TournamentController::class, "index"])->name("index");
 });
+Route::get('articles/{slug?}', [Site\IndexController::class, 'articles'])->name('site.articles');

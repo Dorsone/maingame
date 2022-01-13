@@ -108,7 +108,7 @@
                             <h1 class="title-h3">Настройки аккаунта</h1>
                         </div>
                         <div class="profile-form-data-wrap">
-                            <form class="profile-form profile-form--data" action="{{route("user.update", $user->id)}}" method="post" id="update-form">
+                            <form class="profile-form profile-form--data" action="{{route("profile.update", $user->id)}}" method="post" id="update-form">
                                 @csrf
                                 <div class="profile-form-2-col-block">
                                     <div class="profile-form-field-wrap">

@@ -326,7 +326,7 @@ class IndexController extends Controller
      * @param null|Articles $article
      * @return array
      */
-    private function getBreadcrumbs($category = null, $article = null, $tag = null, $slug = null): array
+    private function getBreadcrumbs($category = null, $article = null, $tag = null, $slug = null, $articles = null): array
     {
         $breadcrumbs = [];
 
@@ -334,6 +334,14 @@ class IndexController extends Controller
             $breadcrumbs[0] = [
                 'title' => 'Категории',
                 'url' => route('site.categories'),
+                'current' => true
+            ];
+        }
+
+        if($articles){
+            $breadcrumbs[0] = [
+                'title' => 'Последние новости',
+                'url' => route('site.articles'),
                 'current' => true
             ];
         }
@@ -387,5 +395,23 @@ class IndexController extends Controller
     public function policy()
     {
         return view('gzone.pages.policy');
+    }
+
+    /**
+     * Articles index page
+     * @param string|null $slug
+     * @return Application|Factory|View
+     */
+    public function articles(?string $slug = null) {
+
+        $articles = Articles::where('active', 1)
+            ->with('category')
+            ->latest()
+            ->take(12)
+            ->get();
+
+        $breadcrumbs = $slug ? $this->getBreadcrumbs(false, false, false, $slug, false) : $this->getBreadcrumbs(false, false, false, false, true);
+
+        return view('gzone.pages.articles', compact('articles', 'breadcrumbs'));
     }
 }
