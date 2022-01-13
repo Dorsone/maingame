@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SteamController;
+use App\Http\Controllers\Site\IndexController;
 use App\Http\Controllers\Site\LoginController;
 use App\Http\Controllers\Site\AccountController;
-use App\Http\Controllers\Site;
 use App\Http\Controllers\Site\MailchimpController;
+use App\Http\Controllers\Site\TournamentController;
 use App\Http\Controllers\Site\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,20 +22,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [Site\IndexController::class, 'index'])->name('site.index');
-Route::get('tournament', [Site\IndexController::class, 'tournament'])->name('site.tournament');
-Route::get('categories/{slug?}', [Site\IndexController::class, 'categories'])->name('site.categories');
-Route::match(['get', 'post'],'category/{categorySlug}', [Site\IndexController::class, 'category'])->name('site.category');
-Route::get('category/{categorySlug}/{articleSlug}', [Site\IndexController::class, 'article'])->name('site.article');
-Route::get('search', [Site\IndexController::class, 'search'])->name('site.search');
-Route::get('tag/{tagSlug}', [Site\IndexController::class, 'articlesByTag'])->name('site.articles-by-tag');
+Route::get('/', [IndexController::class, 'index'])->name('site.index');
+Route::get('tournament', [IndexController::class, 'tournament'])->name('site.tournament');
+Route::get('categories/{slug?}', [IndexController::class, 'categories'])->name('site.categories');
+Route::match(['get', 'post'],'category/{categorySlug}', [IndexController::class, 'category'])->name('site.category');
+Route::get('category/{categorySlug}/{articleSlug}', [IndexController::class, 'article'])->name('site.article');
+Route::get('search', [IndexController::class, 'search'])->name('site.search');
+Route::get('tag/{tagSlug}', [IndexController::class, 'articlesByTag'])->name('site.articles-by-tag');
 
-Route::post('add-comment', [Site\IndexController::class, 'addComment'])->name('site.add-comment');
+Route::post('add-comment', [IndexController::class, 'addComment'])->name('site.add-comment');
 Route::post('subscribe', [MailchimpController::class, 'subscribe'])->name('site.subscribe');
 
 Auth::routes();
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('site.login');
-Route::get('policy', [Site\IndexController::class, 'policy'])->name('site.policy');
+Route::get('policy', [IndexController::class, 'policy'])->name('site.policy');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('send/letter', [LoginController::class, 'sendLetterPage'])->name('send.letter');
 Route::post('recovery/letter', [LoginController::class, 'forgotPassword'])->name('recovery.letter');
@@ -57,9 +58,10 @@ Route::prefix('author')->middleware('auth')->name('author.')->group(function () 
         Route::get('', [AccountController::class, 'history'])->name('index');
         Route::delete('{articles}', [AccountController::class, 'destroyHistory'])->name('delete');
     });
-    Route::match(['get', 'post'],'{id}', [Site\IndexController::class, 'author'])->name('index');
+    Route::match(['get', 'post'],'{id}', [IndexController::class, 'author'])->name('index');
 });
 
+/** User settings */
 Route::prefix('profile')->middleware('auth')->name('profile.')->group(function () {
     Route::get('settings', [UserController::class, 'settings'])->name('settings');
     Route::post('settings', [UserController::class, 'update'])->name('update');
@@ -72,4 +74,8 @@ Route::prefix('profile')->middleware('auth')->name('profile.')->group(function (
     Route::put('/cover/store/{user}', [AccountController::class, 'userCoverStore'])->name('cover.store');
 });
 
+/** Tournaments */
+Route::group(["prefix" => "tournaments", "as" => "tournament."], function () {
+   Route::get("{game:slug}", [TournamentController::class, "index"])->name("index");
+});
 Route::get('articles/{slug?}', [Site\IndexController::class, 'articles'])->name('site.articles');

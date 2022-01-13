@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Constants\TournamentStatusConstant;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -65,4 +67,19 @@ class Tournament extends Model
         return $this->hasMany(Match::class, 'tournament_id', 'id');
     }
 
+    /**
+     * @param Builder $query
+     */
+    public function scopeByMatchFormat(Builder $query)
+    {
+        $format = request()->get("format");
+
+        if (is_null($format)) {
+            return;
+        }
+
+        $query->select("tournaments.*")
+            ->join("match_formats", "tournaments.match_format_id", "=", "match_formats.id")
+            ->where("match_formats.name", "=", $format);
+    }
 }
