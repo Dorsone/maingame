@@ -26,9 +26,12 @@
                         <span>{{ $article->comments_count }}</span>
                     </div>
                     <div
-                        onclick="bookmark({{$article->id}}, this)"
+                        onclick="bookmark({{$article->id}}, this, {{auth()->check()}})"
                         class="bookmark
-                        {{!in_array($article->id ,auth()->user()->bookmarks->pluck('id')->toArray()) ?: 'add'}}">
+                        @if (auth()->check())
+                            {{!in_array($article->id ,auth()->user()->bookmarks->pluck('id')->toArray()) ?: 'add'}}
+                        @endif
+                        ">
                         <svg class="icon icon-mark ">
                             <use xlink:href="{{ asset('images/sprite-inline.svg#mark') }}"></use>
                         </svg>

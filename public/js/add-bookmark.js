@@ -4,12 +4,15 @@ const _token = $('meta[name="csrf-token"]').attr('content');
  * Click listener
  * @param articleId
  * @param element
+ * @param authCheck
  */
-let bookmark = function (articleId, element) {
-    if (element.classList.contains('add')){
+let bookmark = function (articleId, element, authCheck) {
+    if (element.classList.contains('add') && authCheck){
         deleteBookmark(articleId);
-    }else {
+    }else if(authCheck) {
         addBookmark(articleId);
+    }else {
+        window.location.href = `${window.location.origin}/login`;
     }
 }
 
