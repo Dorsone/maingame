@@ -407,8 +407,7 @@ class IndexController extends Controller
         $articles = Articles::where('active', 1)
             ->with('category')
             ->latest()
-            ->take(12)
-            ->get();
+            ->paginate(1);
 
         $breadcrumbs = $slug ? $this->getBreadcrumbs(false, false, false, $slug, false) : $this->getBreadcrumbs(false, false, false, false, true);
 
