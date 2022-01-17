@@ -13,7 +13,7 @@
                 @if(url()->previous())
                     <div class="back-link">
                         <div class="line"></div>
-                        <a href="{{ route('site.categories') }}">Вернуться</a>
+                        <a href="{{ url()->previous() }}">Вернуться</a>
                     </div>
                 @endif
                 <div class="container-md2">
