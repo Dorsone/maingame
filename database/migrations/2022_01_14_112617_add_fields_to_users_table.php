@@ -14,12 +14,14 @@ class AddFieldsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('first_name')->nullable();
+            $table->renameColumn('name', 'first_name');
+            $table->string('username');
             $table->string('surname')->nullable();
             $table->string("steam_id")->nullable();
             $table->string("gender")->default("male");
             $table->string("birth_date")->nullable();
             $table->string("country")->nullable();
+            $table->timestamp("deleted_at")->nullable();
         });
     }
 
@@ -30,13 +32,8 @@ class AddFieldsToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('first_name');
-            $table->dropColumn('surname');
-            $table->dropColumn("steam_id");
-            $table->dropColumn("gender");
-            $table->dropColumn("birth_date");
-            $table->dropColumn("country");
+        Schema::table('', function (Blueprint $table) {
+
         });
     }
 }
