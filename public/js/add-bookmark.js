@@ -4,12 +4,15 @@ const _token = $('meta[name="csrf-token"]').attr('content');
  * Click listener
  * @param articleId
  * @param element
+ * @param authCheck
  */
-let bookmark = function (articleId, element) {
-    if (element.classList.contains('add')){
+let bookmark = function (articleId, element, authCheck) {
+    if (element.classList.contains('add') && authCheck){
         deleteBookmark(articleId);
-    }else {
+    }else if(authCheck) {
         addBookmark(articleId);
+    }else {
+        window.location.href = `${window.location.origin}/login`;
     }
 }
 
@@ -20,7 +23,7 @@ let bookmark = function (articleId, element) {
 let addBookmark = function (articleId) {
     $.ajax({
         method: 'PUT',
-        url: `${window.location.origin}/author/bookmark/store/${articleId}`,
+        url: `${window.location.origin}/profile/bookmark/store/${articleId}`,
         data: {
             _token,
         },
@@ -37,7 +40,7 @@ let addBookmark = function (articleId) {
 let deleteBookmark = function (articleId) {
     $.ajax({
         method: 'DELETE',
-        url: `${window.location.origin}/author/bookmark/ajax/${articleId}`,
+        url: `${window.location.origin}/profile/bookmark/ajax/${articleId}`,
         data: {
             _token,
         },

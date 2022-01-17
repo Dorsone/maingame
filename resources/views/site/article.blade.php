@@ -30,7 +30,7 @@
 
                     <div class="news-info__desc">
                         <div class="news-info__block">
-                            <a class="name" href="{{ route('author.index', $article->user->id]) }}">
+                            <a class="name" href="{{ route('profile.index', $article->user->id]) }}">
                                 {{ $article->user->name }}
                             </a>
                             <div class="date">{{ $article->date->format('d.m.Y') }}</div>

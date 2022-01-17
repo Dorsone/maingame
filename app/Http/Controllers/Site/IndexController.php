@@ -51,7 +51,7 @@ class IndexController extends Controller
         $news = Articles::where('active', 1)
             ->with(['category'])
             ->withCount(['comments'])
-            ->orderByDesc('date')->orderByDesc('id')->limit(4)->get();
+            ->orderByDesc('date')->orderByDesc('id')->limit(5)->get();
 
         return view('gzone.home', compact('slides', 'categories', 'news'));
     }
@@ -227,7 +227,7 @@ class IndexController extends Controller
         $breadcrumbs = $this->getBreadcrumbs();
         $breadcrumbs[] = [
             'title' => $user->name,
-            'url' => route('author.index', ['id' => $user->id]),
+            'url' => route('profile.index', ['id' => $user->id]),
             'current' => true
         ];
 
@@ -407,8 +407,7 @@ class IndexController extends Controller
         $articles = Articles::where('active', 1)
             ->with('category')
             ->latest()
-            ->take(12)
-            ->get();
+            ->paginate(12);
 
         $breadcrumbs = $slug ? $this->getBreadcrumbs(false, false, false, $slug, false) : $this->getBreadcrumbs(false, false, false, false, true);
 

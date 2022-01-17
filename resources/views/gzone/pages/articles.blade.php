@@ -19,16 +19,20 @@
                 <div class="container-md2">
                     @include('gzone.partials.breadcrumbs')
                 </div>
-            </div>
-            <div class="container-md2">
+                <div class="container-md2">
+                    <h2 class="title-h2">Последние новости</h2>
+                </div>
                 <div class="popular-articles__wrapper">
                     @foreach($articles as $article)
                         @include('gzone.partials.article-item', ['articles' => $articles, 'withAuthor' => true, 'category' => $article->category])
                     @endforeach
                 </div>
+                <br><br>
+                <div class="container-md12">
+                    {{ $articles->links('vendor.pagination.custom') }}
+                </div>
             </div>
         </div>
-
 
 
 

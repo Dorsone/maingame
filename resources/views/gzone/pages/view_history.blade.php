@@ -12,30 +12,7 @@
                 <div class="line"></div><a href="{{route('site.index')}}">Вернуться</a>
             </div>
             <div class="container-md1">
-                <div class="account-info">
-                    <div class="account-info-actions">
-                        <button class="account-info-btn" type="button">
-                            <svg class="icon icon-edit ">
-                                <use xlink:href="{{asset("./images/sprite-inline.svg#edit")}}"></use>
-                            </svg>Редактировать профиль
-                        </button>
-                        <button class="account-info-btn" type="button">
-                            <svg class="icon icon-image ">
-                                <use xlink:href="{{asset("./images/sprite-inline.svg#image")}}"></use>
-                            </svg>Изменить обложку
-                        </button>
-                    </div>
-                    <div class="account-info-cover">
-                        <!--<img src="./images/arena-main-bg.png" alt="">-->
-                    </div>
-                    <div class="account-info-desc">
-                        <div class="account-info-avatar"></div>
-                        <div class="account-info-name">
-                            <p>Mirror111</p>
-                            <div class="account-info-date">Играет с 21 июля 2021</div>
-                        </div>
-                    </div>
-                </div>
+                @include('gzone.partials.account-info')
             </div>
         </div>
         <section>
@@ -58,7 +35,7 @@
                             <div class="account-my-bookmarks">
                                 @foreach($histories as $history)
                                     <div class="article-preview">
-                                        <form method="POST" action="{{route('author.history.delete', $history->id)}}">
+                                        <form method="POST" action="{{route('profile.history.delete', $history->id)}}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bookmark-remove-btn">
@@ -83,7 +60,7 @@
                                         <div class="article-preview__info">
                                             <div class="article-preview__author">
                                                 <div class="article-preview__author-img"><img src="{{asset($history->user->image)}}" alt="">
-                                                </div><a class="article-preview__author-name" href="{{route('author.index', $history->user->id)}}">
+                                                </div><a class="article-preview__author-name" href="{{route('profile.index', $history->user->id)}}">
                                                     {{$history->user->username}}
                                                 </a>
                                             </div><span class="article-preview__reading">Читать {{$history->time_read}} мин</span>

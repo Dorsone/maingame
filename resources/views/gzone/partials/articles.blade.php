@@ -26,9 +26,12 @@
                         <span>{{ $article->comments_count }}</span>
                     </div>
                     <div
-                        onclick="bookmark({{$article->id}}, this)"
+                        onclick="bookmark({{$article->id}}, this, {{auth()->check()}})"
                         class="bookmark
-                        {{!in_array($article->id ,auth()->user()->bookmarks->pluck('id')->toArray()) ?: 'add'}}">
+                        @if (auth()->check())
+                            {{!in_array($article->id ,auth()->user()->bookmarks->pluck('id')->toArray()) ?: 'add'}}
+                        @endif
+                        ">
                         <svg class="icon icon-mark ">
                             <use xlink:href="{{ asset('images/sprite-inline.svg#mark') }}"></use>
                         </svg>
@@ -46,7 +49,7 @@
                         <img src="{{ asset($article->user->image) }}" alt=""/>
                     </div>
                     <a class="article-preview__author-name"
-                       href="{{ route('author.index', $article->user->id) }}">{{ $article->user->name }}</a>
+                       href="{{ route('profile.index', $article->user->id) }}">{{ $article->user->name }}</a>
                 </div>
             @endif
             <span class="article-preview__date">{{ $article->created_at->format('d M. Y') }}</span>

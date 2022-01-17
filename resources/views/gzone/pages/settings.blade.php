@@ -52,57 +52,14 @@
             </div>
         </div>
         <div class="container-md1">
-            <div class="account-info">
-                <div class="account-info-actions">
-                    <button class="account-info-btn" type="button">
-                        <svg class="icon icon-edit ">
-                            <use xlink:href="{{asset("images/sprite-inline.svg#edit")}}"></use>
-                        </svg>Редактировать профиль
-                    </button>
-                    <button class="account-info-btn" type="button">
-                        <svg class="icon icon-image ">
-                            <use xlink:href="{{asset("images/sprite-inline.svg#image")}}"></use>
-                        </svg>Изменить обложку
-                    </button>
-                </div>
-                <div class="account-info-cover">
-                    <!--<img src="./images/arena-main-bg.png" alt="">-->
-                </div>
-                <div class="account-info-desc">
-                    <div class="account-info-avatar"></div>
-                    <div class="account-info-name">
-                        <p>{{$user->username}}</p>
-                        <div class="account-info-date">Играет с 21 июля 2021</div>
-                    </div>
-                </div>
-            </div>
+            @include('gzone.partials.account-info')
         </div>
     </div>
     <section>
         <div class="container">
             <div class="container-md1">
                 <div class="account-main">
-                    <div class="account-menu"><a class="account-menu-link" href="javascript:void(0)">
-                            <svg class="icon icon-bookmark ">
-                                <use xlink:href="{{asset("images/sprite-inline.svg#bookmark")}}"></use>
-                            </svg>Мои закладки</a><a class="account-menu-link" href="javascript:void(0)">
-                            <svg class="icon icon-calendar1 ">
-                                <use xlink:href="{{asset("images/sprite-inline.svg#calendar1")}}"></use>
-                            </svg>История просмотров</a><a class="account-menu-link" href="javascript:void(0)">
-                            <svg class="icon icon-category ">
-                                <use xlink:href="{{asset("images/sprite-inline.svg#category")}}"></use>
-                            </svg>Мои устройства</a><a class="account-menu-link account-menu-link--premium" href="javascript:void(0)">
-                            <svg class="icon icon-ticket ">
-                                <use xlink:href="{{asset("images/sprite-inline.svg#ticket")}}"></use>
-                            </svg>Премиум</a>
-                        <hr/><a class="account-menu-link account-menu-link--current" href="javascript:void(0)">
-                            <svg class="icon icon-setting ">
-                                <use xlink:href="{{asset("images/sprite-inline.svg#setting")}}"></use>
-                            </svg>Настройки аккаунта</a><a class="account-menu-link" href="javascript:void(0)">
-                            <svg class="icon icon-logout ">
-                                <use xlink:href="{{asset("images/sprite-inline.svg#logout")}}"></use>
-                            </svg>Выйти</a>
-                    </div>
+                    @include('gzone.partials.account-menu')
                     <div class="account-content">
                         <div class="account-title-block">
                             <h1 class="title-h3">Настройки аккаунта</h1>
