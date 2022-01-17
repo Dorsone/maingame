@@ -35,7 +35,7 @@ class UserCrudController extends CrudController
     {
         $this->crud->addColumns([
             [
-                'name' => 'name',
+                'name' => 'username',
                 'label' => 'Имя',
                 'type' => 'text',
             ],
@@ -46,7 +46,7 @@ class UserCrudController extends CrudController
             ],
         ]);
 
-        $this->crud->orderBy('name');
+        $this->crud->orderBy('id');
 
     }
 
@@ -67,8 +67,8 @@ class UserCrudController extends CrudController
     {
         $this->crud->addFields([
             [
-                'name' => 'name',
-                'label' => 'Имя',
+                'username' => 'username',
+                'label' => 'Имя пользователя',
                 'type' => 'text',
             ],
             [
