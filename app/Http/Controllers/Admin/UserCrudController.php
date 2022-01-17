@@ -67,7 +67,7 @@ class UserCrudController extends CrudController
     {
         $this->crud->addFields([
             [
-                'username' => 'username',
+                'name' => 'username',
                 'label' => 'Имя пользователя',
                 'type' => 'text',
             ],

@@ -135,7 +135,7 @@ class ArticlesCrudController extends CrudController
                 'label' => 'Автор',
                 'type' => 'select2',
                 'entity' => 'user',
-                'attribute' => 'name',
+                'attribute' => 'email',
                 'allows_null' => false,
                 'wrapperAttributes' => [
                     'class' => 'form-group col-md-6',
