@@ -3,19 +3,23 @@
 namespace App\Listeners;
 
 use App\Events\ArticleCreatedEvent;
+use App\Services\AutoPostingService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
 class AutoPostTwitterListener
 {
     /**
-     * Create the event listener.
-     *
-     * @return void
+     * @var AutoPostingService
      */
-    public function __construct()
+    private $autoPostingService;
+
+    /**
+     * @param AutoPostingService $autoPostingService
+     */
+    public function __construct(AutoPostingService $autoPostingService)
     {
-        //
+        $this->autoPostingService = $autoPostingService;
     }
 
     /**
@@ -26,6 +30,6 @@ class AutoPostTwitterListener
      */
     public function handle(ArticleCreatedEvent $event)
     {
-        //
+        $this->autoPostingService->createArticleTwitter($event->article);
     }
 }
