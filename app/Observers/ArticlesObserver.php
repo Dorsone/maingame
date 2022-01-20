@@ -7,6 +7,7 @@
 
 namespace App\Observers;
 
+use App\Events\ArticleCreatedEvent;
 use App\Jobs\UpdateSearchIndexJob;
 use App\Models\Articles;
 use App\Services\IndexingText;
@@ -22,6 +23,10 @@ class ArticlesObserver
 
     public function created(Articles $articles)
     {
+        if($articles->active){
+            event(new ArticleCreatedEvent($articles));
+        }
+
         UpdateSearchIndexJob::dispatch($articles);
     }
 

@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\ArticleCreatedEvent;
+use App\Listeners\AutoPostFacebookListener;
+use App\Listeners\AutoPostTwitterListener;
 use App\Models\Articles;
 use App\Observers\ArticlesObserver;
 use Illuminate\Auth\Events\Registered;
@@ -19,6 +22,11 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+
+        ArticleCreatedEvent::class => [
+            AutoPostFacebookListener::class,
+            AutoPostTwitterListener::class,
         ],
     ];
 
