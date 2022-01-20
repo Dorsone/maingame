@@ -30,4 +30,17 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' => [
+        'app_id' => env('FACEBOOK_APP_ID'),
+        'app_secret' => env('FACEBOOK_APP_SECRET'),
+        'access_token' => env('FACEBOOK_ACCESS_TOKEN'),
+    ],
+
+    'twitter' => [
+        'consumer_key' => env('TWITTER_CONSUMER_KEY'),
+        'consumer_key_secret' => env('TWITTER_CONSUMER_KEY_SECRET'),
+        'access_token' => env('TWITTER_ACCESS_TOKEN'),
+        'access_token_secret' => env('TWITTER_ACCESS_TOKEN_SECRET'),
+    ],
+
 ];

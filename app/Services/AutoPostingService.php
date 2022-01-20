@@ -15,11 +15,11 @@ class AutoPostingService
      */
     public function createArticleFacebook($article){
         $fb = new facebook([
-            'app_id' => 'xxx',
-            'app_secret' => 'xxx',
+            'app_id' => config('services.facebook.app_id'),
+            'app_secret' => config('services.facebook.app_secret'),
             'default_graph_version' => 'v12.0',
         ]);
-        $pageAccessToken ='xxx';
+        $pageAccessToken = config('services.facebook.access_token');
 
         $message = $article->seo_title.' '.$article->seo_description.' #tag1'.' #tag2'.' #tag3';
         $imagePath = 'https://maingame.gg/uploads/Pokemon-Go.jpg';
@@ -51,12 +51,12 @@ class AutoPostingService
      * @return void
      */
     public function createArticleTwitter($article) {
-        $consumer_key = 'xxx';
-        $consumer_key_secret = 'xxx';
-        $access_token = 'xxx';
-        $access_token_secret = 'xxx';
-
-        $connection = new TwitterOAuth($consumer_key, $consumer_key_secret, $access_token, $access_token_secret);
+        $connection = new TwitterOAuth(
+            config('services.twitter.consumer_key'),
+            config('services.twitter.consumer_key_secret'),
+            config('services.twitter.access_token'),
+            config('services.twitter.access_token_secret')
+        );
         $content = $connection->get("account/verify_credentials");
         $connection->setTimeouts(10, 30);
 
