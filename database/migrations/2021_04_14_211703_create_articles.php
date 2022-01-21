@@ -57,6 +57,9 @@ class CreateArticles extends Migration
             $table->integer('time_read')->nullable();
             $table->bigInteger('views')->nullable();
 
+            $table->string('facebook_id')->nullable();
+            $table->string('twitter_id')->nullable();
+
             $table->string('breadcrumbs_title')->nullable();
             $table->string('seo_title')->nullable();
             $table->string('seo_h1')->nullable();

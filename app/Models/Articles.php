@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
+/**
+ * @property string $active
+ */
 class Articles extends Model
 {
     use CrudTrait, HasFactory, Sluggable;
