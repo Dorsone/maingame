@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use App\Models\Articles;
+use App\Models\ArticlesTags;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
@@ -14,16 +16,15 @@ class AutoPostingService
      * @throws FacebookSDKException
      */
     public function createArticleFacebook($article){
-        $fb = new facebook([
+        $fb = new Facebook([
             'app_id' => config('services.facebook.app_id'),
             'app_secret' => config('services.facebook.app_secret'),
             'default_graph_version' => 'v12.0',
         ]);
         $pageAccessToken = config('services.facebook.access_token');
 
-        $message = $article->seo_title.' '.$article->seo_description.' #tag1'.' #tag2'.' #tag3';
-        $imagePath = 'https://maingame.gg/uploads/Pokemon-Go.jpg';
-
+        $message = $article->title;
+        $imagePath = $article->image ? asset($article->image) : asset('/images/favicon/favicon-32x32.png');
         $data = [
             'url' => $imagePath,
             'message' => $message
@@ -31,18 +32,18 @@ class AutoPostingService
 
         try {
             $response = $fb->post('/me/photos', $data, $pageAccessToken);
-        } catch(FacebookResponseException $e)
+        }
+        catch(FacebookResponseException $e)
         {
             echo 'Graph returned an error: '.$e->getMessage();
             exit;
-        } catch(FacebookSDKException $e)
+        }
+        catch(FacebookSDKException $e)
         {
             echo 'Facebook SDK returned an error: '.$e->getMessage();
             exit;
         }
-            $graphNode = $response->getGraphNode();
-            $article->facebook_id = $graphNode['post_id'];
-            $article->save();
+        $graphNode = $response->getGraphNode();
     }
 
     /**
@@ -74,4 +75,5 @@ class AutoPostingService
 
         $result = $connection->post('statuses/update', $parameters);
     }
+
 }

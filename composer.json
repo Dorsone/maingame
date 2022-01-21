@@ -12,6 +12,7 @@
         "backpack/settings": "^3.0",
         "cijic/phpmorphy": "^0.3.1",
         "cviebrock/eloquent-sluggable": "^8.0",
+        "facebook/graph-sdk": "^5.7",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",

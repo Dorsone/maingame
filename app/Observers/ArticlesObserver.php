@@ -39,10 +39,6 @@ class ArticlesObserver
 
     public function updated(Articles $articles)
     {
-        if($articles->active){
-            event(new ArticleCreatedEvent($articles));
-        }
-
         UpdateSearchIndexJob::dispatch($articles);
     }
 
