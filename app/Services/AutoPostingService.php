@@ -61,16 +61,14 @@ class AutoPostingService
         $content = $connection->get("account/verify_credentials");
         $connection->setTimeouts(10, 30);
 
-        $message = $article->seo_title.' '.$article->seo_description.' #tag1'.' #tag2'.' #tag3';
-        $imagePath1 = 'https://maingame.gg/uploads/Pokemon-Go.jpg';
-        $imagePath2 = 'https://maingame.gg/uploads/Screenshot_1_large.png';
+        $message = $article->title;
+        $imagePath = $article->image ? asset($article->image) : asset('/images/favicon/favicon-32x32.png');
 
-        $image1 = $connection->upload('media/upload', ['media' => $imagePath1]);
-        $image2 = $connection->upload('media/upload', ['media' => $imagePath2]);
+        $image = $connection->upload('media/upload', ['media' => $imagePath]);
 
         $parameters = [
             'status' => $message,
-            'media_ids' => implode(',', [$image1->media_id_string, $image2->media_id_string]),
+            'media_ids' => implode(',', [$image->media_id_string]),
         ];
 
         $result = $connection->post('statuses/update', $parameters);
